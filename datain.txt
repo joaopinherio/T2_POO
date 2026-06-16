@@ -21,17 +21,17 @@ Cyberdine Systems
 555
 Tetris
 2000
-5
+5.5
 AVENTURA
 666
 War
 2020
-6
+6.6
 ESTRATEGIA
 777
 Gran Turismo 7
 2022
-7
+7.7
 CORRIDA
 -1
 8888

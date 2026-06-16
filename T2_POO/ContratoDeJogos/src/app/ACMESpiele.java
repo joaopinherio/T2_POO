@@ -72,6 +72,11 @@ public class ACMESpiele {
 
     }
 
+    //teste T2
+    private void cadastraContratos2(){
+        FormaPagamento pagamento = new PIX(0, 0, nomeArquivoEntrada);
+    }
+
     // 1
     private void cadastraClienteInd() {
         int numero = 0;
@@ -129,7 +134,7 @@ public class ACMESpiele {
     private void cadastraJogos() {
         int codigo = 0, ano = 0;
         String nome = null, categoria = null;
-        int valorDiario = 0;
+        double valorDiario = 0;
 
         do {
             codigo = entrada.nextInt();
@@ -137,7 +142,7 @@ public class ACMESpiele {
                 entrada.nextLine();
                 nome = entrada.nextLine();
                 ano = entrada.nextInt();
-                valorDiario = entrada.nextInt();
+                valorDiario = entrada.nextDouble();
                 // nao faz parte do constructor de Jogo
                 entrada.nextLine();
                 categoria = entrada.nextLine();

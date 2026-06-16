@@ -5,7 +5,8 @@ public class Contrato {
     private int periodo;
     private Cliente cliente;
     private Jogo jogo;
-    private FormaPagamento formaPagamento;
+    private PIX pix;
+    private CartaoCredito cartaoCredito;
 
 
     public Contrato(int id, int periodo) {
@@ -58,7 +59,7 @@ da categoria do jogo e da forma de pagamento:*/
 
     public void calculaValorFinal(){
         double  result = 0;
-        int valorDiario = jogo.getValorDiario();
+        double valorDiario = jogo.getValorDiario();
         Categoria categoriaCon = jogo.getCategoria();
 
         if(categoriaCon.getExtenso().equals("AVENTURA")){
@@ -76,7 +77,9 @@ da categoria do jogo e da forma de pagamento:*/
             result += this.periodo * valorDiario;
         }
 
-        if(formaPagamento)
+        if(formaPagamento.get != null){
+            
+        }
 
 
 
