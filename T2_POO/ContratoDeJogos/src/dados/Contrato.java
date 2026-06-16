@@ -6,6 +6,7 @@ public class Contrato {
     private Cliente cliente;
     private Jogo jogo;
 
+
     public Contrato(int id, int periodo) {
         this.id = id;
         this.periodo = periodo;
@@ -54,8 +55,26 @@ public class Contrato {
     /*O método calculaValorFinal() da classe Contrato calcula o valor final do contrato depende
 da categoria do jogo e da forma de pagamento:*/
 
-    //public void calculaValorFinal(){
-        //double result = this.periodo * jogo.getValorDiario();
-    //}
+    public void calculaValorFinal(){
+        double  result = 0;
+        int valorDiario = jogo.getValorDiario();
+        Categoria categoriaCon = jogo.getCategoria();
+
+        if(categoriaCon.getExtenso().equals("AVENTURA")){
+            valorDiario += valorDiario * 0.05;
+            result += this.periodo * valorDiario;
+        }
+
+        if(categoriaCon.getExtenso().equals("AVENTURA")){
+            valorDiario += valorDiario * 0.10;
+            result += this.periodo * valorDiario;
+        }
+
+        if(categoriaCon.getExtenso().equals("CORRIDA")){
+            valorDiario += valorDiario * 0.15;
+            result += this.periodo * valorDiario;
+        }
+
+    }
 
 }
