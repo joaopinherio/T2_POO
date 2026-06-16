@@ -20,19 +20,20 @@ public class Clientela {
     }
 
     // CLIENTESINICIAL.CSV
-    private void inicializaIndividual(){
+    public void inicializaIndividual() {
         Individual ind1 = null;
         Path arq1 = Paths.get("CLIENTESINICIAL.CSV");
-        
-        try(ObjectInputStream iarq =  new ObjectInputStream(Files.newInputStream(arq1))){
+
+        try (ObjectInputStream iarq = new ObjectInputStream(Files.newInputStream(arq1))) {
             ind1 = (Individual) iarq.readObject();
-            } catch (ClassNotFoundException e){
-                System.out.println("Problema na leitura do arquivo" + e.getMessage());
-            } catch (IOException e){
-                System.out.println("Problema na leitura do arquivo" + e.getMessage());
-            } catch (Exception e){
-                System.out.println("Problema na leitura do arquivo" + e.getMessage());
-            }
+            addCliente(ind1);
+        } catch (ClassNotFoundException e) {
+            System.out.println("Problema na leitura do arquivo" + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Problema na leitura do arquivo" + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Problema na leitura do arquivo" + e.getMessage());
+        }
     }
 
     public Cliente pesquisaNum(int num) {

@@ -31,8 +31,8 @@ public class ACMESpiele {
 
     public ACMESpiele() {
 
-        redirecionaEntrada();
-        redirecionaSaida();
+        //redirecionaEntrada();
+        //redirecionaSaida();
 
         catalogo = new Catalogo();
         clientela = new Clientela();
@@ -41,45 +41,12 @@ public class ACMESpiele {
 
     public void executar() {
 
-        // 1
-        cadastraClienteInd();
-
-        // 2
-        cadastraClienteCorp();
-
-        // 3
-
-        cadastraJogos();
-
-        // 4
-        cadastraContratos();
-
-        // 5
-        consultarCodigo();
-
-        // 6
-
-        cosultarJogoCategoria();
-
-        // 7
-        mudarNomeCliente();
-
-        // 8
-
-        rmContratoDeJogo();
-
-        // 9
-
-        listaTodosContratos();
-
-        // 10
-
-        clientesMaiorValorContratado();
+        
 
     }
 
     private void inicializar(){
-
+        clientela.inicializaIndividual();
     }
 
 
