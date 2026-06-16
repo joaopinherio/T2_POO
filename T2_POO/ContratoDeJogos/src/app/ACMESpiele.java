@@ -5,10 +5,16 @@ import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.PrintStream;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Locale;
 import dados.*;
+import java.nio.file.*;
 
 public class ACMESpiele {
     private Clientela clientela;
@@ -72,12 +78,27 @@ public class ACMESpiele {
 
     }
 
-    //teste T2
-    private void cadastraContratos2(){
-        FormaPagamento pagamento = new PIX(0, 0, nomeArquivoEntrada);
+    private void inicializar(){
+
     }
 
-    // 1
+    private void inicializaIndividual(){
+        Individual ind1 = null;
+        Path arq1 = Paths.get("CLIENTESINICIAL.CSV");
+        
+        try(ObjectInputStream iarq =  new ObjectInputStream(Files.newInputStream(arq1))){
+            ind1 = (Individual) iarq.readObject();
+            } catch (ClassNotFoundException e){
+                System.out.println("Problema na leitura do arquivo" + e.getMessage());
+            } catch (IOException e){
+                System.out.println("Problema na leitura do arquivo" + e.getMessage());
+            } catch (Exception e){
+                System.out.println("Problema na leitura do arquivo" + e.getMessage());
+            }
+    }
+    
+
+    // CLIENTESINICIAL.CSV
     private void cadastraClienteInd() {
         int numero = 0;
         String nome = null, email = null, cpf = null;

@@ -1,6 +1,8 @@
 package dados;
 
-abstract class Cliente {
+import java.io.Serializable;
+
+abstract class Cliente implements Serializable {
     private int numero;
     private String nome;
     private String email;
