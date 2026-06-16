@@ -54,8 +54,8 @@ public class Contrato {
     /*O método calculaValorFinal() da classe Contrato calcula o valor final do contrato depende
 da categoria do jogo e da forma de pagamento:*/
 
-    public void calculaValorFinal(){
-        double result = this.periodo * jogo.getValorDiario();
-    }
+    //public void calculaValorFinal(){
+        //double result = this.periodo * jogo.getValorDiario();
+    //}
 
 }
