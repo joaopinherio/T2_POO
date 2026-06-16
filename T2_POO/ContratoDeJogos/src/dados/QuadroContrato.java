@@ -1,17 +1,17 @@
 package dados;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class QuadroContrato {
-    private ArrayList<Contrato> quadro;
+    private Queue<Contrato> quadro;
 
     public QuadroContrato() {
         // Polimorfismo de classe
-        quadro = new ArrayList<>();
+        quadro = new LinkedList<>();
     }
 
     public boolean addContrato(Contrato c) {
-        return quadro.add(c);
+        return quadro.offer(c);
     }
 
     public boolean rmContrato(Contrato c) {
@@ -47,11 +47,11 @@ public class QuadroContrato {
         }
     }
 
-    public ArrayList pesquisaTodosContratantes() {
-        ArrayList arrayC = new ArrayList<Cliente>();
+    public Queue pesquisaTodosContratantes() {
+        Queue arrayC = new LinkedList<Cliente>();
         for (Contrato c : quadro) {
             if (arrayC.contains(c.getCliente()) == false) {
-                arrayC.add(c.getCliente());
+                arrayC.offer(c.getCliente());
             }
         }
         return arrayC;
@@ -59,7 +59,7 @@ public class QuadroContrato {
 
     // 10
     public String getClienteMaiorValor() {
-        ArrayList<Cliente> arrayC = pesquisaTodosContratantes();
+        Queue<Cliente> arrayC = pesquisaTodosContratantes();
         Cliente maioral = null;
         double maior = 0;
 
