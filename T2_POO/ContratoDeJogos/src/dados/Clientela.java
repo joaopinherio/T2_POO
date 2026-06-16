@@ -1,5 +1,10 @@
 package dados;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Clientela {
@@ -12,6 +17,22 @@ public class Clientela {
 
     public boolean addCliente(Cliente c) {
         return cadastro.add(c);
+    }
+
+    // CLIENTESINICIAL.CSV
+    private void inicializaIndividual(){
+        Individual ind1 = null;
+        Path arq1 = Paths.get("CLIENTESINICIAL.CSV");
+        
+        try(ObjectInputStream iarq =  new ObjectInputStream(Files.newInputStream(arq1))){
+            ind1 = (Individual) iarq.readObject();
+            } catch (ClassNotFoundException e){
+                System.out.println("Problema na leitura do arquivo" + e.getMessage());
+            } catch (IOException e){
+                System.out.println("Problema na leitura do arquivo" + e.getMessage());
+            } catch (Exception e){
+                System.out.println("Problema na leitura do arquivo" + e.getMessage());
+            }
     }
 
     public Cliente pesquisaNum(int num) {

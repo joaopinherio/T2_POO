@@ -82,23 +82,7 @@ public class ACMESpiele {
 
     }
 
-    private void inicializaIndividual(){
-        Individual ind1 = null;
-        Path arq1 = Paths.get("CLIENTESINICIAL.CSV");
-        
-        try(ObjectInputStream iarq =  new ObjectInputStream(Files.newInputStream(arq1))){
-            ind1 = (Individual) iarq.readObject();
-            } catch (ClassNotFoundException e){
-                System.out.println("Problema na leitura do arquivo" + e.getMessage());
-            } catch (IOException e){
-                System.out.println("Problema na leitura do arquivo" + e.getMessage());
-            } catch (Exception e){
-                System.out.println("Problema na leitura do arquivo" + e.getMessage());
-            }
-    }
-    
 
-    // CLIENTESINICIAL.CSV
     private void cadastraClienteInd() {
         int numero = 0;
         String nome = null, email = null, cpf = null;
