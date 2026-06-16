@@ -76,10 +76,6 @@ da categoria do jogo e da forma de pagamento:*/
             result += this.periodo * valorDiario;
         }
 
-        if(formaPagamento)
-
-
-
     }
-
+        
 }
