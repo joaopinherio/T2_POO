@@ -19,7 +19,7 @@ public class Jogo {
     }
 
     public String descrever() {
-        return codigo + ";" + nome + ";" + ano + ";" + valorMinuto + ";" + categoria;
+        return codigo + ";" + nome + ";" + ano + ";" + valorDiario + ";" + categoria;
     }
 
     public String descreverRedux() {
@@ -38,7 +38,7 @@ public class Jogo {
         this.codigo = codigo;
     }
 
-    public int getValorMinuto() {
+    public int getValorDiario() {
         return this.valorDiario;
     }
 

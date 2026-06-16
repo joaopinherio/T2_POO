@@ -68,7 +68,7 @@ public class QuadroContrato {
             for (Contrato con : quadro) {
                 if (con.getCliente() != null && con.getJogo() != null) {
                     if (con.getCliente() == c) {
-                        somatorio += con.getJogo().getValorMinuto();
+                        somatorio += con.getJogo().getValorDiario();
                     }
                 }
             }

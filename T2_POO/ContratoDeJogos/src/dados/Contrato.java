@@ -55,7 +55,7 @@ public class Contrato {
 da categoria do jogo e da forma de pagamento:*/
 
     public void calculaValorFinal(){
-        double result = this.periodo * jogo.getValorMinuto() 
+        double result = this.periodo * jogo.getValorDiario();
     }
 
 }

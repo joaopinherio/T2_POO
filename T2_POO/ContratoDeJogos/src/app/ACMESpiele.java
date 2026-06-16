@@ -129,7 +129,7 @@ public class ACMESpiele {
     private void cadastraJogos() {
         int codigo = 0, ano = 0;
         String nome = null, categoria = null;
-        double valorMinuto = 0;
+        int valorDiario = 0;
 
         do {
             codigo = entrada.nextInt();
@@ -137,14 +137,14 @@ public class ACMESpiele {
                 entrada.nextLine();
                 nome = entrada.nextLine();
                 ano = entrada.nextInt();
-                valorMinuto = entrada.nextDouble();
+                valorDiario = entrada.nextInt();
                 // nao faz parte do constructor de Jogo
                 entrada.nextLine();
                 categoria = entrada.nextLine();
 
                 boolean autenticaCod = false, autenticaCategoria = false;
 
-                Jogo j = new Jogo(codigo, nome, ano, valorMinuto);
+                Jogo j = new Jogo(codigo, nome, ano, valorDiario);
                 if (catalogo.pesquisaCod(j.getCodigo()) != null) {
                     System.out.println("3:erro-codigo repetido.");
                 } else {
