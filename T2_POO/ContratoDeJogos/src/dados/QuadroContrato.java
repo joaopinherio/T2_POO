@@ -57,6 +57,16 @@ public class QuadroContrato {
         return arrayC;
     }
 
+    public int numDeContratorPorCliente(Cliente cli) {
+        int cont = 0;
+        for (Contrato c : quadro) {
+            if (c.getCliente().equals(cli)) {
+                cont++;
+            }
+        }
+        return cont;
+    }
+
 
 
     // 10
