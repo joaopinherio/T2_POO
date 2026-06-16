@@ -5,15 +5,17 @@ public class Jogo {
     private int codigo;
     private String nome;
     private int ano;
-    private double valorMinuto;
+    //no T1 era valor minuto, passou a ser valor diario no novo diagrama (T2)
+    //private double valorMinuto;
+    private int valorDiario;
     private Categoria categoria;
     private Contrato contrato; // veio apos a 8
 
-    public Jogo(int codigo, String nome, int ano, double valorMinuto) {
+    public Jogo(int codigo, String nome, int ano, int valorDiario) {
         this.codigo = codigo;
         this.nome = nome;
         this.ano = ano;
-        this.valorMinuto = valorMinuto;
+        this.valorDiario = valorDiario;
     }
 
     public String descrever() {
@@ -36,8 +38,8 @@ public class Jogo {
         this.codigo = codigo;
     }
 
-    public double getValorMinuto() {
-        return this.valorMinuto;
+    public int getValorMinuto() {
+        return this.valorDiario;
     }
 
     public String getNome() {
