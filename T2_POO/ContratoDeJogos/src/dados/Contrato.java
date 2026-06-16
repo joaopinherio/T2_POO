@@ -5,6 +5,7 @@ public class Contrato {
     private int periodo;
     private Cliente cliente;
     private Jogo jogo;
+    private FormaPagamento formaPagamento;
 
 
     public Contrato(int id, int periodo) {
@@ -74,6 +75,10 @@ da categoria do jogo e da forma de pagamento:*/
             valorDiario += valorDiario * 0.15;
             result += this.periodo * valorDiario;
         }
+
+        if(formaPagamento)
+
+
 
     }
 
