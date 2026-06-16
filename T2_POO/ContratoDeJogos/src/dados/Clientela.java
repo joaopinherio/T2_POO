@@ -28,13 +28,30 @@ public class Clientela {
             ind1 = (Individual) iarq.readObject();
             addCliente(ind1);
         } catch (ClassNotFoundException e) {
-            System.out.println("Problema na leitura do arquivo" + e.getMessage());
+            System.out.println("1Problema na leitura do arquivo" + e.getMessage());
         } catch (IOException e) {
-            System.out.println("Problema na leitura do arquivo" + e.getMessage());
+            System.out.println("2Problema na leitura do arquivo" + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Problema na leitura do arquivo" + e.getMessage());
+            System.out.println("3Problema na leitura do arquivo" + e.getMessage());
         }
     }
+    
+    public void inicializaCorporativo() {
+        Corporativo corp1 = null;
+        Path arq1 = Paths.get("CLIENTESINICIAL.CSV");
+
+        try (ObjectInputStream iarq = new ObjectInputStream(Files.newInputStream(arq1))) {
+            corp1 = (Corporativo) iarq.readObject();
+            addCliente(corp1);
+        } catch (ClassNotFoundException e) {
+            System.out.println("1Problema na leitura do arquivo" + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("2Problema na leitura do arquivo" + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("3Problema na leitura do arquivo" + e.getMessage());
+        }
+    }
+    
 
     public Cliente pesquisaNum(int num) {
         for (Cliente c : cadastro) {

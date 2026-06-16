@@ -41,12 +41,15 @@ public class ACMESpiele {
 
     public void executar() {
 
-        
+        inicializar();
 
     }
 
     private void inicializar(){
+        clientela.inicializaCorporativo();
         clientela.inicializaIndividual();
+
+        clientela.toString();
     }
 
 
