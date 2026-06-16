@@ -26,7 +26,7 @@ public class ACMESpiele {
     public ACMESpiele() {
 
         redirecionaEntrada();
-        redirecionaSaida();
+        //redirecionaSaida();
 
         catalogo = new Catalogo();
         clientela = new Clientela();

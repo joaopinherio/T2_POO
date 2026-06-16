@@ -57,6 +57,8 @@ public class QuadroContrato {
         return arrayC;
     }
 
+
+
     // 10
     public String getClienteMaiorValor() {
         Queue<Cliente> arrayC = pesquisaTodosContratantes();
@@ -79,5 +81,6 @@ public class QuadroContrato {
         }
         return maioral.descreverRedux() + ";" + maior;
     }
+
 
 }

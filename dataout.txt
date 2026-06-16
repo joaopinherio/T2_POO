@@ -2,9 +2,9 @@
 1:22;Maria da Silva;maria@mail.com.br;222222222-22
 2:33;ACME Corp.;acme@acme.com;33333333/0001-33;A Company Making Everything
 2:44;Cyberdine Co.;t1000@cyberdine.com;44444444/0001-44;Cyberdine Systems
-3:555;Tetris;2000;5;AVENTURA
-3:666;War;2020;6;ESTRATEGIA
-3:777;Gran Turismo 7;2022;7;CORRIDA
+3:555;Tetris;2000;5.0;AVENTURA
+3:666;War;2020;6.0;ESTRATEGIA
+3:777;Gran Turismo 7;2022;7.0;CORRIDA
 4:8888;88;22;555
 4:9999;99;44;666
 4:1111;11;11;777
