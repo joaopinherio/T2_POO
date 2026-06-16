@@ -1,5 +1,5 @@
 package dados;
 
-public class PIX {
+public class PIX extends FormaPagamento{
     private String chave;
 }
