@@ -1,26 +1,25 @@
 package dados;
 
-import java.util.*;
 
 public class FormaPagamento {
-    private String numero;
-    private Date validade;
+    private int cod;
+    private int diaVencimento;
     
-    public FormaPagamento(String numero, Date validade) {
-        this.numero = numero;
-        this.validade = validade;
+    public FormaPagamento(int cod, int diaVencimento) {
+        this.cod = cod;
+        this.diaVencimento = diaVencimento;
     }
 
-    public String getNumero() {
-        return numero;
+    public int getCod() {
+        return cod;
     }
-    public void setNumero(String numero) {
-        this.numero = numero;
+    public void setCod(int cod) {
+        this.cod = cod;
     }
-    public Date getValidade() {
-        return validade;
+    public int getDiaVencimento() {
+        return diaVencimento;
     }
-    public void setValidade(Date validade) {
-        this.validade = validade;
-    }
+    public void setDiaVencimento(int diaVencimento) {
+        this.diaVencimento = diaVencimento;
+    } 
 }
