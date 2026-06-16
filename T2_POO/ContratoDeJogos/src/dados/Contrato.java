@@ -83,7 +83,7 @@ public class Contrato {
         long cont = quadro.pesquisaTodosContratantes().stream().filter(c -> c.equals(cliente)).count();
 
         if (cont >= 3) {
-            valorDiario += valorDiario * 0.03;
+            valorDiario -= valorDiario * 0.03;
             result += this.periodo * valorDiario;
         }
 
