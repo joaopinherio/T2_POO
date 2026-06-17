@@ -62,14 +62,13 @@ public class Clientela {
                     sb.append(',');
                 }
             }
-            System.out.println("haha");
-            System.out.println(sb);
             String[] sbArray = sb.toString().split(",");
+            /* TESTES DOS DADOS SENDO REPASSADOS
             for (String s : sbArray) {
                 System.out.println(s);
             }
             System.out.println("INDICE 6");
-            System.out.println(sbArray[6]);
+            System.out.println(sbArray[6]);*/
 
             reader.close();
         } catch (IOException e) {
