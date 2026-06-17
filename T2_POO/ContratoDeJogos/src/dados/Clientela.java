@@ -41,7 +41,7 @@ public class Clientela {
         }
     }
 
-    public void inicializaCorporativo(Path arq) {
+    public void inicializaClientes(Path arq) {
         Corporativo corp1 = null;
         BufferedReader reader = null;
         String line = "";
