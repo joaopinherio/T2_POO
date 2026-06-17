@@ -62,24 +62,27 @@ public class Clientela {
                     sb.append(',');
                 }
             }
-            String[] sbArray = sb.toString().split(",");
+            String[] data = sb.toString().split(",");
             /* TESTES DOS DADOS SENDO REPASSADOS
-            for (String s : sbArray) {
+            for (String s : data) {
                 System.out.println(s);
             }
             System.out.println("INDICE 6");
             */
-           System.out.println(sbArray[7]);
+           System.out.println(data[7]);
 
-           
-           int numero = Integer.parseInt(sbArray[6]);
-           String nome = sbArray[7], email = sbArray[8],
-           cnpj = sbArray[9],nomeFantasia = sbArray[10];
+           //LOOP LEITURA/CADASTROS 
+           int count = 0;
+            
+
+           int numero = Integer.parseInt(data[6]);
+           String nome = data[7], email = data[8],
+           cnpj = data[9],nomeFantasia = data[10];
 
            System.out.println("teste");
            System.out.println(numero + " " + nome + " " + email + " " + cnpj + " " + nomeFantasia);
 
-           //corp1 = new Corporativo((int)sbArray[6], line, line, line, line)
+           //corp1 = new Corporativo((int)data[6], line, line, line, line)
 
             reader.close();
         } catch (IOException e) {
