@@ -70,6 +70,8 @@ public class Clientela {
             System.out.println("INDICE 6");
             */
            System.out.println(sbArray[7]);
+
+           
            int numero = Integer.parseInt(sbArray[6]);
            String nome = sbArray[7], email = sbArray[8],
            cnpj = sbArray[9],nomeFantasia = sbArray[10];
