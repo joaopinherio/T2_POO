@@ -72,9 +72,12 @@ public class Clientela {
            System.out.println(sbArray[7]);
            int numero = Integer.parseInt(sbArray[6]);
            String nome = sbArray[7], email = sbArray[8],
-           cnpj = sbArray[9],nomeFantasia = sbArray[10], 
+           cnpj = sbArray[9],nomeFantasia = sbArray[10];
 
-           corp1 = new Corporativo((int)sbArray[6], line, line, line, line)
+           System.out.println("teste");
+           System.out.println(numero + " " + nome + " " + email + " " + cnpj + " " + nomeFantasia);
+
+           //corp1 = new Corporativo((int)sbArray[6], line, line, line, line)
 
             reader.close();
         } catch (IOException e) {
