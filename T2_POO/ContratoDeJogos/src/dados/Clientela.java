@@ -31,6 +31,7 @@ public class Clientela {
     public void inicializaIndividual() {
         Individual ind1 = null;
         Path arq1 = Paths.get("CLIENTESINICIAL.CSV");
+        BufferedReader reader = null;
 
         try (ObjectInputStream iarq = new ObjectInputStream(Files.newInputStream(arq1))) {
             ind1 = (Individual) iarq.readObject();
@@ -51,16 +52,31 @@ public class Clientela {
         Path arq1 = Paths.get("CLIENTESINICIAL.CSV");
         BufferedReader reader = null;
         String line = "";
+        StringBuilder sb = new StringBuilder();  
 
         try{
             reader = new BufferedReader(new FileReader(arq1.toFile()));
             while((line = reader.readLine()) != null){
-                String[] row = line.split(",", 1);
-                //for(int i = 0; i < 1; i++){
-                  //  System.out.printf(row[i] + "\n");
-                //}
-                System.out.println(row[0]);
+                //System.out.println(line);
+                //System.out.println("!!");
+                String[] rowSplit = line.split(";");
+                //String[] lineSplit = rowSplit[0].toString().split(",");
+               for(String s: rowSplit){
+                    System.out.println(s);
+                    sb.append(s);
+                    sb.append(',');
+                }
+                System.out.println(rowSplit[0]);
             }
+            System.out.println("haha");
+            System.out.println(sb);
+            String[] sbArray = sb.toString().split(",");
+                for(String s: sbArray){
+                    System.out.println(s);
+                }
+            System.out.println("INDICE 6");
+            System.out.println(sbArray[6]);
+
             reader.close();
         } catch (IOException e) {
             System.out.println("2Problema na leitura do arquivo" + e.getMessage());
