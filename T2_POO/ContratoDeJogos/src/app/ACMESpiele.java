@@ -50,7 +50,7 @@ public class ACMESpiele {
         clientela.inicializaCorporativo(clientesIniciais);
         //clientela.inicializaIndividual();
 
-        //clientela.toString();
+        clientela.toString();
     }
 
 

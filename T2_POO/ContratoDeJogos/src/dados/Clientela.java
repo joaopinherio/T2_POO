@@ -9,12 +9,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 public class Clientela {
     private ArrayList<Cliente> cadastro;
 
@@ -63,26 +57,51 @@ public class Clientela {
                 }
             }
             String[] data = sb.toString().split(",");
-            /* TESTES DOS DADOS SENDO REPASSADOS
-            for (String s : data) {
-                System.out.println(s);
+            /*
+             * TESTES DOS DADOS SENDO REPASSADOS
+             * for (String s : data) {
+             * System.out.println(s);
+             * }
+             * System.out.println("INDICE 6");
+             */
+            System.out.println(data[7]);
+
+            // LOOP LEITURA/CADASTROS
+            //int count = 0;
+            for (int i = 0; i > data.length; i++) {
+                if (i > 5) { // 6 eh o indice em que comecam os valores
+                    int count = i;
+                    int tipo = count + 3;
+                    if(tipo == 1){
+                        int numero = Integer.parseInt(data[count]); count++;
+                        String nome = data[count];count++; 
+                        String email = data[count];count++;
+                        String cpf = data[count];count += 2;
+
+                        Individual ind = new Individual(numero, nome, email, cpf);
+                        cadastro.add(ind);
+                    }
+                    if(tipo == 2){
+                        int numero = Integer.parseInt(data[count]); count++;
+                        String nome = data[count];count++; 
+                        String email = data[count];count++;
+                        String cnpj = data[count];count += 2;
+                        String nomeFantasia = data[count];count++;
+                        
+                        Corporativo corp = new Corporativo(numero, nome, email, cnpj, nomeFantasia);
+                        cadastro.add(corp);
+                    }
+                    i += count;
+                }
             }
-            System.out.println("INDICE 6");
-            */
-           System.out.println(data[7]);
 
-           //LOOP LEITURA/CADASTROS 
-           int count = 0;
-            
+            int numero = Integer.parseInt(data[6]);
+            String nome = data[7], email = data[8],
+                    cnpj = data[9], nomeFantasia = data[10];
 
-           int numero = Integer.parseInt(data[6]);
-           String nome = data[7], email = data[8],
-           cnpj = data[9],nomeFantasia = data[10];
+            System.out.println("teste");
+            System.out.println(numero + " " + nome + " " + email + " " + cnpj + " " + nomeFantasia);
 
-           System.out.println("teste");
-           System.out.println(numero + " " + nome + " " + email + " " + cnpj + " " + nomeFantasia);
-
-           //corp1 = new Corporativo((int)data[6], line, line, line, line)
 
             reader.close();
         } catch (IOException e) {
