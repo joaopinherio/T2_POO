@@ -63,8 +63,9 @@ public class Clientela {
              * System.out.println(s);
              * }
              * System.out.println("INDICE 6");
-            System.out.println(data[7]);
-             */
+            */
+           System.out.println("TESTE IND PRE");
+            System.out.println(data[11]);
 
             // LOOP LEITURA/CADASTROS
             //int count = 0;
@@ -91,11 +92,15 @@ public class Clientela {
                         cadastro.add(ind);
                     }
                     if(tipo == 2){
+                        System.out.println("2corp");
+                        System.out.println(i);
                         int numero = Integer.parseInt(data[count]); count++;
-                        String nome = data[count];count++; 
-                        String email = data[count];count++;
-                        String cnpj = data[count];count += 2;
-                        String nomeFantasia = data[count];count++;
+                        String nome = data[i+count];count++; 
+                        System.out.println(numero);
+                        String email = data[i+count];count++;
+                        System.out.println(nome);
+                        String cnpj = data[i+count];count++;
+                        String nomeFantasia = data[i+count];count++;
                         
                         Corporativo corp = new Corporativo(numero, nome, email, cnpj, nomeFantasia);
                         System.out.println("teste corp");
@@ -104,7 +109,7 @@ public class Clientela {
                     }
                     System.out.println(count + "count");
                     System.out.println(i);
-                    i += count;
+                    i += count -1;
                     System.out.println("indice");
                     System.out.println(i);
                 }
