@@ -63,22 +63,31 @@ public class Clientela {
              * System.out.println(s);
              * }
              * System.out.println("INDICE 6");
-             */
             System.out.println(data[7]);
+             */
 
             // LOOP LEITURA/CADASTROS
             //int count = 0;
-            for (int i = 0; i > data.length; i++) {
+            for (int i = 0; i < data.length; i++) {
+                //System.out.println("HA");
                 if (i > 5) { // 6 eh o indice em que comecam os valores
-                    int count = i;
-                    int tipo = count + 3;
+                    int count = 0;
+                    int tipo = Integer.parseInt(data[i + 3]);
+                    System.out.println("tipo:" + tipo);
                     if(tipo == 1){
-                        int numero = Integer.parseInt(data[count]); count++;
-                        String nome = data[count];count++; 
-                        String email = data[count];count++;
-                        String cpf = data[count];count += 2;
+                        int numero = Integer.parseInt(data[i]); count++;
+                        System.out.println(numero);
+                        String nome = data[i+count];count++; 
+                        System.out.println(nome);
+                        String email = data[i+count];count+=2;
+                        System.out.println(email);
+                        String cpf = data[i+count];count++;
+                        System.out.println("cpf");
+                        System.out.println(cpf);
 
                         Individual ind = new Individual(numero, nome, email, cpf);
+                        System.out.println("teste ind");
+                        System.out.println(ind.descrever());
                         cadastro.add(ind);
                     }
                     if(tipo == 2){
@@ -89,9 +98,15 @@ public class Clientela {
                         String nomeFantasia = data[count];count++;
                         
                         Corporativo corp = new Corporativo(numero, nome, email, cnpj, nomeFantasia);
+                        System.out.println("teste corp");
+                        corp.descreverRedux();
                         cadastro.add(corp);
                     }
+                    System.out.println(count + "count");
+                    System.out.println(i);
                     i += count;
+                    System.out.println("indice");
+                    System.out.println(i);
                 }
             }
 
@@ -99,8 +114,8 @@ public class Clientela {
             String nome = data[7], email = data[8],
                     cnpj = data[9], nomeFantasia = data[10];
 
-            System.out.println("teste");
-            System.out.println(numero + " " + nome + " " + email + " " + cnpj + " " + nomeFantasia);
+            //System.out.println("teste");
+            //System.out.println(numero + " " + nome + " " + email + " " + cnpj + " " + nomeFantasia);
 
 
             reader.close();
@@ -135,6 +150,12 @@ public class Clientela {
                 return c.descrever();
         }
         return null;
+    }
+
+    public void printClientela(){
+        for(Cliente c : cadastro){
+            System.out.println(c.descreverRedux());
+        }
     }
 
 }
