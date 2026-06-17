@@ -37,7 +37,7 @@ public class Clientela {
             ind1 = (Individual) iarq.readObject();
             addCliente(ind1);
             iarq.close();
-            //arq1.close();
+            // arq1.close();
         } catch (ClassNotFoundException e) {
             System.out.println("1Problema na leitura do arquivo" + e.getMessage());
         } catch (IOException e) {
@@ -46,34 +46,29 @@ public class Clientela {
             System.out.println("3Problema na leitura do arquivo" + e.getMessage());
         }
     }
-    
+
     public void inicializaCorporativo() {
         Corporativo corp1 = null;
         Path arq1 = Paths.get("CLIENTESINICIAL.CSV");
         BufferedReader reader = null;
         String line = "";
-        StringBuilder sb = new StringBuilder();  
+        StringBuilder sb = new StringBuilder();
 
-        try{
+        try {
             reader = new BufferedReader(new FileReader(arq1.toFile()));
-            while((line = reader.readLine()) != null){
-                //System.out.println(line);
-                //System.out.println("!!");
+            while ((line = reader.readLine()) != null) {
                 String[] rowSplit = line.split(";");
-                //String[] lineSplit = rowSplit[0].toString().split(",");
-               for(String s: rowSplit){
-                    System.out.println(s);
+                for (String s : rowSplit) {
                     sb.append(s);
                     sb.append(',');
                 }
-                System.out.println(rowSplit[0]);
             }
             System.out.println("haha");
             System.out.println(sb);
             String[] sbArray = sb.toString().split(",");
-                for(String s: sbArray){
-                    System.out.println(s);
-                }
+            for (String s : sbArray) {
+                System.out.println(s);
+            }
             System.out.println("INDICE 6");
             System.out.println(sbArray[6]);
 
@@ -84,7 +79,6 @@ public class Clientela {
             System.out.println("3Problema na leitura do arquivo" + e.getMessage());
         }
     }
-    
 
     public Cliente pesquisaNum(int num) {
         for (Cliente c : cadastro) {
