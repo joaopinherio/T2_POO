@@ -69,7 +69,9 @@ public class Clientela {
 
             // LOOP LEITURA/CADASTROS
             //int count = 0;
-            for (int i = 0; i < data.length; i++) {
+            //data.length - 5 -> comprimento total menos 5 (numero de itens no cabecalho do .csv)
+            //logo se nao tem mais que 5 numeros de indice sobrando quer dizer que aquela iteracao eh a ultima
+            for (int i = 0; i < data.length - 5; i++) {
                 //System.out.println("HA");
                 if (i > 5) { // 6 eh o indice em que comecam os valores
                     int count = 0;
@@ -104,9 +106,10 @@ public class Clientela {
                         
                         Corporativo corp = new Corporativo(numero, nome, email, cnpj, nomeFantasia);
                         System.out.println("teste corp");
-                        corp.descreverRedux();
+                        corp.descrever();
                         cadastro.add(corp);
                     }
+                    System.out.println("LOOP OUT OF BOUND");
                     System.out.println(count + "count");
                     System.out.println(i);
                     i += count -1;
@@ -114,14 +117,6 @@ public class Clientela {
                     System.out.println(i);
                 }
             }
-
-            int numero = Integer.parseInt(data[6]);
-            String nome = data[7], email = data[8],
-                    cnpj = data[9], nomeFantasia = data[10];
-
-            //System.out.println("teste");
-            //System.out.println(numero + " " + nome + " " + email + " " + cnpj + " " + nomeFantasia);
-
 
             reader.close();
         } catch (IOException e) {
