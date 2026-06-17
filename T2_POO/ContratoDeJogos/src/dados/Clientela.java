@@ -47,15 +47,14 @@ public class Clientela {
         }
     }
 
-    public void inicializaCorporativo() {
+    public void inicializaCorporativo(Path arq) {
         Corporativo corp1 = null;
-        Path arq1 = Paths.get("CLIENTESINICIAL.CSV");
         BufferedReader reader = null;
         String line = "";
         StringBuilder sb = new StringBuilder();
 
         try {
-            reader = new BufferedReader(new FileReader(arq1.toFile()));
+            reader = new BufferedReader(new FileReader(arq.toFile()));
             while ((line = reader.readLine()) != null) {
                 String[] rowSplit = line.split(";");
                 for (String s : rowSplit) {

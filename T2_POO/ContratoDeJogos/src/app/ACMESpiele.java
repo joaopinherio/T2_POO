@@ -27,6 +27,7 @@ public class ACMESpiele {
     private PrintStream saidaPadrao = System.out; // Guarda a saida padrao - tela (console)
     private final String nomeArquivoEntrada = "datain.txt"; // Nome do arquivo de entrada de dados
     private final String nomeArquivoSaida = "dataout.txt"; // Nome do arquivo de saida de dados
+    private final Path clientesIniciais = Paths.get("CLIENTESINICIAL.CSV");
     private Scanner entrada = null;
 
     public ACMESpiele() {
@@ -46,7 +47,7 @@ public class ACMESpiele {
     }
 
     private void inicializar(){
-        clientela.inicializaCorporativo();
+        clientela.inicializaCorporativo(clientesIniciais);
         //clientela.inicializaIndividual();
 
         //clientela.toString();
