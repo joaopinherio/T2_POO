@@ -94,7 +94,7 @@ public class Clientela {
                     if(tipo == 2){
                         System.out.println("2corp");
                         System.out.println(i);
-                        int numero = Integer.parseInt(data[count]); count++;
+                        int numero = Integer.parseInt(data[i]); count++;
                         String nome = data[i+count];count++; 
                         System.out.println(numero);
                         String email = data[i+count];count++;

@@ -48,7 +48,6 @@ public class ACMESpiele {
 
     private void inicializar(){
         clientela.inicializaCorporativo(clientesIniciais);
-        //clientela.inicializaIndividual();
         System.out.println("oficial:");
         clientela.printClientela();
     }
