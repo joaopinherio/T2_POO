@@ -62,6 +62,7 @@ public class ACMESpiele {
         historicoPagamentos.printPagamentos();
 
         quadroContrato.inicializaContratos(contratosIniciais);
+        quadroContrato.printContratos();
     }
 
 

@@ -22,7 +22,7 @@ public class Contrato {
     }
 
     public String descreverRedux() {
-        return id + ";" + periodo + ";" + cliente.getNumero() + ";" + jogo.getCodigo();
+        return id + ";" + periodo;
     }
 
     public int getId() {

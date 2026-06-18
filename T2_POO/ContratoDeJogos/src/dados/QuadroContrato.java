@@ -39,15 +39,15 @@ public class QuadroContrato {
              * System.out.println(s);
              * }
             System.out.println("INDICE");
-            System.out.println(data[5]);
-             */
+            */
+            System.out.println(data[7]);
 
             // LOOP LEITURA/CADASTROS
             // data.length - 5 -> comprimento total menos 5 (numero de itens no cabecalho do
             // .csv)
             // logo se nao tem mais que 5 numeros de indice sobrando quer dizer que aquela
             // iteracao eh a ultima
-            for (int i = 6; i < data.length - 4; i++) {
+            for (int i = 6; i < data.length - 5; i++) {
                 int count = 0;
 
                 int id = Integer.parseInt(data[i]);
@@ -61,10 +61,12 @@ public class QuadroContrato {
                 int codigoJogo = Integer.parseInt(data[i + count]);
                 count++;
                 int codigoPagamento = Integer.parseInt(data[i + count]);
-                count++;
 
                 Contrato contrato = new Contrato(id, periodo);
-                
+                //contrato.setData(dataContrato);
+                //contrato.setCliente(Clientela.get);
+
+                //contrato.descrever();
                 //contrato.setCategoria(categoria);
                 addContrato(contrato);
 
@@ -145,6 +147,12 @@ public class QuadroContrato {
             }
         }
         return maioral.descreverRedux() + ";" + maior;
+    }
+
+    public void printContratos(){
+        for (Contrato contrato : quadro) {
+            System.out.println(contrato.descreverRedux());
+        }
     }
 
 }
