@@ -44,38 +44,47 @@ public class Clientela {
              * System.out.println(s);
              * }
              * System.out.println("INDICE 6");
-            */
-
+             */
 
             // LOOP LEITURA/CADASTROS
-            //int count = 0;
-            //data.length - 5 -> comprimento total menos 5 (numero de itens no cabecalho do .csv)
-            //logo se nao tem mais que 5 numeros de indice sobrando quer dizer que aquela iteracao eh a ultima
+            // int count = 0;
+            // data.length - 5 -> comprimento total menos 5 (numero de itens no cabecalho do
+            // .csv)
+            // logo se nao tem mais que 5 numeros de indice sobrando quer dizer que aquela
+            // iteracao eh a ultima
             for (int i = 0; i < data.length - 5; i++) {
                 if (i > 5) { // 6 eh o indice em que comecam os valores
                     int count = 0;
                     int tipo = Integer.parseInt(data[i + 3]);
-                    if(tipo == 1){
-                        int numero = Integer.parseInt(data[i]); count++;
-                        String nome = data[i+count];count++; 
-                        String email = data[i+count];count+=2;
-                        String cpf = data[i+count];
+                    if (tipo == 1) {
+                        int numero = Integer.parseInt(data[i]);
+                        count++;
+                        String nome = data[i + count];
+                        count++;
+                        String email = data[i + count];
+                        count += 2;
+                        String cpf = data[i + count];
 
                         Individual ind = new Individual(numero, nome, email, cpf);
                         cadastro.add(ind);
                     }
-                    if(tipo == 2){
-                        int numero = Integer.parseInt(data[i]); count++;
-                        String nome = data[i+count];count++; 
-                        String email = data[i+count];count++;
-                        String cnpj = data[i+count];count++;
-                        String nomeFantasia = data[i+count];
-                        
+                    if (tipo == 2) {
+                        int numero = Integer.parseInt(data[i]);
+                        count++;
+                        String nome = data[i + count];
+                        count++;
+                        String email = data[i + count];
+                        count++;
+                        String cnpj = data[i + count];
+                        count++;
+                        String nomeFantasia = data[i + count];
+
                         Corporativo corp = new Corporativo(numero, nome, email, cnpj, nomeFantasia);
                         cadastro.add(corp);
                     }
 
-                    //soma o numero de indices percorridos nessa iteracao do loop para que o indice esteja correto na proxima
+                    // soma o numero de indices percorridos nessa iteracao do loop para que o indice
+                    // esteja correto na proxima
                     i += count;
                 }
             }
@@ -114,8 +123,8 @@ public class Clientela {
         return null;
     }
 
-    public void printClientela(){
-        for(Cliente c : cadastro){
+    public void printClientela() {
+        for (Cliente c : cadastro) {
             System.out.println(c.descreverRedux());
         }
     }
