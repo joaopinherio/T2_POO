@@ -1,5 +1,9 @@
 package dados;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class Catalogo {
@@ -9,6 +13,66 @@ public class Catalogo {
     public Catalogo() {
         // Polimorfismo de classe
         catalogo = new ArrayList<>();
+    }
+
+    public void inicializaJogos(Path arq) {
+        BufferedReader reader = null;
+        String line = "";
+        StringBuilder sb = new StringBuilder();
+
+        try {
+            reader = new BufferedReader(new FileReader(arq.toFile()));
+            while ((line = reader.readLine()) != null) {
+                String[] rowSplit = line.split(";");
+                for (String s : rowSplit) {
+                    sb.append(s);
+                    sb.append(',');
+                }
+            }
+            String[] data = sb.toString().split(",");
+            /*
+             * TESTES DOS DADOS SENDO REPASSADOS
+             * for (String s : data) {
+             * System.out.println(s);
+             * }
+             * System.out.println("INDICE 6");
+             */
+
+            // LOOP LEITURA/CADASTROS
+            // int count = 0;
+            // data.length - 5 -> comprimento total menos 5 (numero de itens no cabecalho do
+            // .csv)
+            // logo se nao tem mais que 5 numeros de indice sobrando quer dizer que aquela
+            // iteracao eh a ultima
+            for (int i = 0; i < data.length - 5; i++) {
+                if (i > 5) { // 6 eh o indice em que comecam os valores
+                    int count = 0;
+
+                        int codigo = Integer.parseInt(data[i]);
+                        count++;
+                        String nome = data[i + count];
+                        count++;
+                        int ano = Integer.parseInt(data[i + count]);
+                        count++;
+                        double valorDiario = Double.parseDouble(data[i + count]);
+                        count++;
+                        Categoria categoria = Categoria.valueOf(data[i]);
+
+                        Jogo jogo = new Jogo(codigo, nome, ano, valorDiario);
+                        jogo.setCategoria(categoria);
+
+                    // soma o numero de indices percorridos nessa iteracao do loop para que o indice
+                    // esteja correto na proxima
+                    i += count;
+                }
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("1Problema na leitura do arquivo" + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("2Problema na leitura do arquivo" + e.getMessage());
+        }
     }
 
     public boolean addJogo(Jogo j) {
