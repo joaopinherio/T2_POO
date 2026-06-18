@@ -97,7 +97,12 @@ public class LogPagamentos {
         }
     }
 
-    
+    public void printPagemtnos() {
+        for (FormaPagamento p : pagamentos ) {
+            System.out.println(p.descreverRedux());
+        }
+    }
+
 
 
 }

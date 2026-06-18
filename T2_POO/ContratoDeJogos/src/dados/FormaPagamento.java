@@ -10,6 +10,10 @@ public class FormaPagamento {
         this.diaVencimento = diaVencimento;
     }
 
+    public String descrever(){
+        return getCod() + ";" + getDiaVencimento();
+    }
+
     public int getCod() {
         return cod;
     }

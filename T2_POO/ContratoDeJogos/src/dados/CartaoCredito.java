@@ -10,6 +10,11 @@ public class CartaoCredito extends FormaPagamento{
         this.numero = numero;
         this.validade = validade;
     }
+
+    @Override
+    public String descrever(){
+        return super.descrever() + ";" + getNumero() + ";" + getValidade().toString();
+    }
     
     public String getNumero() {
         return numero;
