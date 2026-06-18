@@ -102,6 +102,9 @@ public class LogPagamentos {
         }
     }
 
+    public FormaPagamento getPagamentoByCodigo(int codigo){
+        return pagamentos.get(codigo);
+    }
 
 
 }

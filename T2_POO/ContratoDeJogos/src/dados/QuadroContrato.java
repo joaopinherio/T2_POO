@@ -67,7 +67,7 @@ public class QuadroContrato {
                 contrato.setData(dataContrato);
                 contrato.setCliente(clientela.pesquisaNum(numeroCliente));
                 contrato.setJogo(catalogoJogos.pesquisaCod(codigoJogo));
-                //contrato.setFormaPagamento(historicoPagamentos.);
+                contrato.setFormaPagamento(historicoPagamentos.getPagamentoByCodigo(codigoJogo));
 
                 addContrato(contrato);
 
@@ -152,7 +152,7 @@ public class QuadroContrato {
 
     public void printContratos(){
         for (Contrato contrato : quadro) {
-            System.out.println(contrato.descreverRedux());
+            System.out.println(contrato.descrever());
         }
     }
 
