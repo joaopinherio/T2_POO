@@ -54,40 +54,39 @@ public class Clientela {
             // iteracao eh a ultima
             // 6 eh o indice em que comecam os valores
             for (int i = 6; i < data.length - 5; i++) {
-                    int count = 0;
-                    int tipo = Integer.parseInt(data[i + 3]);
-                    if (tipo == 1) {
-                        int numero = Integer.parseInt(data[i]);
-                        count++;
-                        String nome = data[i + count];
-                        count++;
-                        String email = data[i + count];
-                        count += 2;
-                        String cpf = data[i + count];
+                int count = 0;
+                int tipo = Integer.parseInt(data[i + 3]);
+                if (tipo == 1) {
+                    int numero = Integer.parseInt(data[i]);
+                    count++;
+                    String nome = data[i + count];
+                    count++;
+                    String email = data[i + count];
+                    count += 2;
+                    String cpf = data[i + count];
 
-                        Individual ind = new Individual(numero, nome, email, cpf);
-                        cadastro.add(ind);
-                    }
-                    if (tipo == 2) {
-                        int numero = Integer.parseInt(data[i]);
-                        count++;
-                        String nome = data[i + count];
-                        count++;
-                        String email = data[i + count];
-                        count++;
-                        String cnpj = data[i + count];
-                        count++;
-                        String nomeFantasia = data[i + count];
-
-                        Corporativo corp = new Corporativo(numero, nome, email, cnpj, nomeFantasia);
-                        cadastro.add(corp);
-                    }
-
-                    // soma o numero de indices percorridos nessa iteracao do loop para que o indice
-                    // esteja correto na proxima
-                    i += count;
+                    Individual ind = new Individual(numero, nome, email, cpf);
+                    cadastro.add(ind);
                 }
-    
+                if (tipo == 2) {
+                    int numero = Integer.parseInt(data[i]);
+                    count++;
+                    String nome = data[i + count];
+                    count++;
+                    String email = data[i + count];
+                    count++;
+                    String cnpj = data[i + count];
+                    count++;
+                    String nomeFantasia = data[i + count];
+
+                    Corporativo corp = new Corporativo(numero, nome, email, cnpj, nomeFantasia);
+                    cadastro.add(corp);
+                }
+
+                // soma o numero de indices percorridos nessa iteracao do loop para que o indice
+                // esteja correto na proxima
+                i += count;
+            }
 
             reader.close();
         } catch (IOException e) {
