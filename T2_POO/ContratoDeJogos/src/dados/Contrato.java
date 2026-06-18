@@ -33,6 +33,14 @@ public class Contrato {
         this.id = id;
     }
 
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+
     public int getPeriodo() {
         return this.periodo;
     }
