@@ -13,7 +13,6 @@ public class LogPagamentos {
         pagamentos = new TreeMap<>();
      }
 
-    
      public void addPagamento(Integer numeroCliente, FormaPagamento f){
         pagamentos.putIfAbsent(numeroCliente, f);
      }
