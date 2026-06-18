@@ -43,7 +43,6 @@ public class ACMESpiele {
     public void executar() {
 
         inicializar();
-
     }
 
     private void inicializar(){

@@ -2,7 +2,7 @@ package dados;
 
 import java.io.Serializable;
 
-abstract class Cliente implements Serializable {
+public abstract class Cliente implements Serializable {
     private int numero;
     private String nome;
     private String email;
@@ -13,7 +13,7 @@ abstract class Cliente implements Serializable {
         this.email = email;
     }
 
-    abstract String descrever();
+    public abstract String descrever();
 
     public String descreverRedux() {
         return numero + ";" + nome + ";" + email;
