@@ -35,9 +35,9 @@ public class Catalogo {
              * for (String s : data) {
              * System.out.println(s);
              * }
-             */
             System.out.println("INDICE");
             System.out.println(data[5]);
+             */
 
             // LOOP LEITURA/CADASTROS
             // int count = 0;
@@ -49,20 +49,17 @@ public class Catalogo {
                 int count = 0;
 
                 int codigo = Integer.parseInt(data[i]);
-                System.out.println("codigo " + codigo);
                 count++;
                 String nome = data[i + count];
-                System.out.println("nome" + nome);
                 count++;
                 int ano = Integer.parseInt(data[i + count]);
-                System.out.println("ano" + ano);
                 count++;
                 double valorDiario = Double.parseDouble(data[i + count]);
-                System.out.println("valor diario" + valorDiario);
                 count++;
                 Categoria categoria = Categoria.valueOf(data[i + count]);
 
                 Jogo jogo = new Jogo(codigo, nome, ano, valorDiario);
+                
                 jogo.setCategoria(categoria);
                 addJogo(jogo);
 
