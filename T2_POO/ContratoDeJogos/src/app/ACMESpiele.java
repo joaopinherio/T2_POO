@@ -29,6 +29,7 @@ public class ACMESpiele {
     private final String nomeArquivoSaida = "dataout.txt"; // Nome do arquivo de saida de dados
     private final Path clientesIniciais = Paths.get("CLIENTESINICIAL.CSV");
     private final Path jogosIniciais = Paths.get("JOGOSINICIAL.CSV");
+    private final Path formaPagamentosIniciais = Paths.get("FORMASPAGAMENTOINICIAL.CSV");
     private Scanner entrada = null;
 
     public ACMESpiele() {
