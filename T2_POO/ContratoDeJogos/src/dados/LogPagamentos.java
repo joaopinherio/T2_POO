@@ -7,15 +7,15 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class LogPagamentos {
-     private ArrayList<FormaPagamento> pagamentos;
+     private TreeMap<Integer, FormaPagamento> pagamentos;
 
      public LogPagamentos(){
-        pagamentos = new ArrayList<>();
+        pagamentos = new TreeMap<>();
      }
 
     
-     public boolean addPagamento(FormaPagamento f){
-        return pagamentos.add(f);
+     public void addPagamento(Integer numeroCliente, FormaPagamento f){
+        pagamentos.putIfAbsent(numeroCliente, f);
      }
 
     // CLIENTESINICIAL.CSV
@@ -57,7 +57,7 @@ public class LogPagamentos {
                     count++;
                     int diaVencimento = Integer.parseInt(data[i + count]);
                     count++;
-                    String numeroCliente = data[i + count];
+                    int numeroCliente = Integer.parseInt(data[i + count]);
                     count += 2;
                     //por enquanto isso ta no limbo, mas depois sera inserido com um treeMap [Int][String] -> [codigo][numeroCliente]
                     String numeroCartao = data[i + count];
@@ -65,14 +65,14 @@ public class LogPagamentos {
                     Date validade = new Date(data[i + count]);
 
                     CartaoCredito cartao = new CartaoCredito(codigo, diaVencimento, numeroCartao, validade);
-                    addPagamento(cartao);
+                    addPagamento(numeroCliente, cartao);
                 }
                 if (tipo == 2) {
                     int codigo = Integer.parseInt(data[i]);
                     count++;
                     int diaVencimento = Integer.parseInt(data[i + count]);
                     count++;
-                    String numeroCliente = data[i + count];
+                    int numeroCliente = Integer.parseInt(data[i + count]);
                     count += 2;
                     //por enquanto isso ta no limbo, mas depois sera inserido com um treeMap [Int][String] -> [codigo][numeroCliente]
                     String chavePix = data[i + count];
@@ -81,7 +81,7 @@ public class LogPagamentos {
                     count++;
 
                     PIX pix = new PIX(codigo, diaVencimento, chave);
-                    addPagamento(pix);
+                    addPagamento(numeroCliente, pix);
                 }
 
                 // soma o numero de indices percorridos nessa iteracao do loop para que o indice
@@ -98,7 +98,7 @@ public class LogPagamentos {
     }
 
     public void printPagamentos() {
-        for (FormaPagamento p : pagamentos ) {
+        for (FormaPagamento p : pagamentos.values()) {
             System.out.println(p.descrever());
         }
     }
