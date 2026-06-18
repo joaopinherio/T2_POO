@@ -1,7 +1,10 @@
 package dados;
 
+import java.util.*;
+
 public class Contrato {
     private int id;
+    private Date data;
     private int periodo;
     private Cliente cliente;
     private Jogo jogo;
