@@ -45,7 +45,7 @@ public class Catalogo {
             // .csv)
             // logo se nao tem mais que 5 numeros de indice sobrando quer dizer que aquela
             // iteracao eh a ultima
-            for (int i = 5; i < data.length - 5; i++) {
+            for (int i = 5; i < data.length - 4; i++) {
                 int count = 0;
 
                 int codigo = Integer.parseInt(data[i]);
