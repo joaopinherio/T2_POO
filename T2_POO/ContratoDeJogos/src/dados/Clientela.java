@@ -80,7 +80,7 @@ public class Clientela {
                     String nomeFantasia = data[i + count];
 
                     Corporativo corp = new Corporativo(numero, nome, email, cnpj, nomeFantasia);
-                    cadastro.add(corp);
+                    addCliente(corp);
                 }
 
                 // soma o numero de indices percorridos nessa iteracao do loop para que o indice

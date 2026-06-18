@@ -35,8 +35,9 @@ public class Catalogo {
              * for (String s : data) {
              * System.out.println(s);
              * }
-             * System.out.println("INDICE 6");
              */
+            System.out.println("INDICE");
+            System.out.println(data[5]);
 
             // LOOP LEITURA/CADASTROS
             // int count = 0;
@@ -44,27 +45,30 @@ public class Catalogo {
             // .csv)
             // logo se nao tem mais que 5 numeros de indice sobrando quer dizer que aquela
             // iteracao eh a ultima
-            for (int i = 0; i < data.length - 5; i++) {
-                if (i > 5) { // 6 eh o indice em que comecam os valores
-                    int count = 0;
+            for (int i = 5; i < data.length - 5; i++) {
+                int count = 0;
 
-                        int codigo = Integer.parseInt(data[i]);
-                        count++;
-                        String nome = data[i + count];
-                        count++;
-                        int ano = Integer.parseInt(data[i + count]);
-                        count++;
-                        double valorDiario = Double.parseDouble(data[i + count]);
-                        count++;
-                        Categoria categoria = Categoria.valueOf(data[i]);
+                int codigo = Integer.parseInt(data[i]);
+                System.out.println("codigo " + codigo);
+                count++;
+                String nome = data[i + count];
+                System.out.println("nome" + nome);
+                count++;
+                int ano = Integer.parseInt(data[i + count]);
+                System.out.println("ano" + ano);
+                count++;
+                double valorDiario = Double.parseDouble(data[i + count]);
+                System.out.println("valor diario" + valorDiario);
+                count++;
+                Categoria categoria = Categoria.valueOf(data[i + count]);
 
-                        Jogo jogo = new Jogo(codigo, nome, ano, valorDiario);
-                        jogo.setCategoria(categoria);
+                Jogo jogo = new Jogo(codigo, nome, ano, valorDiario);
+                jogo.setCategoria(categoria);
+                addJogo(jogo);
 
-                    // soma o numero de indices percorridos nessa iteracao do loop para que o indice
-                    // esteja correto na proxima
-                    i += count;
-                }
+                // soma o numero de indices percorridos nessa iteracao do loop para que o indice
+                // esteja correto na proxima
+                i += count;
             }
 
             reader.close();
