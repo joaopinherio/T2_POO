@@ -8,6 +8,7 @@ public class Contrato {
     private int periodo;
     private Cliente cliente;
     private Jogo jogo;
+    private FormaPagamento formaPagamento;
     private PIX pix;
     private CartaoCredito cartaoCredito;
 
@@ -63,6 +64,10 @@ public class Contrato {
 
     public void setPeriodo(int periodo) {
         this.periodo = periodo;
+    }
+
+    public void setFormaPagamento(FormaPagamento formaPagamento) {
+        this.formaPagamento = formaPagamento;
     }
 
     /*O método calculaValorFinal() da classe Contrato calcula o valor final do contrato depende

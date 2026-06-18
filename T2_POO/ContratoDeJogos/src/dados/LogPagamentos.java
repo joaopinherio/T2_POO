@@ -64,7 +64,7 @@ public class LogPagamentos {
                     Date validade = new Date(data[i + count]);
 
                     CartaoCredito cartao = new CartaoCredito(codigo, diaVencimento, numeroCartao, validade);
-                    addPagamento(numeroCliente, cartao);
+                    addPagamento(codigo, cartao);
                 }
                 if (tipo == 2) {
                     int codigo = Integer.parseInt(data[i]);
@@ -80,7 +80,7 @@ public class LogPagamentos {
                     count++;
 
                     PIX pix = new PIX(codigo, diaVencimento, chave);
-                    addPagamento(numeroCliente, pix);
+                    addPagamento(codigo, pix);
                 }
 
                 // soma o numero de indices percorridos nessa iteracao do loop para que o indice

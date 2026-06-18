@@ -18,7 +18,7 @@ public class QuadroContrato {
         return quadro.offer(c);
     }
 
-    public void inicializaContratos(Path arq) {
+    public void inicializaContratos(Path arq, Clientela clientela, Catalogo catalogoJogos, LogPagamentos historicoPagamentos) {
         BufferedReader reader = null;
         String line = "";
         StringBuilder sb = new StringBuilder();
@@ -36,11 +36,11 @@ public class QuadroContrato {
             /*
              * TESTES DOS DADOS SENDO REPASSADOS
              * for (String s : data) {
-             * System.out.println(s);
+             * System.out.println(s);   
              * }
             System.out.println("INDICE");
-            */
             System.out.println(data[7]);
+            */
 
             // LOOP LEITURA/CADASTROS
             // data.length - 5 -> comprimento total menos 5 (numero de itens no cabecalho do
@@ -63,11 +63,12 @@ public class QuadroContrato {
                 int codigoPagamento = Integer.parseInt(data[i + count]);
 
                 Contrato contrato = new Contrato(id, periodo);
-                //contrato.setData(dataContrato);
-                //contrato.setCliente(Clientela.get);
+                
+                contrato.setData(dataContrato);
+                contrato.setCliente(clientela.pesquisaNum(numeroCliente));
+                contrato.setJogo(catalogoJogos.pesquisaCod(codigoJogo));
+                //contrato.setFormaPagamento(historicoPagamentos.);
 
-                //contrato.descrever();
-                //contrato.setCategoria(categoria);
                 addContrato(contrato);
 
                 // soma o numero de indices percorridos nessa iteracao do loop para que o indice
