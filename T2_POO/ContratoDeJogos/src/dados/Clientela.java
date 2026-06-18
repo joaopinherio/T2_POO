@@ -52,8 +52,8 @@ public class Clientela {
             // .csv)
             // logo se nao tem mais que 5 numeros de indice sobrando quer dizer que aquela
             // iteracao eh a ultima
-            for (int i = 0; i < data.length - 5; i++) {
-                if (i > 5) { // 6 eh o indice em que comecam os valores
+            // 6 eh o indice em que comecam os valores
+            for (int i = 6; i < data.length - 5; i++) {
                     int count = 0;
                     int tipo = Integer.parseInt(data[i + 3]);
                     if (tipo == 1) {
@@ -87,7 +87,7 @@ public class Clientela {
                     // esteja correto na proxima
                     i += count;
                 }
-            }
+    
 
             reader.close();
         } catch (IOException e) {
