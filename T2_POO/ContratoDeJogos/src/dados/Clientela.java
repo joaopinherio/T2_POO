@@ -47,7 +47,6 @@ public class Clientela {
              */
 
             // LOOP LEITURA/CADASTROS
-            // int count = 0;
             // data.length - 5 -> comprimento total menos 5 (numero de itens no cabecalho do
             // .csv)
             // logo se nao tem mais que 5 numeros de indice sobrando quer dizer que aquela

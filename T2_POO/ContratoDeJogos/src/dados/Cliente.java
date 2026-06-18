@@ -6,6 +6,7 @@ public abstract class Cliente implements Serializable {
     private int numero;
     private String nome;
     private String email;
+    private FormaPagamento formaPagamento;
 
     public Cliente(int numero, String nome, String email) {
         this.numero = numero;
@@ -14,6 +15,14 @@ public abstract class Cliente implements Serializable {
     }
 
     public abstract String descrever();
+
+    public FormaPagamento getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(FormaPagamento formaPagamento) {
+        this.formaPagamento = formaPagamento;
+    }
 
     public String descreverRedux() {
         return numero + ";" + nome + ";" + email;
