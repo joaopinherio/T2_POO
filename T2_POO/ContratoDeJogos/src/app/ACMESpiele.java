@@ -31,6 +31,7 @@ public class ACMESpiele {
     private final Path clientesIniciais = Paths.get("CLIENTESINICIAL.CSV");
     private final Path jogosIniciais = Paths.get("JOGOSINICIAL.CSV");
     private final Path formaPagamentosIniciais = Paths.get("FORMASPAGAMENTOINICIAL.CSV");
+    private final Path contratosIniciais = Paths.get("CONTRATOSINICIAL.CSV");
     private Scanner entrada = null;
 
     public ACMESpiele() {
