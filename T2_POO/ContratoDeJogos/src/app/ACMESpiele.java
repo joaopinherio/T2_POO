@@ -50,6 +50,9 @@ public class ACMESpiele {
         clientela.inicializaClientes(clientesIniciais);
         System.out.println("oficial:");
         clientela.printClientela();
+
+        catalogo.inicializaJogos(jogosIniciais);
+        catalogo.printJogos();
     }
 
 

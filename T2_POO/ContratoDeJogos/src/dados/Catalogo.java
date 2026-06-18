@@ -136,4 +136,10 @@ public class Catalogo {
         return null;
     }
 
+    public void printJogos() {
+        for (Jogo j : catalogo) {
+            System.out.println(j.descrever());
+        }
+    }
+
 }
