@@ -20,6 +20,7 @@ public class ACMESpiele {
     private Clientela clientela;
     private Catalogo catalogo;
     private QuadroContrato quadroContrato;
+    private LogPagamentos historicoPagamentos; 
 
     // Atributos para redirecionamento de E/S
     // private Scanner entrada = new Scanner(System.in); // Atributo para entrada
@@ -40,6 +41,7 @@ public class ACMESpiele {
         catalogo = new Catalogo();
         clientela = new Clientela();
         quadroContrato = new QuadroContrato();
+        historicoPagamentos = new LogPagamentos();
     }
 
     public void executar() {
@@ -54,6 +56,10 @@ public class ACMESpiele {
 
         catalogo.inicializaJogos(jogosIniciais);
         catalogo.printJogos();
+
+        historicoPagamentos.inicializaPagamentos(formaPagamentosIniciais);
+        historicoPagamentos.printPagamentos();
+
     }
 
 
