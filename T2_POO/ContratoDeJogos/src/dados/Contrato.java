@@ -74,37 +74,31 @@ public class Contrato {
 da categoria do jogo e da forma de pagamento:*/
 
     public double calculaValorFinal(){
-        double  result = 0;
         double valorDiario = jogo.getValorDiario();
         Categoria categoriaCon = jogo.getCategoria();
 
         if(categoriaCon.getExtenso().equals("AVENTURA")){
             valorDiario += valorDiario * 0.05;
-            result += this.periodo * valorDiario;
         }
 
-        if(categoriaCon.getExtenso().equals("AVENTURA")){
+        if(categoriaCon.getExtenso().equals("ESTRATEGIA")){
             valorDiario += valorDiario * 0.10;
-            result += this.periodo * valorDiario;
         }
 
         if(categoriaCon.getExtenso().equals("CORRIDA")){
             valorDiario += valorDiario * 0.15;
-            result += this.periodo * valorDiario;
         }
         //Vamos usar atributos pois nao podemos puxar os metodos das subclases de FormaPagamento
         if(formaPagamento instanceof CartaoCredito){
             valorDiario += valorDiario * 0.05;
-            result += this.periodo * valorDiario;
         }
 
         if(formaPagamento instanceof PIX){
             valorDiario -= valorDiario * 0.05;
-            result += this.periodo * valorDiario;
         }
 
         //
-        return result;
+        return periodo * valorDiario;
 
     }
 
