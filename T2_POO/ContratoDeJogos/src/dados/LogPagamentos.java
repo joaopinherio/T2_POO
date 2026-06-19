@@ -48,7 +48,7 @@ public class LogPagamentos {
             // logo se nao tem mais que 5 numeros de indice sobrando quer dizer que aquela
             // iteracao eh a ultima
             // 6 eh o indice em que comecam os valores
-            for (int i = 6; i < data.length - 5; i++) {
+            for (int i = 6; i < data.length - 4; i++) {
                 int count = 0;
                 int tipo = Integer.parseInt(data[i + 3]);
                 if (tipo == 1) {
@@ -64,6 +64,7 @@ public class LogPagamentos {
                     Date validade = new Date(data[i + count]);
 
                     CartaoCredito cartao = new CartaoCredito(codigo, diaVencimento, numeroCartao, validade);
+                    cartao.setCliente(clientela.pesquisaNum(numeroCliente));
                     addPagamento(codigo, cartao);
                 }
                 if (tipo == 2) {
@@ -75,11 +76,10 @@ public class LogPagamentos {
                     count += 2;
                     //por enquanto isso ta no limbo, mas depois sera inserido com um treeMap [Int][String] -> [codigo][numeroCliente]
                     String chavePix = data[i + count];
-                    count++;
-                    String chave = data[i + count];
-                    count++;
+                    count += 2;
 
-                    PIX pix = new PIX(codigo, diaVencimento, chave);
+                    PIX pix = new PIX(codigo, diaVencimento, chavePix);
+                    pix.setCliente(clientela.pesquisaNum(numeroCliente));
                     addPagamento(codigo, pix);
                 }
 

@@ -51,15 +51,19 @@ public class ACMESpiele {
     }
 
     private void inicializar(){
+        System.out.println("Clientes");
         clientela.inicializaClientes(clientesIniciais);
         clientela.printClientela();
-
+        
+        System.out.println("\njogos");
         catalogo.inicializaJogos(jogosIniciais);
         catalogo.printJogos();
 
+        System.out.println("\npagamentos");
         historicoPagamentos.inicializaPagamentos(formaPagamentosIniciais, clientela);
         historicoPagamentos.printPagamentos();
 
+        System.out.println("\ncontratos");
         quadroContrato.inicializaContratos(contratosIniciais, clientela, catalogo, historicoPagamentos);
         quadroContrato.printContratos();
     }
