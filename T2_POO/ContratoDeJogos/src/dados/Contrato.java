@@ -12,7 +12,6 @@ public class Contrato {
     private PIX pix;
     private CartaoCredito cartaoCredito;
 
-
     public Contrato(int id, int periodo) {
         this.id = id;
         this.periodo = periodo;
@@ -73,11 +72,11 @@ public class Contrato {
     /*O método calculaValorFinal() da classe Contrato calcula o valor final do contrato depende
 da categoria do jogo e da forma de pagamento:*/
 
-    public double calculaValorFinal(){
+    public double calculaValorFinal(QuadroContrato quadroContrato){
         double valorDiario = jogo.getValorDiario();
         Categoria categoriaCon = jogo.getCategoria();
 
-        if(categoriaCon.getExtenso().equals("AVENTURA")){
+        if (categoriaCon.getExtenso().equals("AVENTURA")) {
             valorDiario += valorDiario * 0.05;
         }
 
@@ -85,7 +84,7 @@ da categoria do jogo e da forma de pagamento:*/
             valorDiario += valorDiario * 0.10;
         }
 
-        if(categoriaCon.getExtenso().equals("CORRIDA")){
+        if (categoriaCon.getExtenso().equals("CORRIDA")) {
             valorDiario += valorDiario * 0.15;
         }
         //Vamos usar atributos pois nao podemos puxar os metodos das subclases de FormaPagamento
@@ -98,8 +97,11 @@ da categoria do jogo e da forma de pagamento:*/
         }
 
         //
+        if (quadroContrato.numDeContratorPorCliente(cliente) >= 3) {
+            valorDiario -= valorDiario * 0.03;
+        }
+        
         return periodo * valorDiario;
-
     }
 
 }
