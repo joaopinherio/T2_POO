@@ -67,8 +67,8 @@ public class ACMESpiele {
         quadroContrato.inicializaContratos(contratosIniciais, clientela, catalogo, historicoPagamentos);
         quadroContrato.printContratos();
 
-        System.out.println("Valores calculaValorFinal");
-        quadroContrato.getValoresFinais();
+        System.out.println("\nValores calculaValorFinal");
+        quadroContrato.getValoresFinais(quadroContrato);
         
     }
 
