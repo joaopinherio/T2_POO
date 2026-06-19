@@ -93,12 +93,12 @@ da categoria do jogo e da forma de pagamento:*/
             result += this.periodo * valorDiario;
         }
         //Vamos usar atributos pois nao podemos puxar os metodos das subclases de FormaPagamento
-        if(cartaoCredito != null){
+        if(formaPagamento instanceof CartaoCredito){
             valorDiario += valorDiario * 0.05;
             result += this.periodo * valorDiario;
         }
 
-        if(pix != null){
+        if(formaPagamento instanceof PIX){
             valorDiario -= valorDiario * 0.05;
             result += this.periodo * valorDiario;
         }
