@@ -4,6 +4,7 @@ package dados;
 public class FormaPagamento {
     private int cod;
     private int diaVencimento;
+    private Cliente cliente;
     
     public FormaPagamento(int cod, int diaVencimento) {
         this.cod = cod;
@@ -12,6 +13,12 @@ public class FormaPagamento {
 
     public String descrever(){
         return getCod() + ";" + getDiaVencimento();
+    }
+    public Cliente getCliente() {
+        return cliente;
+    }
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public int getCod() {

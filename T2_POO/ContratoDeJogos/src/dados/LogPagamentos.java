@@ -18,7 +18,7 @@ public class LogPagamentos {
      }
 
     // CLIENTESINICIAL.CSV
-    public void inicializaPagamentos(Path arq) {
+    public void inicializaPagamentos(Path arq, Clientela clientela) {
         Corporativo corp1 = null;
         BufferedReader reader = null;
         String line = "";
