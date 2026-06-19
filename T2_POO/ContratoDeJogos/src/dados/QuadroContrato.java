@@ -156,4 +156,10 @@ public class QuadroContrato {
         }
     }
 
+    public void getValoresFinais(){
+        for (Contrato contrato : quadro) {
+            System.out.println(contrato.descrever() + " valor final: " + contrato.calculaValorFinal());
+        }
+    }
+
 }
