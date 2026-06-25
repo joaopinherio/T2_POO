@@ -23,9 +23,9 @@ import com.vaadin.flow.router.Route;
 
 @PageTitle("Menu de Cadastros")
 @Route("telaCadastros")
-public class TelaCadastro extends VerticalLayout {
+public class TelaCadastroView extends VerticalLayout {
 
-    public TelaCadastro(){
+    public TelaCadastroView(){
         Button bClientes = new Button("Cadastra Cliente");
 
         add(bClientes);
