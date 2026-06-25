@@ -2,5 +2,7 @@
     "java.project.sourcePaths": [
         "T2_POO/ContratoDeJogos/src",
         "T2_POO/src/main/java/joaoPinheiro/rafaelLedur/T2POO"
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.compile.nullAnalysis.mode": "automatic"
 }

@@ -11,10 +11,14 @@ import com.vaadin.flow.component.textfield.*;
 @Route("")
 public class MainView extends VerticalLayout {
     public MainView(){
-        TextField teste = new TextField("teste");
-        teste.setValue("teste");
-
-        add(teste);
+        Button telaCadastro = new Button("Opcoes de Cadastro");   
+        Button telaRelatorio= new Button("Opcoes de Relatorio");    
+        Button telaEdicao  = new Button("Opcoes de Edicao"); 
+        telaCadastro.addClickListener(e -> UI.getCurrent().navigate("telaCadastros"));
+        
+        add(telaCadastro);
+        add(telaRelatorio);
+        add(telaEdicao);
     }
 
 }
