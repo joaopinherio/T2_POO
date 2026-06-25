@@ -32,5 +32,6 @@ public class TelaClienteRegView extends VerticalLayout {
     private final TextField nome;
     private final TextField email;
 
+    private final Textfield cpf_cnpj;
 
 }
