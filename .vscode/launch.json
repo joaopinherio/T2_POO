@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "joaoPinheiro.rafaelLedur.T2POO.Main",
+            "projectName": "T2POO"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-T2PooApplication<T2POO>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "joaoPinheiro.rafaelLedur.T2POO.T2PooApplication",
+            "projectName": "T2POO",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

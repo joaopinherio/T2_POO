@@ -1,4 +1,4 @@
-package app;
+package joaoPinheiro.rafaelLedur.T2POO.app;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,7 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Locale;
-import dados.*;
+import joaoPinheiro.rafaelLedur.T2POO.dados.*;
 import java.nio.file.*;
 
 public class ACMESpiele {

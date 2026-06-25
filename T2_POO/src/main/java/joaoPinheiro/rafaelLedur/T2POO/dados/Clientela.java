@@ -1,12 +1,9 @@
-package dados;
+package joaoPinheiro.rafaelLedur.T2POO.dados;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Clientela {

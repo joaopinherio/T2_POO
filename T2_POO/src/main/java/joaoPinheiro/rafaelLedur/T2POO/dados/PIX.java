@@ -1,4 +1,4 @@
-package dados;
+package joaoPinheiro.rafaelLedur.T2POO.dados;
 
 public class PIX extends FormaPagamento{
     private String chave;

@@ -1,6 +1,6 @@
-package dados;
+package joaoPinheiro.rafaelLedur.T2POO.dados;
 
-import java.util.*;
+import java.util.Date;
 
 public class Contrato {
     private int id;

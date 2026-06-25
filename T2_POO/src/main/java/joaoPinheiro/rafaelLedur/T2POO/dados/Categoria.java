@@ -1,4 +1,4 @@
-package dados;
+package joaoPinheiro.rafaelLedur.T2POO.dados;
 
 public enum Categoria {
     // declaracao de constantes

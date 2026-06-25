@@ -1,10 +1,11 @@
-package dados;
+package joaoPinheiro.rafaelLedur.T2POO.dados;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.Date;
+import java.util.TreeMap;
 
 public class LogPagamentos {
      private TreeMap<Integer, FormaPagamento> pagamentos;

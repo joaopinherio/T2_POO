@@ -1,4 +1,4 @@
-package dados;
+package joaoPinheiro.rafaelLedur.T2POO.dados;
 
 public class Jogo {
 
