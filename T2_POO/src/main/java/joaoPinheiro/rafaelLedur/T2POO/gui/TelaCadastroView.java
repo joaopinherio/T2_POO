@@ -26,9 +26,9 @@ import com.vaadin.flow.router.Route;
 public class TelaCadastroView extends VerticalLayout {
 
     public TelaCadastroView(){
-        Button Clientes = new Button("Cadastra Cliente");
-
-        add(Clientes);
+        Button cadCliente = new Button("Cadastra Cliente");
+        cadCliente.addClickListener(e -> UI.getCurrent().navigate("cadastroCliente"));
+        add(cadCliente);
     }
 
  }
