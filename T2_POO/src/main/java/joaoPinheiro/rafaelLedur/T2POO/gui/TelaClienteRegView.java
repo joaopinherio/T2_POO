@@ -52,11 +52,12 @@ public class TelaClienteRegView extends VerticalLayout {
         numero = new IntegerField("Numero");
         nome = new TextField("Nome");
         email = new TextField("E-mail");
-        id = new TextField("CPF/CNPJ");
+        id = new TextField("-");
         nomeFantasia = new TextField("Nome Fantasia");
 
         tipoCliente = new ComboBox<>("Tipo de Cliente");
         tipoCliente.setItems("Individual", "Corporativo");
+        tipoCliente.addCustomValueSetListener(tipoCliente.Individual -> )
 
         formaPagamento = new ComboBox<>("Forma de Pagamento");
         formaPagamento.setItems("PIX", "Cartao de Credito");       
@@ -102,6 +103,23 @@ public class TelaClienteRegView extends VerticalLayout {
         add(backButton);
         //nome.display(null);
     }
+
+    private void cadIndividual(){
+        numero.focus();
+        nome.focus();
+        email.focus();
+        id.setLabel("CPF");
+    }
+    
+    private void cadCorporativo(){
+        numero.focus();
+        nome.focus();
+        email.focus();
+        nomeFantasia.focus();
+        id.setLabel("CNPJ");
+    }
+
+
 
     private void inserirFormulario() {
             if (numero.getValue().equals("") || nome.getValue().equals("")|| email.getValue().equals("") ||
