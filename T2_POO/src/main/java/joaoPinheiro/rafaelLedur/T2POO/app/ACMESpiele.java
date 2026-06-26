@@ -1,20 +1,24 @@
 package joaoPinheiro.rafaelLedur.T2POO.app;
 
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.PrintStream;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Locale;
-import joaoPinheiro.rafaelLedur.T2POO.dados.*;
-import java.nio.file.*;
+import java.util.Scanner;
+
+import joaoPinheiro.rafaelLedur.T2POO.dados.Catalogo;
+import joaoPinheiro.rafaelLedur.T2POO.dados.Categoria;
+import joaoPinheiro.rafaelLedur.T2POO.dados.Clientela;
+import joaoPinheiro.rafaelLedur.T2POO.dados.Contrato;
+import joaoPinheiro.rafaelLedur.T2POO.dados.Corporativo;
+import joaoPinheiro.rafaelLedur.T2POO.dados.Individual;
+import joaoPinheiro.rafaelLedur.T2POO.dados.Jogo;
+import joaoPinheiro.rafaelLedur.T2POO.dados.LogPagamentos;
+import joaoPinheiro.rafaelLedur.T2POO.dados.QuadroContrato;
 
 public class ACMESpiele {
     private Clientela clientela;
@@ -52,7 +56,7 @@ public class ACMESpiele {
 
     private void inicializar(){
         System.out.println("Clientes");
-        clientela.inicializaClientes(clientesIniciais);
+        clientela.inicializaClientes("CLIENTESNINICIAL.CSV");
         clientela.printClientela();
         
         System.out.println("\njogos");

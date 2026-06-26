@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+
 
 public class Clientela {
     private ArrayList<Cliente> cadastro;
@@ -19,7 +21,8 @@ public class Clientela {
     }
 
     // CLIENTESINICIAL.CSV
-    public void inicializaClientes(Path arq) {
+    public void inicializaClientes(String pathS) {
+        Path arq = Paths.get(pathS);
         Corporativo corp1 = null;
         BufferedReader reader = null;
         String line = "";

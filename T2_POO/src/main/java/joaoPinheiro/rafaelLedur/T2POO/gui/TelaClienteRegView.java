@@ -1,4 +1,5 @@
 package joaoPinheiro.rafaelLedur.T2POO.gui;
+
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -27,40 +28,44 @@ import joaoPinheiro.rafaelLedur.T2POO.dados.Clientela;
 @PageTitle("Cadastro Clientes")
 @Route("cadastroCliente")
 public class TelaClienteRegView extends VerticalLayout {
-    private final Clientela cliente;
+    private final Clientela clientela;
     
+    private final TextField numero;
     private final TextField nome;
-    private final TextField;
-    private final DatePicker dataNascimento;
-    private final ComboBox<String> pais;
-    private final Checkbox aceitaTermos;
-    
-    private final Grid<Pessoa> grid;
+    private final TextField email;
+    private final TextField nomeFantasia;
+    private final ComboBox<String> formaPagamento;
+    private final ComboBox<String> cpf_cnpj;
+    private final ComboBox<String> tipoCliente;
+     
+    private final Grid<Cliente> grid;
 
     public TelaClienteRegView() {
         // Inicializando o cadastro de pessoas
-        cadPessoas = CadastroPessoas.getInstance();
+        clientela = new Clientela();
+        clientela.inicializaClientes("CLIENTESINICIAL.CSV");
 
-        // Inicializando os campos do formulário
+        numero = new TextField("Numero");
         nome = new TextField("Nome");
         email = new TextField("E-mail");
-        dataNascimento = new DatePicker("Data de nascimento");
-        pais = new ComboBox<>("País");
-        pais.setItems("Brasil", "Portugal", "EUA", "Inglaterra");
+        
+        tipoCliente = new ComboBox<>("Tipo de Cliente");
+        tipoCliente.setItems("Individual", "Corporativo");
 
-        aceitaTermos = new Checkbox("Aceito os termos de serviço");
-        // inicializando o Grid para exibir as pessoas
-        grid = new Grid<>(Pessoa.class);
+        formaPagamento = new ComboBox<>("Forma de Pagamento");
+        formaPagamento.setItems("PIX", "Cartao de Credito");
+
+        grid = new Grid<>(Cliente.class);
 
         // Definindo as características do layout básico
         setSpacing(true);
         setPadding(true);
 
         // Define título do formulário
-        add(new H2("Tela 1 - Cadastro de pessoas - INSERÇÃO"));
+        add(new H2("Menu de Cadastro de Clientes"));
 
         // Configuração do formulário
-        FormLayout formLayout = new FormLayout(nome, email, dataNascimento, pais, aceitaTermos);
+        FormLayout formLayout = new FormLayout(numero, nome, email, tipoCliente, formaPagamento);
 
         // Definição dos botões de ação
         Button salvarButton = new Button("Inserir", VaadinIcon.CHECK.create());
@@ -134,11 +139,4 @@ public class TelaClienteRegView extends VerticalLayout {
         dialogo.getFooter().add(fecharDialogo, confirmarCancelamento);
         return dialogo;
     }
-}    private final Clientela clientela;
-    //Componentes formulario
-    private final TextField nome;
-    private final TextField email;
-
-    private final TextField cpf_cnpj;
-
 }
