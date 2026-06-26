@@ -7,7 +7,6 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
@@ -63,18 +62,16 @@ public class TelaClienteRegView extends VerticalLayout {
         
         grid = new Grid<>(Cliente.class);
 
-        // Definindo as características do layout básico
         setSpacing(true);
         setPadding(true);
 
-        // Define título do formulário
         add(new H2("Menu de Cadastro de Clientes"));
-
-        // Configuração do formulário
-        FormLayout formLayout = new FormLayout(tipoCliente, numero, nome, email, nomeFantasia, formaPagamento, id);
-
+        
         Button tipoClientButton = new Button("Selecionar", VaadinIcon.CHECK.create());
+        tipoClientButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         tipoClientButton.addClickListener(click -> this.cadHighlight());
+
+        FormLayout formLayout = new FormLayout(numero, nome, email, formaPagamento, id, nomeFantasia);
 
         // Definição dos botões de ação
         Button salvarButton = new Button("Inserir", VaadinIcon.CHECK.create());
@@ -86,37 +83,27 @@ public class TelaClienteRegView extends VerticalLayout {
         Dialog dialogoCancelamento = criaDialogoDeCancelamento();
         cancelarButton.addClickListener(click -> dialogoCancelamento.open());
 
-        // Adiciona botoes de ação em um layout horizontal
         HorizontalLayout botoesLayout = new HorizontalLayout(salvarButton, cancelarButton);
 
-        // Configuração da Grid
         grid.setItems(clientela.getLista());
-        // grid.setColumns("nome", "email", "pais", "formattedDataNascimento");
         grid.setColumns("numero","nome", "email");
-        // grid.addColumn(Cliente::numero).setHeader("Data nascimento");
 
+        add(tipoCliente);
+        add(tipoClientButton);
         add(formLayout, botoesLayout, new H2("Usuários Cadastrados"), grid);
-        add(tipoClientButton); 
         add(new Hr());
 
-        // Define o botão de retorno à página principal
         Button backButton = new Button("Voltar");
         backButton.addClickListener(e -> UI.getCurrent().navigate(""));
         add(backButton);
-        //nome.display(null);
     }
 
     private void cadHighlight(){
         if(tipoCliente.getValue().equals("Individual")){
-            numero.focus();
-            nome.focus();
-            email.focus();
+            nomeFantasia.setVisible(false);
             id.setLabel("CPF");
         }else{
-            numero.focus();
-            nome.focus();
-            email.focus();
-            nomeFantasia.focus();
+            nomeFantasia.setVisible(true);
             id.setLabel("CNPJ");
         }
     }
@@ -127,7 +114,10 @@ public class TelaClienteRegView extends VerticalLayout {
             if (numero.getValue().equals("") || nome.getValue().equals("")|| email.getValue().equals("") ||
                 tipoCliente.getValue() == null || formaPagamento.getValue() == null) {
                 Notification.show("Erro! Campo vazio.", 3000, Notification.Position.BOTTOM_STRETCH);
-            } else {
+            }
+            if(clientela.isRepetido(numero.getValue()))
+                Notification.show("Erro! Numero de cliente ja existe! Favor inserir numero diferente", 3000, Notification.Position.BOTTOM_STRETCH);
+            else {
                 Cliente c;
                 if(tipoCliente.getValue() == "Individual"){
                     c = new Individual(numero.getValue(),
@@ -155,7 +145,7 @@ public class TelaClienteRegView extends VerticalLayout {
         email.clear();
         id.clear();
         nomeFantasia.clear();
-        nome.focus(); // Coloca o foco no campo nome
+        nome.focus();
     }
 
     private Dialog criaDialogoDeCancelamento() {

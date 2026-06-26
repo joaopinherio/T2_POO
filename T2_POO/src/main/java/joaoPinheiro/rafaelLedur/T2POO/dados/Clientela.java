@@ -130,5 +130,9 @@ public class Clientela {
     public ArrayList<Cliente> getLista(){
         return cadastro;
     }
-
+    
+    public boolean isRepetido(int num){
+        Cliente c = pesquisaNum(num);
+        return cadastro.contains(c);
+    }
 }
