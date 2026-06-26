@@ -23,14 +23,14 @@ import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-import joaoPinheiro.rafaelLedur.T2POO.dados.Cliente;
-import joaoPinheiro.rafaelLedur.T2POO.dados.Individual;
-import joaoPinheiro.rafaelLedur.T2POO.dados.Corporativo;
-import joaoPinheiro.rafaelLedur.T2POO.dados.Clientela;
+import joaoPinheiro.rafaelLedur.T2POO.dados.*;
 
-@PageTitle("Cadastro Clientes")
-@Route("cadastroCliente")
-public class TelaClienteRegView extends VerticalLayout {
+@PageTitle("Cadastra Jogos")
+@Route("cadastroJogo")
+
+public class TelaJogoRegView {
+    private final Catalogo catalogo;
+    //lembrar de criar instancia de tela reg cliente pq sou BURRO
     private final Clientela clientela;
 
     private final IntegerField numero;
@@ -45,7 +45,7 @@ public class TelaClienteRegView extends VerticalLayout {
 
     public TelaClienteRegView() {
         // Inicializando o cadastro de pessoas
-        clientela = new Clientela();
+        clientela = ;
         clientela.inicializaClientes("CLIENTESINICIAL.CSV");
 
         numero = new IntegerField("Numero");
@@ -162,7 +162,4 @@ public class TelaClienteRegView extends VerticalLayout {
         return dialogo;
     }
 
-    public Clientela getClientela(){
-        return clientela;
-    }
 }
