@@ -127,4 +127,8 @@ public class Clientela {
         }
     }
 
+    public ArrayList<Cliente> getLista(){
+        return cadastro;
+    }
+
 }
