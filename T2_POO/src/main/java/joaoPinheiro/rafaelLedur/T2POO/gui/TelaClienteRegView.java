@@ -81,7 +81,7 @@ public class TelaClienteRegView extends VerticalLayout {
         HorizontalLayout botoesLayout = new HorizontalLayout(salvarButton, cancelarButton);
 
         // Configuração da Grid
-        grid.setItems(cadPessoas.getLista());
+        grid.setItems(clientela.getLista());
 //        grid.setColumns("nome", "email", "pais", "formattedDataNascimento");
         grid.setColumns("nome", "email", "pais");
         grid.addColumn(Pessoa::getFormattedDataNascimento).setHeader("Data nascimento");
