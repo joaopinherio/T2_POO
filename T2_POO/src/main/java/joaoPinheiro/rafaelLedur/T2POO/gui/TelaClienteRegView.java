@@ -57,7 +57,6 @@ public class TelaClienteRegView extends VerticalLayout {
 
         tipoCliente = new ComboBox<>("Tipo de Cliente");
         tipoCliente.setItems("Individual", "Corporativo");
-        tipoCliente.addCustomValueSetListener(tipoCliente.Individual -> )
 
         formaPagamento = new ComboBox<>("Forma de Pagamento");
         formaPagamento.setItems("PIX", "Cartao de Credito");       
@@ -72,7 +71,10 @@ public class TelaClienteRegView extends VerticalLayout {
         add(new H2("Menu de Cadastro de Clientes"));
 
         // Configuração do formulário
-        FormLayout formLayout = new FormLayout(numero, nome, email, tipoCliente, formaPagamento, id, nomeFantasia);
+        FormLayout formLayout = new FormLayout(tipoCliente, numero, nome, email, nomeFantasia, formaPagamento, id);
+
+        Button tipoClientButton = new Button("Selecionar", VaadinIcon.CHECK.create());
+        tipoClientButton.addClickListener(click -> this.cadHighlight());
 
         // Definição dos botões de ação
         Button salvarButton = new Button("Inserir", VaadinIcon.CHECK.create());
@@ -93,8 +95,8 @@ public class TelaClienteRegView extends VerticalLayout {
         grid.setColumns("numero","nome", "email");
         // grid.addColumn(Cliente::numero).setHeader("Data nascimento");
 
-        // Monta todos os elementos na janela
         add(formLayout, botoesLayout, new H2("Usuários Cadastrados"), grid);
+        add(tipoClientButton); 
         add(new Hr());
 
         // Define o botão de retorno à página principal
@@ -104,19 +106,19 @@ public class TelaClienteRegView extends VerticalLayout {
         //nome.display(null);
     }
 
-    private void cadIndividual(){
-        numero.focus();
-        nome.focus();
-        email.focus();
-        id.setLabel("CPF");
-    }
-    
-    private void cadCorporativo(){
-        numero.focus();
-        nome.focus();
-        email.focus();
-        nomeFantasia.focus();
-        id.setLabel("CNPJ");
+    private void cadHighlight(){
+        if(tipoCliente.getValue().equals("Individual")){
+            numero.focus();
+            nome.focus();
+            email.focus();
+            id.setLabel("CPF");
+        }else{
+            numero.focus();
+            nome.focus();
+            email.focus();
+            nomeFantasia.focus();
+            id.setLabel("CNPJ");
+        }
     }
 
 
