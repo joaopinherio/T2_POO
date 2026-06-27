@@ -9,7 +9,7 @@ public class Jogo {
     //private double valorMinuto;
     private double valorDiario;
     private Categoria categoria;
-    private Contrato contrato; // veio apos a 8
+    private Contrato contrato; 
 
     public Jogo(int codigo, String nome, int ano, double valorDiario) {
         this.codigo = codigo;

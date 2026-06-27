@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Catalogo {
@@ -15,7 +16,8 @@ public class Catalogo {
         catalogo = new ArrayList<>();
     }
 
-    public void inicializaJogos(Path arq) {
+    public void inicializaJogos(String pathS) {
+        Path arq = Paths.get(pathS);
         BufferedReader reader = null;
         String line = "";
         StringBuilder sb = new StringBuilder();
@@ -142,4 +144,7 @@ public class Catalogo {
         }
     }
 
+    public ArrayList<Jogo> getLista(){
+        return catalogo;
+    }
 }
