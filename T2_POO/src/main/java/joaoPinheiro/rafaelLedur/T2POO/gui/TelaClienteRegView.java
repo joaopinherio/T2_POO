@@ -45,7 +45,7 @@ public class TelaClienteRegView extends VerticalLayout {
 
     public TelaClienteRegView() {
         // Inicializando o cadastro de pessoas
-        clientela = new Clientela();
+        clientela = Clientela.getInstance();
         clientela.inicializaClientes("CLIENTESINICIAL.CSV");
 
         numero = new IntegerField("Numero");
@@ -58,15 +58,15 @@ public class TelaClienteRegView extends VerticalLayout {
         tipoCliente.setItems("Individual", "Corporativo");
 
         formaPagamento = new ComboBox<>("Forma de Pagamento");
-        formaPagamento.setItems("PIX", "Cartao de Credito");       
-        
+        formaPagamento.setItems("PIX", "Cartao de Credito");
+
         grid = new Grid<>(Cliente.class);
 
         setSpacing(true);
         setPadding(true);
 
         add(new H2("Menu de Cadastro de Clientes"));
-        
+
         Button tipoClientButton = new Button("Selecionar", VaadinIcon.CHECK.create());
         tipoClientButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         tipoClientButton.addClickListener(click -> this.cadHighlight());
@@ -86,7 +86,7 @@ public class TelaClienteRegView extends VerticalLayout {
         HorizontalLayout botoesLayout = new HorizontalLayout(salvarButton, cancelarButton);
 
         grid.setItems(clientela.getLista());
-        grid.setColumns("numero","nome", "email");
+        grid.setColumns("numero", "nome", "email");
 
         add(tipoCliente);
         add(tipoClientButton);
@@ -98,45 +98,44 @@ public class TelaClienteRegView extends VerticalLayout {
         add(backButton);
     }
 
-    private void cadHighlight(){
-        if(tipoCliente.getValue().equals("Individual")){
+    private void cadHighlight() {
+        if (tipoCliente.getValue().equals("Individual")) {
             nomeFantasia.setVisible(false);
             id.setLabel("CPF");
-        }else{
+        } else {
             nomeFantasia.setVisible(true);
             id.setLabel("CNPJ");
         }
     }
 
-
-
     private void inserirFormulario() {
-            if (numero.getValue().equals("") || nome.getValue().equals("")|| email.getValue().equals("") ||
+        if (numero.getValue().equals("") || nome.getValue().equals("") || email.getValue().equals("") ||
                 tipoCliente.getValue() == null || formaPagamento.getValue() == null) {
-                Notification.show("Erro! Campo vazio.", 3000, Notification.Position.BOTTOM_STRETCH);
-            }
-            if(clientela.isRepetido(numero.getValue()))
-                Notification.show("Erro! Numero de cliente ja existe! Favor inserir numero diferente", 3000, Notification.Position.BOTTOM_STRETCH);
-            else {
-                Cliente c;
-                if(tipoCliente.getValue() == "Individual"){
-                    c = new Individual(numero.getValue(),
-                    nome.getValue(),
-                    email.getValue(),
-                    id.getValue()); 
-               } else{
+            Notification.show("Erro! Campo vazio.", 3000, Notification.Position.BOTTOM_STRETCH);
+        }
+        if (clientela.isRepetido(numero.getValue()))
+            Notification.show("Erro! Numero de cliente ja existe! Favor inserir numero diferente", 3000,
+                    Notification.Position.BOTTOM_STRETCH);
+        else {
+            Cliente c;
+            if (tipoCliente.getValue() == "Individual") {
+                c = new Individual(numero.getValue(),
+                        nome.getValue(),
+                        email.getValue(),
+                        id.getValue());
+            } else {
                 c = new Corporativo(numero.getValue(),
                         nome.getValue(),
                         email.getValue(),
                         id.getValue(),
                         nomeFantasia.getValue());
-                }
-                clientela.addCliente(c);
-                String mensagem = "Usuário " + c.getNome() + " salvo com sucesso!";
-                Notification.show(mensagem, 3000, Notification.Position.BOTTOM_STRETCH);
             }
-            grid.getDataProvider().refreshAll();
-            limparFormulario();
+            clientela.addCliente(c);
+            String mensagem = "Usuário " + c.getNome() + " salvo com sucesso!";
+            Notification.show(mensagem, 3000, Notification.Position.BOTTOM_STRETCH);
+        }
+        grid.getDataProvider().refreshAll();
+        limparFormulario();
     }
 
     private void limparFormulario() {
@@ -162,7 +161,7 @@ public class TelaClienteRegView extends VerticalLayout {
         return dialogo;
     }
 
-    public Clientela getClientela(){
+    public Clientela getClientela() {
         return clientela;
     }
 }

@@ -8,7 +8,15 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Catalogo {
+    private static Catalogo instance;
 
+    public static Catalogo getInstance(){
+        if(instance == null){
+            instance = new Catalogo();
+        }
+        return instance;
+    }
+    
     private ArrayList<Jogo> catalogo;
 
     public Catalogo() {
@@ -32,14 +40,6 @@ public class Catalogo {
                 }
             }
             String[] data = sb.toString().split(",");
-            /*
-             * TESTES DOS DADOS SENDO REPASSADOS
-             * for (String s : data) {
-             * System.out.println(s);
-             * }
-            System.out.println("INDICE");
-            System.out.println(data[5]);
-             */
 
             // LOOP LEITURA/CADASTROS
             // data.length - 5 -> comprimento total menos 5 (numero de itens no cabecalho do
@@ -146,5 +146,10 @@ public class Catalogo {
 
     public ArrayList<Jogo> getLista(){
         return catalogo;
+    }
+
+    public boolean isRepetido(int cod){
+        Jogo j = pesquisaCod(cod);
+        return catalogo.contains(j);
     }
 }

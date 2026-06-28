@@ -28,22 +28,22 @@ import joaoPinheiro.rafaelLedur.T2POO.dados.*;
 
 @PageTitle("Cadastra Jogos")
 @Route("cadastroJogo")
-
-public class TelaJogoRegView {
+public class TelaJogoRegView extends VerticalLayout{
     private final Catalogo catalogo;
+    private final Clientela clientela;
     private final IntegerField codigo;
     private final IntegerField ano;
     private final NumberField valorDiario;
     private final TextField nome;
 
     private final ComboBox<String> categoria;
-    private final IntegerField contratoNum;
+    //private final IntegerField contratoNum;
     private final Grid<Jogo> grid;
 
 
-    public TelaClienteRegView() {
-        // Inicializando o cadastro de pessoas
-        catalogo = new Catalogo;
+    public TelaJogoRegView() {
+        clientela = Clientela.getInstance(); 
+        catalogo = Catalogo.getInstance();
         catalogo.inicializaJogos("JOGOSINICIAL.CSV");
 
         codigo= new IntegerField("Codigo");
@@ -61,10 +61,6 @@ public class TelaJogoRegView {
 
         add(new H2("Menu de Cadastro de Jogos"));
         
-        Button tipoClientButton = new Button("Selecionar", VaadinIcon.CHECK.create());
-        tipoClientButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        tipoClientButton.addClickListener(click -> this.cadHighlight());
-
         FormLayout formLayout = new FormLayout(codigo, nome, ano, valorDiario);
 
         // Definição dos botões de ação
@@ -80,10 +76,8 @@ public class TelaJogoRegView {
         HorizontalLayout botoesLayout = new HorizontalLayout(salvarButton, cancelarButton);
 
         grid.setItems(catalogo.getLista());
-        grid.setColumns("numero","nome", "email");
+        grid.setColumns("codigo", "nome", "categoria");
 
-        add(tipoCliente);
-        add(tipoClientButton);
         add(formLayout, botoesLayout, new H2("Usuários Cadastrados"), grid);
         add(new Hr());
 
@@ -92,41 +86,21 @@ public class TelaJogoRegView {
         add(backButton);
     }
 
-    private void cadHighlight(){
-        if(tipoCliente.getValue().equals("Individual")){
-            nomeFantasia.setVisible(false);
-            id.setLabel("CPF");
-        }else{
-            nomeFantasia.setVisible(true);
-            id.setLabel("CNPJ");
-        }
-    }
-
-
-
     private void inserirFormulario() {
-            if (numero.getValue().equals("") || nome.getValue().equals("")|| email.getValue().equals("") ||
-                tipoCliente.getValue() == null || formaPagamento.getValue() == null) {
+            if (codigo.getValue().equals("") || nome.getValue().equals("")|| ano.getValue().equals("") ||
+                valorDiario.getValue() == null || categoria.getValue() == null) {
                 Notification.show("Erro! Campo vazio.", 3000, Notification.Position.BOTTOM_STRETCH);
             }
-            if(clientela.isRepetido(numero.getValue()))
+            if(clientela.isRepetido(codigo.getValue()))
                 Notification.show("Erro! Numero de cliente ja existe! Favor inserir numero diferente", 3000, Notification.Position.BOTTOM_STRETCH);
             else {
-                Cliente c;
-                if(tipoCliente.getValue() == "Individual"){
-                    c = new Individual(numero.getValue(),
-                    nome.getValue(),
-                    email.getValue(),
-                    id.getValue()); 
-               } else{
-                c = new Corporativo(numero.getValue(),
-                        nome.getValue(),
-                        email.getValue(),
-                        id.getValue(),
-                        nomeFantasia.getValue());
-                }
-                clientela.addCliente(c);
-                String mensagem = "Usuário " + c.getNome() + " salvo com sucesso!";
+                Jogo j = new Jogo(codigo.getValue(), 
+                nome.getValue(), 
+                ano.getValue(), 
+                valorDiario.getValue());
+                
+                catalogo.addJogo(j);
+                String mensagem = "Jogo" + j.getNome() + " salvo com sucesso!";
                 Notification.show(mensagem, 3000, Notification.Position.BOTTOM_STRETCH);
             }
             grid.getDataProvider().refreshAll();
@@ -134,12 +108,12 @@ public class TelaJogoRegView {
     }
 
     private void limparFormulario() {
-        numero.clear();
+        codigo.clear();
         nome.clear();
-        email.clear();
-        id.clear();
-        nomeFantasia.clear();
-        nome.focus();
+        ano.clear();
+        valorDiario.clear();
+        categoria.clear();
+        codigo.focus();
     }
 
     private Dialog criaDialogoDeCancelamento() {
