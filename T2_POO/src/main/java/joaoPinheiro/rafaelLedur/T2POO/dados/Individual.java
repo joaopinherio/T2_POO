@@ -22,9 +22,14 @@ public class Individual extends Cliente {
     public void setNome(String nome) {
         super.setNome(nome);
     }
-
-    public String getCpf() {
+    
+    @Override
+    public String getGovId() {
         return cpf;
     }
 
+    @Override
+    public String getTipo(){
+        return "Individual";
+    }
 }

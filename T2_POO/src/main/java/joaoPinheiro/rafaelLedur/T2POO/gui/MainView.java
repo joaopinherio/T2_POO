@@ -35,7 +35,9 @@ public class MainView extends VerticalLayout {
         Button telaCadastro = new Button("Opcoes de Cadastro");
         Button telaRelatorio= new Button("Opcoes de Relatorio");
         Button telaEdicao  = new Button("Opcoes de Edicao");
+
         telaCadastro.addClickListener(e -> UI.getCurrent().navigate("telaCadastros"));
+        telaRelatorio.addClickListener(e -> UI.getCurrent().navigate("telaRelatorios"));
         
         add(telaCadastro);
         add(telaRelatorio);

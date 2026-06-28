@@ -13,8 +13,16 @@ public abstract class Cliente implements Serializable {
         this.nome = nome;
         this.email = email;
     }
+    
+    public abstract String getTipo();
+
+    public abstract String getGovId();
 
     public abstract String descrever();
+
+    public String getNomeFantasia(){
+        return null;
+    }
 
     public FormaPagamento getFormaPagamento() {
         return formaPagamento;
@@ -27,7 +35,7 @@ public abstract class Cliente implements Serializable {
     public String descreverRedux() {
         return numero + ";" + nome + ";" + email;
     }
-
+    
     public int getNumero() {
         return this.numero;
     }

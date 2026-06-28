@@ -29,4 +29,18 @@ public class Corporativo extends Cliente {
         super.setNome(nome);
     }
 
+    @Override
+    public String getGovId(){
+        return cnpj;
+    }
+
+    @Override
+    public String getTipo(){
+        return "Corporativo";
+    }
+
+    @Override
+    public String getNomeFantasia(){
+        return nomeFantasia;
+    }
 }

@@ -28,24 +28,45 @@ import com.vaadin.flow.router.Route;
 import java.util.List;
 
 import joaoPinheiro.rafaelLedur.T2POO.dados.*;
+
 @PageTitle("Relatorio de Clientes")
 @Route("relatorioClientes")
 public class TelaRelatorioClientes extends VerticalLayout{
     private final Clientela clientela;
+    private final LogPagamentos logPagamentos;
 
     private final Grid<Cliente> gridCliente;
 
     public TelaRelatorioClientes(){
         clientela = Clientela.getInstance();
+        logPagamentos = LogPagamentos.getInstance();
 
-        gridCliente = new Grid<>(Cliente.class);
+        gridCliente = new Grid<>();
 
         setSpacing(true);
         setSpacing(true);
 
-        add(new H2("Relatorio de Clientes Cadastrados"));
+        gridCliente.addColumn(Cliente::getTipo).setHeader("Tipo");
+        gridCliente.addColumn(Cliente::getNumero).setHeader("Numero");
+        gridCliente.addColumn(Cliente::getNome).setHeader("Nome");
+        gridCliente.addColumn(Cliente::getEmail).setHeader("Email");
+        gridCliente.addColumn(Cliente::getGovId).setHeader("CPF/CNPJ");
+
+        gridCliente.addColumn(cliente -> cliente.getTipo() == "Corporativo" ?
+        cliente.getNomeFantasia() : "---").setHeader("Nome Fantasia");
+
+        gridCliente.addColumn(c -> logPagamentos.getPagamentosByCliente(c).toString())
+        .setHeader("Pagamentos do Cliente");
 
         gridCliente.setItems(clientela.getLista());
-        gridCliente.setColumns("nome");
+        
+        if(clientela.isEmpty())
+            Notification.show("Erro! Nenhum cliente cadastrado.", 3000, Notification.Position.BOTTOM_STRETCH);
+        else{
+            gridCliente.getDataProvider().refreshAll();
+            add(new H2("Relatorio de Clientes Cadastrados"));
+
+            add(gridCliente);
+        }
     }
 }
