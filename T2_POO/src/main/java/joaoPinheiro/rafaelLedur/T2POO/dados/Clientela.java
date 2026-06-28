@@ -152,4 +152,9 @@ public class Clientela {
         Cliente c = pesquisaNum(num);
         return cadastro.contains(c);
     }
+
+    public boolean isEmpty(){
+        return cadastro.isEmpty();
+    }
+
 }

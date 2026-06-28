@@ -42,8 +42,10 @@ public class TelaJogoRegView extends VerticalLayout{
 
 
     public TelaJogoRegView() {
-        clientela = Clientela.getInstance(); 
+        clientela = Clientela.getInstance();
         catalogo = Catalogo.getInstance();
+
+        if(catalogo.isEmpty())
         catalogo.inicializaJogos("JOGOSINICIAL.CSV");
 
         codigo= new IntegerField("Codigo");

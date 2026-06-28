@@ -8,15 +8,15 @@ import java.util.Date;
 import java.util.TreeMap;
 
 public class LogPagamentos {
-     private TreeMap<Integer, FormaPagamento> pagamentos;
+    private TreeMap<Integer, FormaPagamento> pagamentos;
 
-     public LogPagamentos(){
+    public LogPagamentos() {
         pagamentos = new TreeMap<>();
-     }
+    }
 
-     public void addPagamento(Integer numeroCliente, FormaPagamento f){
+    public void addPagamento(Integer numeroCliente, FormaPagamento f) {
         pagamentos.putIfAbsent(numeroCliente, f);
-     }
+    }
 
     // CLIENTESINICIAL.CSV
     public void inicializaPagamentos(Path arq, Clientela clientela) {
@@ -59,7 +59,8 @@ public class LogPagamentos {
                     count++;
                     int numeroCliente = Integer.parseInt(data[i + count]);
                     count += 2;
-                    //por enquanto isso ta no limbo, mas depois sera inserido com um treeMap [Int][String] -> [codigo][numeroCliente]
+                    // por enquanto isso ta no limbo, mas depois sera inserido com um treeMap
+                    // [Int][String] -> [codigo][numeroCliente]
                     String numeroCartao = data[i + count];
                     count++;
                     Date validade = new Date(data[i + count]);
@@ -75,7 +76,8 @@ public class LogPagamentos {
                     count++;
                     int numeroCliente = Integer.parseInt(data[i + count]);
                     count += 2;
-                    //por enquanto isso ta no limbo, mas depois sera inserido com um treeMap [Int][String] -> [codigo][numeroCliente]
+                    // por enquanto isso ta no limbo, mas depois sera inserido com um treeMap
+                    // [Int][String] -> [codigo][numeroCliente]
                     String chavePix = data[i + count];
                     count += 2;
 
@@ -103,9 +105,8 @@ public class LogPagamentos {
         }
     }
 
-    public FormaPagamento getPagamentoByCodigo(int codigo){
+    public FormaPagamento getPagamentoByCodigo(int codigo) {
         return pagamentos.get(codigo);
     }
-
 
 }

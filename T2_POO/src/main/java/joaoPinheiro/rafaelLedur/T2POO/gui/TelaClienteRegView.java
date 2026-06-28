@@ -46,7 +46,9 @@ public class TelaClienteRegView extends VerticalLayout {
     public TelaClienteRegView() {
         // Inicializando o cadastro de pessoas
         clientela = Clientela.getInstance();
-        clientela.inicializaClientes("CLIENTESINICIAL.CSV");
+
+        if(clientela.isEmpty())
+            clientela.inicializaClientes("CLIENTESINICIAL.CSV");
 
         numero = new IntegerField("Numero");
         nome = new TextField("Nome");

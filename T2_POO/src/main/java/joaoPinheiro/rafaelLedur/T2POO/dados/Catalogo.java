@@ -152,4 +152,9 @@ public class Catalogo {
         Jogo j = pesquisaCod(cod);
         return catalogo.contains(j);
     }
+
+    public boolean isEmpty(){
+        return catalogo.isEmpty();
+    }
+
 }
