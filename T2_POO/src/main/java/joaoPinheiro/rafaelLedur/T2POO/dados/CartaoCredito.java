@@ -13,7 +13,8 @@ public class CartaoCredito extends FormaPagamento{
 
     @Override
     public String descrever(){
-        return super.descrever() + ";" + getNumero() + ";" + getValidade().toString();
+        return "Cartao e Credito: " + super.descrever() + ";" + getNumero()
+    + ";" + getValidade().toString();
     }
     
     public String getNumero() {

@@ -10,7 +10,7 @@ public class PIX extends FormaPagamento{
 
     @Override
     public String descrever(){
-        return super.descrever() + ";" + getChave();
+        return "PIX: " + super.descrever() + ";" + getChave();
     }
 
     public String getChave() {

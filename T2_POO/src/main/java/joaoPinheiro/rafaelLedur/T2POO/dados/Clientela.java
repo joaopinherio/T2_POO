@@ -49,14 +49,6 @@ public class Clientela {
                 }
             }
             String[] data = sb.toString().split(",");
-            /*
-             * TESTES DOS DADOS SENDO REPASSADOS
-             * for (String s : data) {
-             * System.out.println(s);
-             * }
-             * System.out.println("INDICE 6");
-             */
-
             // LOOP LEITURA/CADASTROS
             // data.length - 5 -> comprimento total menos 5 (numero de itens no cabecalho do
             // .csv)

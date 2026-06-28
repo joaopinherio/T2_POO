@@ -4,21 +4,36 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.*;
 
 public class QuadroContrato {
+    private static QuadroContrato instance;
+
+    public static QuadroContrato getInstance() {
+        if (instance == null) {
+            instance = new QuadroContrato();
+        }
+        return instance;
+    }
+
     private Queue<Contrato> quadro;
 
     public QuadroContrato() {
-        // Polimorfismo de classe
         quadro = new LinkedList<>();
     }
 
-    public boolean addContrato(Contrato c) {
-        return quadro.offer(c);
+    public void addContrato(Contrato c) {
+        if (quadro.offer(c))
+            Collections.sort((List<Contrato>) quadro,
+                    Comparator.comparing(Contrato::getId));
     }
 
-    public void inicializaContratos(Path arq, Clientela clientela, Catalogo catalogoJogos, LogPagamentos historicoPagamentos) {
+    public void inicializaContratos(String pathS, Clientela clientela, Catalogo catalogoJogos,
+            LogPagamentos historicoPagamentos) {
+        Path arq = Paths.get(pathS);
         BufferedReader reader = null;
         String line = "";
         StringBuilder sb = new StringBuilder();
@@ -33,15 +48,6 @@ public class QuadroContrato {
                 }
             }
             String[] data = sb.toString().split(",");
-            /*
-             * TESTES DOS DADOS SENDO REPASSADOS
-             * for (String s : data) {
-             * System.out.println(s);   
-             * }
-            System.out.println("INDICE");
-            System.out.println(data[7]);
-            */
-
             // LOOP LEITURA/CADASTROS
             // data.length - 5 -> comprimento total menos 5 (numero de itens no cabecalho do
             // .csv)
@@ -63,7 +69,7 @@ public class QuadroContrato {
                 int codigoPagamento = Integer.parseInt(data[i + count]);
 
                 Contrato contrato = new Contrato(id, periodo);
-                
+
                 contrato.setData(dataContrato);
                 contrato.setCliente(clientela.pesquisaNum(numeroCliente));
                 contrato.setJogo(catalogoJogos.pesquisaCod(codigoJogo));
@@ -137,8 +143,6 @@ public class QuadroContrato {
         return cont;
     }
 
-
-
     // 10
     public String getClienteMaiorValor() {
         Queue<Cliente> arrayC = pesquisaTodosContratantes();
@@ -162,16 +166,26 @@ public class QuadroContrato {
         return maioral.descreverRedux() + ";" + maior;
     }
 
-    public void printContratos(){
+    public void printContratos() {
         for (Contrato contrato : quadro) {
             System.out.println(contrato.descrever());
         }
     }
 
-    public void getValoresFinais(QuadroContrato quadroContrato){
+    public void getValoresFinais(QuadroContrato quadroContrato) {
         for (Contrato contrato : quadro) {
             System.out.println(contrato.descrever() + " valor final: " + contrato.calculaValorFinal(quadroContrato));
         }
     }
 
+    public boolean isRepetido(int id) {
+        if (pesquisaId(id) != null)
+            return true;
+
+        return false;
+    }
+
+    public boolean isEmpty() {
+        return quadro.isEmpty();
+    }
 }

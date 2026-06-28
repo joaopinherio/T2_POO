@@ -144,7 +144,9 @@ public class TelaPagamentoReg extends VerticalLayout {
                         Date.valueOf(validade.getValue()));
             }
             f.setCliente(clienteSel);
+            clienteSel.setFormaPagamento(f);
             logPagamentos.addPagamento(f);
+            
             String mensagem = "Pagamento" + tipoPagamento.getValue() + " salvo com sucesso!";
             Notification.show(mensagem, 3000, Notification.Position.BOTTOM_STRETCH);
         }
@@ -181,12 +183,9 @@ public class TelaPagamentoReg extends VerticalLayout {
         clienteSel = event.getValue();
 
         if (clienteSel != null) {
-            // Se uma pessoa foi selecionada, preenche o formulário
             nomeCliente.setValue(clienteSel.getNome());
         } else {
-            // Se a seleção foi limpa, limpa o formulário
             limparFormulario();
-            // habilitarFormulario(false);
         }
     }
 
