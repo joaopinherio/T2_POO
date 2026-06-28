@@ -1,6 +1,7 @@
 package joaoPinheiro.rafaelLedur.T2POO.gui;
 
 import java.sql.Date;
+import java.util.List;
 
 import com.vaadin.flow.component.AbstractField.ComponentValueChangeEvent;
 import com.vaadin.copilot.shaded.commons.configuration2.resolver.CatalogResolver.Catalog;
@@ -24,6 +25,7 @@ import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import java.util.List;
 
 import joaoPinheiro.rafaelLedur.T2POO.dados.*;
 
@@ -44,9 +46,11 @@ public class TelaContratoRegView extends VerticalLayout{
 
     private Cliente clienteSel;
     private Jogo jogoSel;
+    private FormaPagamento formaPagamentoSel;
 
     private final Grid<Cliente> gridCliente;
     private final Grid<Jogo> gridJogo;
+    private final Grid<FormaPagamento> gridFormaPagamentos;
 
     public TelaContratoRegView() {
         clientela = Clientela.getInstance();
@@ -63,6 +67,7 @@ public class TelaContratoRegView extends VerticalLayout{
         
         gridCliente = new Grid<>(Cliente.class);
         gridJogo = new Grid<>(Jogo.class);
+        gridFormaPagamentos = new Grid<>(FormaPagamento.class);
 
         setSpacing(true);
         setPadding(true);
@@ -83,7 +88,7 @@ public class TelaContratoRegView extends VerticalLayout{
         HorizontalLayout botoesLayout = new HorizontalLayout(salvarButton, cancelarButton);
 
         gridCliente.setItems(clientela.getLista());
-        gridCliente.setColumns("numero", "nome", "email", "formaPagamento");
+        gridCliente.setColumns("numero", "nome", "email");
         gridCliente.asSingleSelect().addValueChangeListener(event -> preparaSelecaoCliente(event));
 
         gridJogo.setItems(catalogo.getLista());
@@ -91,7 +96,7 @@ public class TelaContratoRegView extends VerticalLayout{
         gridJogo.asSingleSelect().addValueChangeListener(event -> preparaSelecaoJogo(event));
 
         add(formLayout, botoesLayout, new H2("Clientes Cadastrados"), gridCliente,
-        new H2("Jogos Cadastrados"), gridJogo);
+        new H2("Jogos Cadastrados"), gridJogo, gridFormaPagamentos);
         add(new Hr());
         Button backButton = new Button("Voltar");
         
@@ -152,12 +157,28 @@ public class TelaContratoRegView extends VerticalLayout{
         return dialogo;
     }
 
+    private void montaGridPagamento(Cliente c){
+        List<FormaPagamento> cFormaPagamentos = logPagamentos.getPagamentosByCliente(c);
+        gridFormaPagamentos.setItems(cFormaPagamentos);
+        gridFormaPagamentos.setColumns("cod", "diaVencimento");
+        gridFormaPagamentos.asSingleSelect().addValueChangeListener(event -> preparaSelecaoPagamento(event));
+    }
+
+    private void preparaSelecaoPagamento(ComponentValueChangeEvent<Grid<FormaPagamento>, FormaPagamento> event){
+        formaPagamentoSel = event.getValue();
+
+        if(formaPagamentoSel != null)
+            formaPagamentoData.setValue(formaPagamentoSel.descrever());
+        else
+            limparFormulario();
+    }
+
     private void preparaSelecaoCliente(ComponentValueChangeEvent<Grid<Cliente>, Cliente> event) {
         clienteSel = event.getValue();
 
         if (clienteSel != null) {
             clienteData.setValue(clienteSel.descrever());
-            formaPagamentoData.setValue(clienteSel.getFormaPagamento().descrever());
+            montaGridPagamento(clienteSel);
         } else {
             limparFormulario();
         }

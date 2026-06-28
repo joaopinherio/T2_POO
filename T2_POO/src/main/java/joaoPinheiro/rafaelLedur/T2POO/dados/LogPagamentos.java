@@ -3,11 +3,14 @@ package joaoPinheiro.rafaelLedur.T2POO.dados;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.Date;
 
 public class LogPagamentos {
@@ -134,4 +137,11 @@ public class LogPagamentos {
         return false;
     }
 
+    public List<FormaPagamento> getPagamentosByCliente(Cliente c){
+        List<FormaPagamento> aux = pagamentos.stream()
+        .filter(p -> p.getCliente() == c)
+        .collect(Collectors.toList());
+
+        return aux;
+    }
 }

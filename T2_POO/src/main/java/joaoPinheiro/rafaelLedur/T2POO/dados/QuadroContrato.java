@@ -86,7 +86,7 @@ public class QuadroContrato {
         } catch (IOException e) {
             System.out.println("1Problema na leitura do arquivo" + e.getMessage());
         } catch (Exception e) {
-            System.out.println("2Problema na leitura do arquivo" + e.getMessage());
+            System.out.println("Contratos: 2Problema na leitura do arquivo" + e.getMessage());
         }
     }
 

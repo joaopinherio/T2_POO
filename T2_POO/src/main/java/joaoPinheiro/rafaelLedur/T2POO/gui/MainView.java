@@ -40,6 +40,7 @@ public class MainView extends VerticalLayout {
         add(telaCadastro);
         add(telaRelatorio);
         add(telaEdicao);
+
     }
 
 }
