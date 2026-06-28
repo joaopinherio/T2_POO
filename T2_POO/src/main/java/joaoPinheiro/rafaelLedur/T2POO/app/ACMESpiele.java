@@ -60,7 +60,7 @@ public class ACMESpiele {
         clientela.printClientela();
         
         System.out.println("\njogos");
-        catalogo.inicializaJogos(jogosIniciais);
+       // catalogo.inicializaJogos(jogosIniciais);
         catalogo.printJogos();
 
         System.out.println("\npagamentos");
