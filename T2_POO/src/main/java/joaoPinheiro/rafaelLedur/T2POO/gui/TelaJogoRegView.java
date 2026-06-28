@@ -20,6 +20,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.textfield.IntegerField;
+import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
@@ -30,48 +31,41 @@ import joaoPinheiro.rafaelLedur.T2POO.dados.*;
 
 public class TelaJogoRegView {
     private final Catalogo catalogo;
-    //lembrar de criar instancia de tela reg cliente pq sou BURRO
-    private final Clientela clientela;
-
-    private final IntegerField numero;
+    private final IntegerField codigo;
+    private final IntegerField ano;
+    private final NumberField valorDiario;
     private final TextField nome;
-    private final TextField email;
-    private final TextField nomeFantasia;
-    private final TextField id;
-    private final ComboBox<String> formaPagamento;
-    private final ComboBox<String> tipoCliente;
 
-    private final Grid<Cliente> grid;
+    private final ComboBox<String> categoria;
+    private final IntegerField contratoNum;
+    private final Grid<Jogo> grid;
+
 
     public TelaClienteRegView() {
         // Inicializando o cadastro de pessoas
-        clientela = ;
-        clientela.inicializaClientes("CLIENTESINICIAL.CSV");
+        catalogo = new Catalogo;
+        catalogo.inicializaJogos("JOGOSINICIAL.CSV");
 
-        numero = new IntegerField("Numero");
+        codigo= new IntegerField("Codigo");
         nome = new TextField("Nome");
-        email = new TextField("E-mail");
-        id = new TextField("-");
-        nomeFantasia = new TextField("Nome Fantasia");
+        ano = new IntegerField("Ano");
+        valorDiario = new NumberField("Valor Diario");
 
-        tipoCliente = new ComboBox<>("Tipo de Cliente");
-        tipoCliente.setItems("Individual", "Corporativo");
+        categoria = new ComboBox<>("Categoria");
+        categoria.setItems("AVENTURA","ESTRATEGIA", "CORRIDA");
 
-        formaPagamento = new ComboBox<>("Forma de Pagamento");
-        formaPagamento.setItems("PIX", "Cartao de Credito");       
-        
-        grid = new Grid<>(Cliente.class);
+        grid = new Grid<>(Jogo.class);
 
         setSpacing(true);
         setPadding(true);
 
-        add(new H2("Menu de Cadastro de Clientes"));
+        add(new H2("Menu de Cadastro de Jogos"));
         
         Button tipoClientButton = new Button("Selecionar", VaadinIcon.CHECK.create());
         tipoClientButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         tipoClientButton.addClickListener(click -> this.cadHighlight());
 
-        FormLayout formLayout = new FormLayout(numero, nome, email, formaPagamento, id, nomeFantasia);
+        FormLayout formLayout = new FormLayout(codigo, nome, ano, valorDiario);
 
         // Definição dos botões de ação
         Button salvarButton = new Button("Inserir", VaadinIcon.CHECK.create());
@@ -85,7 +79,7 @@ public class TelaJogoRegView {
 
         HorizontalLayout botoesLayout = new HorizontalLayout(salvarButton, cancelarButton);
 
-        grid.setItems(clientela.getLista());
+        grid.setItems(catalogo.getLista());
         grid.setColumns("numero","nome", "email");
 
         add(tipoCliente);
