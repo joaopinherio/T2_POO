@@ -11,9 +11,9 @@ import com.vaadin.flow.component.textfield.*;
 @Route("")
 public class MainView extends VerticalLayout {
     public MainView(){
-        Button telaCadastro = new Button("Opcoes de Cadastro");   
-        Button telaRelatorio= new Button("Opcoes de Relatorio");    
-        Button telaEdicao  = new Button("Opcoes de Edicao"); 
+        Button telaCadastro = new Button("Opcoes de Cadastro");
+        Button telaRelatorio= new Button("Opcoes de Relatorio");
+        Button telaEdicao  = new Button("Opcoes de Edicao");
         telaCadastro.addClickListener(e -> UI.getCurrent().navigate("telaCadastros"));
         
         add(telaCadastro);
