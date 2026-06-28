@@ -1,12 +1,12 @@
 package joaoPinheiro.rafaelLedur.T2POO.gui;
 
-import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
@@ -19,59 +19,53 @@ import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 import joaoPinheiro.rafaelLedur.T2POO.dados.Cliente;
-import joaoPinheiro.rafaelLedur.T2POO.dados.Individual;
-import joaoPinheiro.rafaelLedur.T2POO.dados.Corporativo;
 import joaoPinheiro.rafaelLedur.T2POO.dados.Clientela;
 
 @PageTitle("Cadastro Clientes")
 @Route("cadastroCliente")
 public class TelaClienteRegView extends VerticalLayout {
     private final Clientela clientela;
-
-    private final IntegerField numero;
+    
+    private final TextField numero;
     private final TextField nome;
     private final TextField email;
     private final TextField nomeFantasia;
-    private final TextField id;
     private final ComboBox<String> formaPagamento;
+    private final ComboBox<String> cpf_cnpj;
     private final ComboBox<String> tipoCliente;
-
+     
     private final Grid<Cliente> grid;
 
     public TelaClienteRegView() {
         // Inicializando o cadastro de pessoas
-        clientela = new Clientela();
+        clientela = clientela.getInstance();
         clientela.inicializaClientes("CLIENTESINICIAL.CSV");
 
-        numero = new IntegerField("Numero");
+        numero = new TextField("Numero");
         nome = new TextField("Nome");
         email = new TextField("E-mail");
-        id = new TextField("-");
-        nomeFantasia = new TextField("Nome Fantasia");
-
+        
         tipoCliente = new ComboBox<>("Tipo de Cliente");
         tipoCliente.setItems("Individual", "Corporativo");
 
         formaPagamento = new ComboBox<>("Forma de Pagamento");
-        formaPagamento.setItems("PIX", "Cartao de Credito");       
-        
+        formaPagamento.setItems("PIX", "Cartao de Credito");
+
         grid = new Grid<>(Cliente.class);
 
+        // Definindo as características do layout básico
         setSpacing(true);
         setPadding(true);
 
+        // Define título do formulário
         add(new H2("Menu de Cadastro de Clientes"));
-        
-        Button tipoClientButton = new Button("Selecionar", VaadinIcon.CHECK.create());
-        tipoClientButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        tipoClientButton.addClickListener(click -> this.cadHighlight());
 
-        FormLayout formLayout = new FormLayout(numero, nome, email, formaPagamento, id, nomeFantasia);
+        // Configuração do formulário
+        FormLayout formLayout = new FormLayout(numero, nome, email, tipoCliente, formaPagamento);
 
         // Definição dos botões de ação
         Button salvarButton = new Button("Inserir", VaadinIcon.CHECK.create());
@@ -83,69 +77,53 @@ public class TelaClienteRegView extends VerticalLayout {
         Dialog dialogoCancelamento = criaDialogoDeCancelamento();
         cancelarButton.addClickListener(click -> dialogoCancelamento.open());
 
+        // Adiciona botoes de ação em um layout horizontal
         HorizontalLayout botoesLayout = new HorizontalLayout(salvarButton, cancelarButton);
 
+        // Configuração da Grid
         grid.setItems(clientela.getLista());
-        grid.setColumns("numero","nome", "email");
+//        grid.setColumns("nome", "email", "pais", "formattedDataNascimento");
+        grid.setColumns("nome", "email", "pais");
+        grid.addColumn(Pessoa::getFormattedDataNascimento).setHeader("Data nascimento");
 
-        add(tipoCliente);
-        add(tipoClientButton);
+        // Monta todos os elementos na janela
         add(formLayout, botoesLayout, new H2("Usuários Cadastrados"), grid);
         add(new Hr());
 
+        // Define o botão de retorno à página principal
         Button backButton = new Button("Voltar");
         backButton.addClickListener(e -> UI.getCurrent().navigate(""));
         add(backButton);
     }
 
-    private void cadHighlight(){
-        if(tipoCliente.getValue().equals("Individual")){
-            nomeFantasia.setVisible(false);
-            id.setLabel("CPF");
-        }else{
-            nomeFantasia.setVisible(true);
-            id.setLabel("CNPJ");
-        }
-    }
-
-
-
     private void inserirFormulario() {
-            if (numero.getValue().equals("") || nome.getValue().equals("")|| email.getValue().equals("") ||
-                tipoCliente.getValue() == null || formaPagamento.getValue() == null) {
+        if (aceitaTermos.getValue() == false) {
+            Notification.show("Você precisa aceitar os termos de serviço.", 3000, Notification.Position.TOP_CENTER)
+                    .addThemeVariants(NotificationVariant.LUMO_ERROR);
+        } else {
+            if (nome.getValue().equals("") || email.getValue().equals("") ||
+                pais.getValue() == null || dataNascimento.getValue() == null) {
                 Notification.show("Erro! Campo vazio.", 3000, Notification.Position.BOTTOM_STRETCH);
-            }
-            if(clientela.isRepetido(numero.getValue()))
-                Notification.show("Erro! Numero de cliente ja existe! Favor inserir numero diferente", 3000, Notification.Position.BOTTOM_STRETCH);
-            else {
-                Cliente c;
-                if(tipoCliente.getValue() == "Individual"){
-                    c = new Individual(numero.getValue(),
-                    nome.getValue(),
-                    email.getValue(),
-                    id.getValue()); 
-               } else{
-                c = new Corporativo(numero.getValue(),
-                        nome.getValue(),
+            } else {
+                Pessoa p = new Pessoa(nome.getValue(),
                         email.getValue(),
-                        id.getValue(),
-                        nomeFantasia.getValue());
-                }
-                clientela.addCliente(c);
-                String mensagem = "Usuário " + c.getNome() + " salvo com sucesso!";
+                        pais.getValue(),
+                        dataNascimento.getValue());
+                cadPessoas.cadastrar(p);
+                String mensagem = "Usuário " + p.getNome() + " salvo com sucesso!";
                 Notification.show(mensagem, 3000, Notification.Position.BOTTOM_STRETCH);
             }
             grid.getDataProvider().refreshAll();
             limparFormulario();
+        }
     }
 
     private void limparFormulario() {
-        numero.clear();
         nome.clear();
+        dataNascimento.clear();
+        pais.clear();
         email.clear();
-        id.clear();
-        nomeFantasia.clear();
-        nome.focus();
+        nome.focus(); // Coloca o foco no campo nome
     }
 
     private Dialog criaDialogoDeCancelamento() {
@@ -160,9 +138,5 @@ public class TelaClienteRegView extends VerticalLayout {
         Button fecharDialogo = new Button("Não", e -> dialogo.close());
         dialogo.getFooter().add(fecharDialogo, confirmarCancelamento);
         return dialogo;
-    }
-
-    public Clientela getClientela(){
-        return clientela;
     }
 }

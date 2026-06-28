@@ -9,6 +9,15 @@ import java.util.ArrayList;
 
 
 public class Clientela {
+    private static Clientela instance;
+
+    public static Clientela getInstance(){
+        if(instance == null){
+            instance = new Clientela();
+        }
+        return instance;
+    }
+
     private ArrayList<Cliente> cadastro;
 
     public Clientela() {
@@ -93,6 +102,14 @@ public class Clientela {
         } catch (Exception e) {
             System.out.println("2Problema na leitura do arquivo" + e.getMessage());
         }
+    }
+
+    public boolean cadastro(int numero, String nome, String email, FormaPagamento formaPagamento, String cpf){
+        return cadastro.add(new Individual(numero, nome, email, cpf));
+    }
+    
+    public boolean cadastro(int numero, String nome, String email, FormaPagamento formaPagamento, String cpnj, String nomeFantasia){
+        return cadastro.add(new Corporativo(numero, nome, email, cpnj, nomeFantasia));
     }
 
     public Cliente pesquisaNum(int num) {
