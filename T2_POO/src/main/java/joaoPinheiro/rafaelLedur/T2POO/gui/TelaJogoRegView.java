@@ -63,7 +63,7 @@ public class TelaJogoRegView extends VerticalLayout{
 
         add(new H2("Menu de Cadastro de Jogos"));
         
-        FormLayout formLayout = new FormLayout(codigo, nome, ano, valorDiario);
+        FormLayout formLayout = new FormLayout(codigo, nome, ano, valorDiario, categoria);
 
         // Definição dos botões de ação
         Button salvarButton = new Button("Inserir", VaadinIcon.CHECK.create());
@@ -93,14 +93,15 @@ public class TelaJogoRegView extends VerticalLayout{
                 valorDiario.getValue() == null || categoria.getValue() == null) {
                 Notification.show("Erro! Campo vazio.", 3000, Notification.Position.BOTTOM_STRETCH);
             }
-            if(clientela.isRepetido(codigo.getValue()))
-                Notification.show("Erro! Numero de cliente ja existe! Favor inserir numero diferente", 3000, Notification.Position.BOTTOM_STRETCH);
+            if(catalogo.isRepetido(codigo.getValue()))
+                Notification.show("Erro! Numero de jogo ja existe! Favor codigo diferente", 3000, Notification.Position.BOTTOM_STRETCH);
             else {
                 Jogo j = new Jogo(codigo.getValue(), 
                 nome.getValue(), 
                 ano.getValue(), 
                 valorDiario.getValue());
-                
+                j.setCategoria(Categoria.valueOf(categoria.getValue()));
+
                 catalogo.addJogo(j);
                 String mensagem = "Jogo" + j.getNome() + " salvo com sucesso!";
                 Notification.show(mensagem, 3000, Notification.Position.BOTTOM_STRETCH);

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Catalogo {
     private static Catalogo instance;
@@ -77,8 +78,9 @@ public class Catalogo {
         }
     }
 
-    public boolean addJogo(Jogo j) {
-        return catalogo.add(j);
+    public void addJogo(Jogo j) {
+        if(catalogo.add(j))
+            catalogo.sort(Comparator.comparing(Jogo::getCodigo));
     }
 
     public Jogo pesquisaCod(int cod) {

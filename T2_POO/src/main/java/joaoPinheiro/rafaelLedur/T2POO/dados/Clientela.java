@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 
 public class Clientela {
@@ -25,8 +26,9 @@ public class Clientela {
         cadastro = new ArrayList<>();
     }
 
-    public boolean addCliente(Cliente c) {
-        return cadastro.add(c);
+    public void addCliente(Cliente c) {
+        if(cadastro.add(c))
+        cadastro.sort(Comparator.comparing(Cliente::getNumero));
     }
 
     // CLIENTESINICIAL.CSV
