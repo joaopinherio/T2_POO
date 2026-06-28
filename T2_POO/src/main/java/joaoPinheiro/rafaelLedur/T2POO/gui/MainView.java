@@ -6,11 +6,29 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.component.textfield.*;
+import joaoPinheiro.rafaelLedur.T2POO.dados.*;
 
 @PageTitle("T2 POO")
 @Route("")
 public class MainView extends VerticalLayout {
+    private final Clientela clientela;
+    private final Catalogo catalogo;
+    private final LogPagamentos logPagamentos;
+    
     public MainView(){
+        clientela = Clientela.getInstance();
+        catalogo = Catalogo.getInstance();
+        logPagamentos = LogPagamentos.getInstance();
+
+        if(clientela.isEmpty())
+            clientela.inicializaClientes("CLIENTESINICIAL.CSV");
+
+        if(catalogo.isEmpty())
+            catalogo.inicializaJogos("JOGOSINICIAL.CSV");
+
+        if (logPagamentos.isEmpty())
+            logPagamentos.inicializaPagamentos("FORMASPAGAMENTOINICIAL.CSV", clientela);
+        
         Button telaCadastro = new Button("Opcoes de Cadastro");
         Button telaRelatorio= new Button("Opcoes de Relatorio");
         Button telaEdicao  = new Button("Opcoes de Edicao");

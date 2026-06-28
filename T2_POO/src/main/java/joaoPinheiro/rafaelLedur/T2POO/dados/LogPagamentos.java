@@ -4,23 +4,36 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Comparator;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
-import java.util.TreeMap;
 
 public class LogPagamentos {
-    private TreeMap<Integer, FormaPagamento> pagamentos;
+    private static LogPagamentos instance;
 
-    public LogPagamentos() {
-        pagamentos = new TreeMap<>();
+    public static LogPagamentos getInstance(){
+        if(instance == null){
+            instance = new LogPagamentos();
+        }
+        return instance;
     }
 
-    public void addPagamento(Integer numeroCliente, FormaPagamento f) {
-        pagamentos.putIfAbsent(numeroCliente, f);
+    private ArrayList<FormaPagamento> pagamentos;
+
+    public LogPagamentos() {
+        pagamentos = new ArrayList<>();
+    }
+
+    public void addPagamento(FormaPagamento f) {
+        if(pagamentos.add(f));
+            pagamentos.sort(Comparator.comparing(FormaPagamento::getCod));
     }
 
     // CLIENTESINICIAL.CSV
-    public void inicializaPagamentos(Path arq, Clientela clientela) {
-        Corporativo corp1 = null;
+    public void inicializaPagamentos(String pathS, Clientela clientela) {
+        Path arq = Paths.get(pathS);
         BufferedReader reader = null;
         String line = "";
         StringBuilder sb = new StringBuilder();
@@ -35,13 +48,6 @@ public class LogPagamentos {
                 }
             }
             String[] data = sb.toString().split(",");
-            /*
-             * TESTES DOS DADOS SENDO REPASSADOS
-             * for (String s : data) {
-             * System.out.println(s);
-             * }
-             * System.out.println("INDICE 6");
-             */
 
             // LOOP LEITURA/CADASTROS
             // data.length - 5 -> comprimento total menos 5 (numero de itens no cabecalho do
@@ -67,7 +73,7 @@ public class LogPagamentos {
 
                     CartaoCredito cartao = new CartaoCredito(codigo, diaVencimento, numeroCartao, validade);
                     cartao.setCliente(clientela.pesquisaNum(numeroCliente));
-                    addPagamento(codigo, cartao);
+                    addPagamento(cartao);
                 }
                 if (tipo == 2) {
                     int codigo = Integer.parseInt(data[i]);
@@ -83,7 +89,7 @@ public class LogPagamentos {
 
                     PIX pix = new PIX(codigo, diaVencimento, chavePix);
                     pix.setCliente(clientela.pesquisaNum(numeroCliente));
-                    addPagamento(codigo, pix);
+                    addPagamento(pix);
                 }
 
                 // soma o numero de indices percorridos nessa iteracao do loop para que o indice
@@ -100,13 +106,32 @@ public class LogPagamentos {
     }
 
     public void printPagamentos() {
-        for (FormaPagamento p : pagamentos.values()) {
-            System.out.println(p.descrever());
+        for (FormaPagamento formaPagamento : pagamentos) {
+            System.out.println(formaPagamento);
         }
     }
 
     public FormaPagamento getPagamentoByCodigo(int codigo) {
         return pagamentos.get(codigo);
+    }
+
+    public boolean isEmpty(){
+        return pagamentos.isEmpty();
+    }
+
+    public FormaPagamento procuraByCod(int codigo){
+        for (FormaPagamento f : pagamentos) {
+            if(f.getCod() == codigo)
+                return f;
+        }
+        return null;
+    }
+
+    public boolean isRepetido(int codigo){
+        if(procuraByCod(codigo) != null)
+            return true;
+
+        return false;
     }
 
 }

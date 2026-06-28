@@ -28,11 +28,14 @@ public class TelaCadastroView extends VerticalLayout {
     public TelaCadastroView(){
         Button cadCliente = new Button("Menu Cadastro Cliente");
         Button cadJogo = new Button("Menu Cadastro Jogo");
+        Button cadPagamento = new Button("Menu Selecao de Pagamento");
         
         cadCliente.addClickListener(e -> UI.getCurrent().navigate("cadastroCliente"));
         cadJogo.addClickListener(e -> UI.getCurrent().navigate("cadastroJogo"));
+        cadPagamento.addClickListener(e -> UI.getCurrent().navigate("cadastroPagamento"));
         
         add(cadCliente);
         add(cadJogo);
+        add(cadPagamento);
     }
 }

@@ -96,7 +96,7 @@ public class TelaClienteRegView extends VerticalLayout {
         add(new Hr());
 
         Button backButton = new Button("Voltar");
-        backButton.addClickListener(e -> UI.getCurrent().navigate(""));
+        backButton.addClickListener(e -> UI.getCurrent().navigate("telaCadastros"));
         add(backButton);
     }
 
