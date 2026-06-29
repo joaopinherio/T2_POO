@@ -52,9 +52,12 @@ public class TelaRelatorioClientes extends VerticalLayout{
         gridCliente.addColumn(Cliente::getEmail).setHeader("Email");
         gridCliente.addColumn(Cliente::getGovId).setHeader("CPF/CNPJ");
 
-        gridCliente.addColumn(cliente -> cliente.getTipo() == "Corporativo" ?
-        cliente.getNomeFantasia() : "---").setHeader("Nome Fantasia");
+//        gridCliente.addColumn(cliente -> cliente.getTipo() == "Corporativo" ?
+//        cliente.getNomeFantasia() : "---").setHeader("Nome Fantasia");
 
+        gridCliente.addColumn(c  -> c instanceof Corporativo?
+        c.getNomeFantasia() : "---").setHeader("Nome Fantasia");
+        
         gridCliente.addColumn(c -> logPagamentos.getPagamentosByCliente(c).toString())
         .setHeader("Pagamentos do Cliente");
 
