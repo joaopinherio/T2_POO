@@ -65,6 +65,10 @@ public class Contrato {
         this.periodo = periodo;
     }
 
+    public FormaPagamento getFormaPagamento(){
+        return formaPagamento;
+    }
+
     public void setFormaPagamento(FormaPagamento formaPagamento) {
         this.formaPagamento = formaPagamento;
     }

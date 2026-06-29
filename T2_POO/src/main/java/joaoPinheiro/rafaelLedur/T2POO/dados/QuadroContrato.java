@@ -188,4 +188,12 @@ public class QuadroContrato {
     public boolean isEmpty() {
         return quadro.isEmpty();
     }
+
+    public List<Contrato> getLista(){
+        List<Contrato> auxList = quadro
+        .stream()
+        .toList();
+
+        return auxList;
+    }
 }
