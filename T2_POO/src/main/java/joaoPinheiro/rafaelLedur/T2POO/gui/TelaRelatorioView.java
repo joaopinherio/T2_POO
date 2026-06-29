@@ -16,5 +16,9 @@ public class TelaRelatorioView extends VerticalLayout {
         relCliente.addClickListener(e -> UI.getCurrent().navigate("relatorioClientes"));
         
         add(relCliente);
+        
+        Button backButton = new Button("Voltar");
+        backButton.addClickListener(e -> UI.getCurrent().navigate(""));
+        add(backButton);
     }
 }

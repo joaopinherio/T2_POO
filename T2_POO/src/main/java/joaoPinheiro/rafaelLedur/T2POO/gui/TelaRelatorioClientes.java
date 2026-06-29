@@ -71,5 +71,9 @@ public class TelaRelatorioClientes extends VerticalLayout{
 
             add(gridCliente);
         }
+    
+        Button backButton = new Button("Voltar");
+        backButton.addClickListener(e -> UI.getCurrent().navigate("telaRelatorios"));
+        add(backButton);
     }
 }
