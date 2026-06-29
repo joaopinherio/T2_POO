@@ -7,17 +7,18 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.*;
 
 public class Catalogo {
     private static Catalogo instance;
 
-    public static Catalogo getInstance(){
-        if(instance == null){
+    public static Catalogo getInstance() {
+        if (instance == null) {
             instance = new Catalogo();
         }
         return instance;
     }
-    
+
     private ArrayList<Jogo> catalogo;
 
     public Catalogo() {
@@ -61,7 +62,7 @@ public class Catalogo {
                 Categoria categoria = Categoria.valueOf(data[i + count]);
 
                 Jogo jogo = new Jogo(codigo, nome, ano, valorDiario);
-                
+
                 jogo.setCategoria(categoria);
                 addJogo(jogo);
 
@@ -79,7 +80,7 @@ public class Catalogo {
     }
 
     public void addJogo(Jogo j) {
-        if(catalogo.add(j))
+        if (catalogo.add(j))
             catalogo.sort(Comparator.comparing(Jogo::getCodigo));
     }
 
@@ -146,17 +147,52 @@ public class Catalogo {
         }
     }
 
-    public ArrayList<Jogo> getLista(){
+    public ArrayList<Jogo> getLista() {
         return catalogo;
     }
 
-    public boolean isRepetido(int cod){
+    public boolean isRepetido(int cod) {
         Jogo j = pesquisaCod(cod);
         return catalogo.contains(j);
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return catalogo.isEmpty();
     }
 
+    private Jogo getJogoByValor(double valor) {
+        for (Jogo j : catalogo) {
+            if (j.getValorDiario() == valor)
+                return j;
+        }
+        return null;
+    }
+
+    public Jogo getJogoMaiorValor(){
+        ArrayList<ArrayList> auxList = new ArrayList<>();
+        double maiorValor = 0;
+        for (Jogo j : catalogo) {
+            if (j.getValorDiario() >= maiorValor)
+                maiorValor = j.getValorDiario();
+                auxList.add(j);
+        }
+
+        auxList = catalogo
+        .stream()
+        .sorted(Comparator.comparing(Jogo::getValorDiario))
+        .toList();
+
+        if (auxList.getLast() == auxList.get((auxList.size()) -2))
+            return getJogoByValor(maiorValor);
+
+        return null;
+    }
+
+    public String toString(){
+        String result = "";
+        for (Jogo j : catalogo) {
+            result.concat(j.descrever() + "\n");
+        }
+        return result;
+    }
 }

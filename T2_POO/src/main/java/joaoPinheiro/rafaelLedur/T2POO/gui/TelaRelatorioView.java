@@ -13,12 +13,15 @@ public class TelaRelatorioView extends VerticalLayout {
     public TelaRelatorioView(){
         Button relCliente = new Button("Gera Relatorio de Cliente");
         Button relContrato = new Button("Gera Relatorio de Contratos");
+        Button menuConsulta = new Button("Menu de Consultas");
 
         relCliente.addClickListener(e -> UI.getCurrent().navigate("relatorioClientes"));
         relContrato.addClickListener(e -> UI.getCurrent().navigate("relatorioContratos"));
+        menuConsulta.addClickListener(e -> UI.getCurrent().navigate("menuConsultas"));
         
         add(relCliente);
         add(relContrato);
+        add(menuConsulta);
         
         Button backButton = new Button("Voltar");
         backButton.addClickListener(e -> UI.getCurrent().navigate(""));
