@@ -58,7 +58,7 @@ public class TelaRelatorioClientes extends VerticalLayout{
         gridCliente.addColumn(c  -> c instanceof Corporativo?
         c.getNomeFantasia() : "---").setHeader("Nome Fantasia");
         
-        gridCliente.addColumn(c -> logPagamentos.getPagamentosByCliente(c).toString())
+        gridCliente.addColumn(c -> logPagamentos.getPagamentosByClienteToString(c))
         .setHeader("Pagamentos do Cliente");
 
         gridCliente.setItems(clientela.getLista());

@@ -144,4 +144,13 @@ public class LogPagamentos {
 
         return aux;
     }
+
+    public List<String> getPagamentosByClienteToString(Cliente c){
+        List<String> aux = pagamentos.stream()
+        .filter(p -> p.getCliente() == c)
+        .map(FormaPagamento::descrever)
+        .collect(Collectors.toList());
+
+        return aux;
+    }
 }
