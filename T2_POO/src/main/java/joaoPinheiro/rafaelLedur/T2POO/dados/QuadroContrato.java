@@ -5,9 +5,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.LinkedList;
-import java.util.*;
+import java.util.List;
+import java.util.Queue;
 
 public class QuadroContrato {
     private static QuadroContrato instance;
@@ -28,7 +31,7 @@ public class QuadroContrato {
     public void addContrato(Contrato c) {
         if (quadro.offer(c))
             Collections.sort((List<Contrato>) quadro,
-                    Comparator.comparing(Contrato::getId));
+            Comparator.comparing(Contrato::getId));
     }
 
     public void inicializaContratos(String pathS, Clientela clientela, Catalogo catalogoJogos,
@@ -69,11 +72,11 @@ public class QuadroContrato {
                 int codigoPagamento = Integer.parseInt(data[i + count]);
 
                 Contrato contrato = new Contrato(id, periodo);
-
+                
                 contrato.setData(dataContrato);
                 contrato.setCliente(clientela.pesquisaNum(numeroCliente));
                 contrato.setJogo(catalogoJogos.pesquisaCod(codigoJogo));
-                contrato.setFormaPagamento(historicoPagamentos.getPagamentoByCodigo(codigoJogo));
+                contrato.setFormaPagamento(historicoPagamentos.getPagamentoByCodigo(codigoPagamento));
 
                 addContrato(contrato);
 

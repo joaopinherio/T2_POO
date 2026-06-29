@@ -115,7 +115,11 @@ public class LogPagamentos {
     }
 
     public FormaPagamento getPagamentoByCodigo(int codigo) {
-        return pagamentos.get(codigo);
+        for (FormaPagamento f: pagamentos) {
+            if(f.getCod() == codigo)
+                return f;
+        }
+        return null;
     }
 
     public boolean isEmpty(){
