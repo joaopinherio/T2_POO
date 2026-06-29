@@ -169,21 +169,16 @@ public class Catalogo {
     }
 
     public Jogo getJogoMaiorValor(){
-        ArrayList<ArrayList> auxList = new ArrayList<>();
-        double maiorValor = 0;
-        for (Jogo j : catalogo) {
-            if (j.getValorDiario() >= maiorValor)
-                maiorValor = j.getValorDiario();
-                auxList.add(j);
-        }
-
-        auxList = catalogo
+        List<Jogo> auxList = catalogo
         .stream()
         .sorted(Comparator.comparing(Jogo::getValorDiario))
         .toList();
 
-        if (auxList.getLast() == auxList.get((auxList.size()) -2))
-            return getJogoByValor(maiorValor);
+        Jogo retornoJ = auxList.getLast();
+        auxList.remove(retornoJ);
+
+        if (auxList.getLast().getValorDiario() != retornoJ.getValorDiario())
+            return auxList.getLast();
 
         return null;
     }
