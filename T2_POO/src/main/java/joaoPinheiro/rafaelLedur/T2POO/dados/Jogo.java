@@ -42,6 +42,10 @@ public class Jogo {
         return this.valorDiario;
     }
 
+    public int getAno(){
+        return this.ano;
+    }
+    
     public String getNome() {
         return this.nome;
     }
