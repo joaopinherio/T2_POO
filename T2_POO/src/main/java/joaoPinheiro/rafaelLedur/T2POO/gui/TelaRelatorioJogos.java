@@ -30,7 +30,7 @@ import joaoPinheiro.rafaelLedur.T2POO.dados.*;
 import java.util.List;
 
 @PageTitle("Relatório de Jogos")
-@Route("relatoriojogos")
+@Route("relatorioJogos")
 public class TelaRelatorioJogos extends VerticalLayout{
     private final Catalogo catalogo;
     private final Grid <Jogo> gridCatalogo; 
