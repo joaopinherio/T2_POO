@@ -54,7 +54,7 @@ public class TelaMenuConsultas extends VerticalLayout {
         consultaJogo.addClickListener(click -> this.mostraJogoMaiorValor());
 
         consultaContrato = new Button("Consulta: Contrato com maior valor final");
-
+        consultaContrato.addClickListener(click -> this.mostraContratoMaiorValor());
         consultaCliente = new Button("Consulta: Cliente com maior montante de Contratos");
 
         add(consultaJogo);
@@ -75,6 +75,15 @@ public class TelaMenuConsultas extends VerticalLayout {
                 Notification.show("Empate entre valores: \n" + catalogo.toString(), 3000, Notification.Position.MIDDLE);
             else
                 Notification.show("Jogo com maior valor diario: \n" + jogoSel.descrever(), 3000, Notification.Position.MIDDLE);
+        }
+    }
+
+    private void mostraContratoMaiorValor(){
+        if (quadroContrato.isEmpty())
+            Notification.show("Erro! Nenhum contrato cadastrado.", 3000, Notification.Position.BOTTOM_STRETCH);
+        else {
+            Contrato contratoSel = quadroContrato.getContratoMaiorValorFinal();
+
         }
     }
 }

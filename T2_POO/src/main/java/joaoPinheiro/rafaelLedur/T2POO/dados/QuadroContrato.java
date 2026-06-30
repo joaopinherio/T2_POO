@@ -199,4 +199,12 @@ public class QuadroContrato {
 
         return auxList;
     }
+
+    public Contrato getContratoMaiorValorFinal(){
+        List<Contrato> auxList = quadro
+        .stream()
+        .sorted(Comparator.comparingDouble(con-> con.calculaValorFinal(quadro)))
+        .toList();
+
+    }
 }
