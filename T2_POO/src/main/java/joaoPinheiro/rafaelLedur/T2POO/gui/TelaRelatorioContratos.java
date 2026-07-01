@@ -19,6 +19,7 @@ import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
@@ -70,9 +71,42 @@ public class TelaRelatorioContratos extends VerticalLayout{
 
             add(gridContrato);
         }
+        gridContrato.addItemClickListener(event -> {
+            Contrato contrato = event.getItem();
+            criaDialogoDeCancelamento(contrato).open();
+        });
     
         Button backButton = new Button("Voltar");
         backButton.addClickListener(e -> UI.getCurrent().navigate("telaRelatorios"));
         add(backButton);
     }
+
+    private void remover(Contrato contrato) {
+        quadroContrato.rmContrato(contrato); 
+        gridContrato.setItems(quadroContrato.getLista());
+        gridContrato.getDataProvider().refreshAll();
+
+        Notification.show("Contrato #" + contrato.getId() + " removido com sucesso.", 3000, Notification.Position.BOTTOM_STRETCH);
+       // sucesso.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+    }
+
+    private void limparFormulario() {
+        gridContrato.asSingleSelect().clear();
+
+    }
+
+    private Dialog criaDialogoDeCancelamento(Contrato contrato) {
+        Dialog dialogo = new Dialog();
+        dialogo.setHeaderTitle("Confirmar remoção");
+        dialogo.add(new Paragraph("Você tem certeza que deseja remover o contrato?"));
+        Button confirmarCancelamento = new Button("Sim, remover", e -> {
+            remover(contrato);
+            dialogo.close();
+        });
+        confirmarCancelamento.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_ERROR);
+        Button fecharDialogo = new Button("Não", e -> dialogo.close());
+        dialogo.getFooter().add(fecharDialogo, confirmarCancelamento);
+        return dialogo;
+    }
+    
 }
