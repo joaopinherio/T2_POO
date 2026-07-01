@@ -87,8 +87,8 @@ public class Catalogo {
 
         try{
             writer = new BufferedWriter(new FileWriter(arq.toFile()));
+            writer.write("codigo" + ";" + "nome" + ";" + "ano" + ";" + "valorMensal"  + ";" + "categoria" + "\n");
             for (Jogo j : catalogo) {
-                writer.write("codigo" + ";" + "nome" + ";" + "ano" + ";" + "valorMensal"  + ";" + "categoria" + "\n");
                 writer.write(j.getCsv());
                 
                 if(j != catalogo.getLast())

@@ -32,4 +32,10 @@ public class Individual extends Cliente {
     public String getTipo(){
         return "Individual";
     }
+
+    @Override
+    public String getCsv(){
+        return getNumero() + ";" + getNome() + ";" +
+        getEmail() + ";" + 1 + ";" + cpf;
+    }
 }

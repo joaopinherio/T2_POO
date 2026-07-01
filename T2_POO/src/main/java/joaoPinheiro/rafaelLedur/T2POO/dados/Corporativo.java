@@ -30,17 +30,23 @@ public class Corporativo extends Cliente {
     }
 
     @Override
-    public String getGovId(){
+    public String getGovId() {
         return cnpj;
     }
 
     @Override
-    public String getTipo(){
+    public String getTipo() {
         return "Corporativo";
     }
 
     @Override
-    public String getNomeFantasia(){
+    public String getNomeFantasia() {
         return nomeFantasia;
+    }
+
+    @Override
+    public String getCsv() {
+        return getNumero() + ";" + getNome() + ";"
+                + getEmail() + ";" + 2 + ";" + cnpj + ";" + nomeFantasia;
     }
 }

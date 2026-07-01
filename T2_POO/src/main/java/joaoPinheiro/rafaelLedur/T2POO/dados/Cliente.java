@@ -69,4 +69,6 @@ public abstract class Cliente implements Serializable {
         return this.valorMontante;
     }
 
+    abstract String getCsv();
+
 }

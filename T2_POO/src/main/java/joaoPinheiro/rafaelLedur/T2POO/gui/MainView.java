@@ -92,7 +92,8 @@ public class MainView extends VerticalLayout {
         
         confirmarButton.addClickListener(click -> {
             
-            if(!(catalogo.salvaJogos(fileNameField.getValue())))
+            if(!(catalogo.salvaJogos(fileNameField.getValue()))||
+            !(clientela.salvaClientes(fileNameField.getValue())))
                 Notification.show("Erro de leitura!", 3000, Notification.Position.BOTTOM_STRETCH);
             else{
                 Notification.show("Dados salvos com sucesso!", 3000, Notification.Position.BOTTOM_STRETCH);

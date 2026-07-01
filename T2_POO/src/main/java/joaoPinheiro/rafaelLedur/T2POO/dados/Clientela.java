@@ -1,7 +1,9 @@
 package joaoPinheiro.rafaelLedur.T2POO.dados;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -75,7 +77,7 @@ public class Clientela {
                     String nome = data[i + count];
                     count++;
                     String email = data[i + count];
-                    count++;
+                    count +=2;
                     String cnpj = data[i + count];
                     count++;
                     String nomeFantasia = data[i + count];
@@ -96,6 +98,32 @@ public class Clientela {
             System.out.println("2Problema na leitura do arquivo" + e.getMessage());
         }
     }
+
+    public boolean salvaClientes(String pathS){
+        Path arq = Paths.get(pathS.concat("CLIENTES.CSV"));
+        BufferedWriter writer = null;
+
+        try{
+            writer = new BufferedWriter(new FileWriter(arq.toFile()));
+            writer.write("numero" + ";" + "nome" + ";" + "email" + ";"+ "tipo" + ";" + "cpf_cnpj"  + ";" + "nomeFantasia" + "\n");
+            for (Cliente c : cadastro) {
+                writer.write(c.getCsv());
+                
+                if(c != cadastro.getLast())
+                    writer.write("\n");
+            }
+
+            writer.close();
+        } catch (IOException e){
+            System.out.println("1 Problema na escrita do arquivo" + e);
+            return false;
+        } catch (Exception e){
+            System.out.println("2 Problema na escrita do arquivo" + e);
+            return false;
+        }
+        return true;
+    }
+
 
     public boolean cadastro(int numero, String nome, String email, FormaPagamento formaPagamento, String cpf){
         return cadastro.add(new Individual(numero, nome, email, cpf));
