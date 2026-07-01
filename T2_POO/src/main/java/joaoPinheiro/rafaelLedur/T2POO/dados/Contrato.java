@@ -109,4 +109,9 @@ da categoria do jogo e da forma de pagamento:*/
         return periodo * valorDiario;
     }
 
+    public String getCsv(){
+        return id + ";" + data + ";" + periodo + ";" + cliente.getNumero()
+        + ";" + jogo.getCodigo() + ";" + formaPagamento.getCod();
+    }
+
 }

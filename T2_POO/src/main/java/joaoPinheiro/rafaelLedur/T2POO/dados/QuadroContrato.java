@@ -1,7 +1,9 @@
 package joaoPinheiro.rafaelLedur.T2POO.dados;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,6 +18,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.Map;
 import java.util.Set;
+import java.util.*;
 
 public class QuadroContrato {
     private static QuadroContrato instance;
@@ -96,6 +99,31 @@ public class QuadroContrato {
         } catch (Exception e) {
             System.out.println("Contratos: 2Problema na leitura do arquivo" + e.getMessage());
         }
+    }
+
+    public boolean salvaContratos(String pathS){
+        Path arq = Paths.get(pathS.concat("CONTRATOS.CSV"));
+        BufferedWriter writer = null;
+
+        try{
+            writer = new BufferedWriter(new FileWriter(arq.toFile()));
+            writer.write("id" + ";" + "data" + ";" + "periodo" + ";"+ "numero" + ";" + "codigo"  + ";" + "cod" + "\n");
+            for (Contrato c : quadro) {
+                writer.write(c.getCsv());
+                
+                if(c != getLista().getLast())
+                    writer.write("\n");
+            }
+
+            writer.close();
+        } catch (IOException e){
+            System.out.println("1 Problema na escrita do arquivo" + e);
+            return false;
+        } catch (Exception e){
+            System.out.println("2 Problema na escrita do arquivo" + e);
+            return false;
+        }
+        return true;
     }
 
     public boolean rmContrato(Contrato c) {
