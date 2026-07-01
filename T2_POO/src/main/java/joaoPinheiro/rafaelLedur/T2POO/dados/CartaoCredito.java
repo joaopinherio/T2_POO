@@ -29,4 +29,11 @@ public class CartaoCredito extends FormaPagamento{
     public void setValidade(Date validade) {
         this.validade = validade;
     }
+
+    @Override
+    public String getCsv(){
+        return super.getCsv() + ";" + 1 + ";" + numero + ";" + validade;
+    }
+
+
 }

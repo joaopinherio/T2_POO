@@ -37,4 +37,8 @@ public class FormaPagamento {
     public void setDiaVencimento(int diaVencimento) {
         this.diaVencimento = diaVencimento;
     }
+
+    public String getCsv(){
+        return cod + ";" + diaVencimento + ";" + cliente.getNumero();
+    }
 }

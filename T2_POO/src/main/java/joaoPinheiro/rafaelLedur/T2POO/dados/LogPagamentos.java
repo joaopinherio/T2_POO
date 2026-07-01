@@ -1,7 +1,9 @@
 package joaoPinheiro.rafaelLedur.T2POO.dados;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.nio.file.Path;
@@ -106,6 +108,31 @@ public class LogPagamentos {
         } catch (Exception e) {
             System.out.println("2Problema na leitura do arquivo" + e.getMessage());
         }
+    }
+
+    public boolean salvaFormaPagamentos(String pathS){
+        Path arq = Paths.get(pathS.concat("PAGAMENTOS.CSV"));
+        BufferedWriter writer = null;
+
+        try{
+            writer = new BufferedWriter(new FileWriter(arq.toFile()));
+            writer.write("cod" + ";" + "diaVencimento" + ";" + "numero" + ";"+ "tipo" + ";" + "numero_chave"  + ";" + "validade" + "\n");
+            for (FormaPagamento f: pagamentos) {
+                writer.write(f.getCsv());
+                
+                if(f != pagamentos.getLast())
+                    writer.write("\n");
+            }
+
+            writer.close();
+        } catch (IOException e){
+            System.out.println("1 Problema na escrita do arquivo" + e);
+            return false;
+        } catch (Exception e){
+            System.out.println("2 Problema na escrita do arquivo" + e);
+            return false;
+        }
+        return true;
     }
 
     public void printPagamentos() {

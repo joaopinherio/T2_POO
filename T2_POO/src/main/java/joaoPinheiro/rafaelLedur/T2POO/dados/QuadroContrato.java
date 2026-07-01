@@ -18,7 +18,6 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.Map;
 import java.util.Set;
-import java.util.*;
 
 public class QuadroContrato {
     private static QuadroContrato instance;

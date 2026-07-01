@@ -20,4 +20,9 @@ public class PIX extends FormaPagamento{
     public void setChave(String chave) {
         this.chave = chave;
     }
+
+    @Override
+    public String getCsv(){
+        return super.getCsv() + ";" + 2 + ";" + chave;
+    }
 }

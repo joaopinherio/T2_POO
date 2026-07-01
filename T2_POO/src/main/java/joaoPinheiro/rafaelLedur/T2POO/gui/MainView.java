@@ -38,12 +38,11 @@ public class MainView extends VerticalLayout {
     private final Catalogo catalogo;
     private final LogPagamentos logPagamentos;
     private final QuadroContrato quadroContrato;
-    
+
     private final Dialog salvarDialog;
     private final TextField fileNameField;
 
-
-    public MainView(){
+    public MainView() {
         clientela = Clientela.getInstance();
         catalogo = Catalogo.getInstance();
         logPagamentos = LogPagamentos.getInstance();
@@ -56,51 +55,51 @@ public class MainView extends VerticalLayout {
 
         Button telaCadastro = new Button("Opcoes de Cadastro");
         telaCadastro.addClickListener(e -> UI.getCurrent().navigate("telaCadastros"));
-        
-        Button telaRelatorio= new Button("Opcoes de Relatorio");
+
+        Button telaRelatorio = new Button("Opcoes de Relatorio");
         telaRelatorio.addClickListener(e -> UI.getCurrent().navigate("telaRelatorios"));
 
         Button salvarButton = new Button("Salvar dados");
         salvarButton.addClickListener(click -> this.salvarDadosUser());
-        
+
         add(salvarButton);
 
         add(telaCadastro);
         add(telaRelatorio);
     }
 
-    public void inicializaDados(){
-        if(clientela.isEmpty())
+    public void inicializaDados() {
+        if (clientela.isEmpty())
             clientela.inicializaClientes("CLIENTESINICIAL.CSV");
 
-        if(catalogo.isEmpty())
+        if (catalogo.isEmpty())
             catalogo.inicializaJogos("JOGOSINICIAL.CSV");
 
         if (logPagamentos.isEmpty())
             logPagamentos.inicializaPagamentos("FORMASPAGAMENTOINICIAL.CSV", clientela);
-        
+
         if (quadroContrato.isEmpty())
             quadroContrato.inicializaContratos("CONTRATOSINICIAL.CSV", clientela, catalogo, logPagamentos);
     }
 
-    public void salvarDadosUser(){
+    public void salvarDadosUser() {
         fileNameField.setLabel("Digite o nome do arquivo em que os dados serao salvos");
         Button confirmarButton = new Button("Confirmar");
         salvarDialog.add(fileNameField, confirmarButton);
 
         salvarDialog.open();
-        
+
         confirmarButton.addClickListener(click -> {
-            
-            if(!(catalogo.salvaJogos(fileNameField.getValue()))||
-            !(clientela.salvaClientes(fileNameField.getValue()))||
-            !(quadroContrato.salvaContratos(fileNameField.getValue())))
+
+            if (!(catalogo.salvaJogos(fileNameField.getValue())) ||
+                    !(clientela.salvaClientes(fileNameField.getValue())) ||
+                    !(quadroContrato.salvaContratos(fileNameField.getValue())) ||
+                    !(logPagamentos.salvaFormaPagamentos(fileNameField.getValue())))
                 Notification.show("Erro de leitura!", 3000, Notification.Position.BOTTOM_STRETCH);
-            else{
+            else
                 Notification.show("Dados salvos com sucesso!", 3000, Notification.Position.BOTTOM_STRETCH);
-                
-                salvarDialog.close();
-            }
+
+            salvarDialog.close();
         });
     }
 
