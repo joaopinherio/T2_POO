@@ -29,13 +29,13 @@ public class Clientela {
     }
 
     public void addCliente(Cliente c) {
-        if(cadastro.add(c))
-        cadastro.sort(Comparator.comparing(Cliente::getNumero));
+        if(cadastro.add(c) && !(isRepetido(c.getNumero())))
+            cadastro.sort(Comparator.comparing(Cliente::getNumero));
     }
 
     // CLIENTESINICIAL.CSV
-    public void inicializaClientes(String pathS) {
-        Path arq = Paths.get(pathS);
+    public boolean inicializaClientes(String pathS) {
+        Path arq = Paths.get(pathS.concat(".CSV"));
         BufferedReader reader = null;
         String line = "";
         StringBuilder sb = new StringBuilder();
@@ -94,9 +94,12 @@ public class Clientela {
             reader.close();
         } catch (IOException e) {
             System.out.println("1Problema na leitura do arquivo" + e.getMessage());
+            return false;
         } catch (Exception e) {
             System.out.println("2Problema na leitura do arquivo" + e.getMessage());
+            return false;
         }
+        return true;
     }
 
     public boolean salvaClientes(String pathS){

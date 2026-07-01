@@ -36,14 +36,14 @@ public class QuadroContrato {
     }
 
     public void addContrato(Contrato c) {
-        if (quadro.offer(c))
+        if (quadro.offer(c) && !(isRepetido(c.getId())))
             Collections.sort((List<Contrato>) quadro,
             Comparator.comparing(Contrato::getId));
     }
 
-    public void inicializaContratos(String pathS, Clientela clientela, Catalogo catalogoJogos,
+    public boolean inicializaContratos(String pathS, Clientela clientela, Catalogo catalogoJogos,
             LogPagamentos historicoPagamentos) {
-        Path arq = Paths.get(pathS);
+        Path arq = Paths.get(pathS.concat(".CSV"));
         BufferedReader reader = null;
         String line = "";
         StringBuilder sb = new StringBuilder();
@@ -95,9 +95,12 @@ public class QuadroContrato {
             reader.close();
         } catch (IOException e) {
             System.out.println("1Problema na leitura do arquivo" + e.getMessage());
+            return false;
         } catch (Exception e) {
             System.out.println("Contratos: 2Problema na leitura do arquivo" + e.getMessage());
+            return false;
         }
+        return true;
     }
 
     public boolean salvaContratos(String pathS){

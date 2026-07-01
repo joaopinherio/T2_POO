@@ -32,13 +32,13 @@ public class LogPagamentos {
     }
 
     public void addPagamento(FormaPagamento f) {
-        if(pagamentos.add(f));
+        if(pagamentos.add(f) && !(isRepetido(f.getCod())));
             pagamentos.sort(Comparator.comparing(FormaPagamento::getCod));
     }
 
     // CLIENTESINICIAL.CSV
-    public void inicializaPagamentos(String pathS, Clientela clientela) {
-        Path arq = Paths.get(pathS);
+    public boolean inicializaPagamentos(String pathS, Clientela clientela) {
+        Path arq = Paths.get(pathS.concat(".CSV"));
         BufferedReader reader = null;
         String line = "";
         StringBuilder sb = new StringBuilder();
@@ -105,9 +105,12 @@ public class LogPagamentos {
             reader.close();
         } catch (IOException e) {
             System.out.println("1Problema na leitura do arquivo" + e.getMessage());
+            return false;
         } catch (Exception e) {
             System.out.println("2Problema na leitura do arquivo" + e.getMessage());
+            return false;
         }
+        return true;
     }
 
     public boolean salvaFormaPagamentos(String pathS){

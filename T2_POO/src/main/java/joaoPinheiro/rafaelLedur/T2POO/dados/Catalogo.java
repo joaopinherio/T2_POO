@@ -28,8 +28,8 @@ public class Catalogo {
         catalogo = new ArrayList<>();
     }
 
-    public void inicializaJogos(String pathS) {
-        Path arq = Paths.get(pathS);
+    public boolean inicializaJogos(String pathS) {
+        Path arq = Paths.get(pathS.concat(".CSV"));
         BufferedReader reader = null;
         String line = "";
         StringBuilder sb = new StringBuilder();
@@ -76,9 +76,12 @@ public class Catalogo {
             reader.close();
         } catch (IOException e) {
             System.out.println("1Problema na leitura do arquivo" + e.getMessage());
+            return false;
         } catch (Exception e) {
             System.out.println("2Problema na leitura do arquivo" + e.getMessage());
+            return false;
         }
+        return true;
     }
 
     public boolean salvaJogos(String pathS){
@@ -107,7 +110,7 @@ public class Catalogo {
     }
 
     public void addJogo(Jogo j) {
-        if (catalogo.add(j))
+        if (catalogo.add(j) && !(isRepetido(j.getCodigo())))
             catalogo.sort(Comparator.comparing(Jogo::getCodigo));
     }
 

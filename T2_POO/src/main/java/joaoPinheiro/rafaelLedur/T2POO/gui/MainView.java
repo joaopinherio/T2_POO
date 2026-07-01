@@ -40,7 +40,9 @@ public class MainView extends VerticalLayout {
     private final QuadroContrato quadroContrato;
 
     private final Dialog salvarDialog;
+    private final Dialog loadDialog;
     private final TextField fileNameField;
+    private final TextField fileNameLoad;
 
     public MainView() {
         clientela = Clientela.getInstance();
@@ -51,7 +53,9 @@ public class MainView extends VerticalLayout {
         inicializaDados();
 
         salvarDialog = new Dialog();
+        loadDialog = new Dialog();
         fileNameField = new TextField();
+        fileNameLoad = new TextField();
 
         Button telaCadastro = new Button("Opcoes de Cadastro");
         telaCadastro.addClickListener(e -> UI.getCurrent().navigate("telaCadastros"));
@@ -62,7 +66,10 @@ public class MainView extends VerticalLayout {
         Button salvarButton = new Button("Salvar dados");
         salvarButton.addClickListener(click -> this.salvarDadosUser());
 
-        add(salvarButton);
+        Button loadButton = new Button("Carregar dados");
+        loadButton.addClickListener(click -> this.loadDados());
+
+        add(salvarButton, loadButton);
 
         add(telaCadastro);
         add(telaRelatorio);
@@ -70,38 +77,60 @@ public class MainView extends VerticalLayout {
 
     public void inicializaDados() {
         if (clientela.isEmpty())
-            clientela.inicializaClientes("CLIENTESINICIAL.CSV");
+            clientela.inicializaClientes("CLIENTESINICIAL");
 
         if (catalogo.isEmpty())
-            catalogo.inicializaJogos("JOGOSINICIAL.CSV");
+            catalogo.inicializaJogos("JOGOSINICIAL");
 
         if (logPagamentos.isEmpty())
-            logPagamentos.inicializaPagamentos("FORMASPAGAMENTOINICIAL.CSV", clientela);
+            logPagamentos.inicializaPagamentos("FORMASPAGAMENTOINICIAL", clientela);
 
         if (quadroContrato.isEmpty())
-            quadroContrato.inicializaContratos("CONTRATOSINICIAL.CSV", clientela, catalogo, logPagamentos);
+            quadroContrato.inicializaContratos("CONTRATOSINICIAL", clientela, catalogo, logPagamentos);
     }
 
     public void salvarDadosUser() {
         fileNameField.setLabel("Digite o nome do arquivo em que os dados serao salvos");
-        Button confirmarButton = new Button("Confirmar");
-        salvarDialog.add(fileNameField, confirmarButton);
+        Button confirmarButton1 = new Button("Confirmar");
+        salvarDialog.add(fileNameField, confirmarButton1);
 
         salvarDialog.open();
 
-        confirmarButton.addClickListener(click -> {
+        confirmarButton1.addClickListener(click -> {
 
             if (!(catalogo.salvaJogos(fileNameField.getValue())) ||
                     !(clientela.salvaClientes(fileNameField.getValue())) ||
                     !(quadroContrato.salvaContratos(fileNameField.getValue())) ||
                     !(logPagamentos.salvaFormaPagamentos(fileNameField.getValue())))
-                Notification.show("Erro de leitura!", 3000, Notification.Position.BOTTOM_STRETCH);
+                Notification.show("Erro ao salvar!", 3000, Notification.Position.BOTTOM_STRETCH);
             else
                 Notification.show("Dados salvos com sucesso!", 3000, Notification.Position.BOTTOM_STRETCH);
 
+            salvarDialog.remove(confirmarButton1);
             salvarDialog.close();
-            remove(confirmarButton);
         });
     }
 
+    public void loadDados(){
+        fileNameLoad.setLabel("Digite o nome do arquivo que deseja carregar");
+        Button confirmarButton2 = new Button("Confirmar");
+    
+        loadDialog.add(fileNameLoad, confirmarButton2);
+
+        loadDialog.open();
+
+        confirmarButton2.addClickListener(click -> {
+        
+            if (!(catalogo.inicializaJogos(fileNameLoad.getValue().concat("JOGOS"))) ||
+                    !(clientela.inicializaClientes(fileNameLoad.getValue().concat("CLIENTES"))) ||
+                    !(quadroContrato.inicializaContratos(fileNameLoad.getValue().concat("CONTRATOS"), clientela, catalogo, logPagamentos)) ||
+                    !(logPagamentos.inicializaPagamentos(fileNameLoad.getValue().concat("PAGAMENTOS"), clientela)))
+                Notification.show("Erro ao carregar dados!", 3000, Notification.Position.BOTTOM_STRETCH);
+            else
+                Notification.show("Dados salvos com sucesso!", 3000, Notification.Position.BOTTOM_STRETCH);
+
+            loadDialog.close();
+            loadDialog.remove(confirmarButton2);
+        });
+    }
 }
