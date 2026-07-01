@@ -12,8 +12,10 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.Map;
+import java.util.Set;
 
 public class QuadroContrato {
     private static QuadroContrato instance;
@@ -180,7 +182,7 @@ public class QuadroContrato {
 
     public void getValoresFinais(QuadroContrato quadroContrato) {
         for (Contrato contrato : quadro) {
-            System.out.println(contrato.descrever() + " valor final: " + contrato.calculaValorFinal(quadroContrato));
+            System.out.println(contrato.descrever() + " valor final: " + contrato.calculaValorFinal());
         }
     }
 
@@ -215,7 +217,7 @@ public class QuadroContrato {
     public Contrato getContratoMaiorValorFinal(){
         List<Contrato> auxList = quadro
         .stream()
-        .sorted(Comparator.comparingDouble(con-> con.calculaValorFinal(instance)))
+        .sorted(Comparator.comparingDouble(con-> con.calculaValorFinal()))
         .toList();
 
         Contrato conFinal = auxList.getLast();
@@ -227,9 +229,19 @@ public class QuadroContrato {
         return conFinal;
     }
 
-    public Cliente getClienteMaiorMontante(){
-        HashSet<Contrato> auxClientes = quadro.stream()
-        .collect(Collectors.groupingBy(Contrato::getCliente)
-        ,Collectors.summingDouble())
+    public void calculaMontanteEachCliente(){
+        Set<Cliente> auxClientes =
+        quadro.stream()
+        .map(Contrato::getCliente)
+        .collect(Collectors.toSet());
+
+        for (Cliente c: auxClientes) {
+            double montante =
+            quadro.stream()
+            .filter(con -> con.getCliente() == c)
+            .collect(Collectors.summingDouble(Contrato::calculaValorFinal));
+
+            c.setValorMontante(montante);
+        }
     }
 }

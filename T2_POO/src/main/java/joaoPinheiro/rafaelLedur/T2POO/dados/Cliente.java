@@ -64,4 +64,9 @@ public abstract class Cliente implements Serializable {
     public void setValorMontante(double valorMontante){
         this.valorMontante = valorMontante;
     }
+
+    public double getValorMontante(){
+        return this.valorMontante;
+    }
+
 }

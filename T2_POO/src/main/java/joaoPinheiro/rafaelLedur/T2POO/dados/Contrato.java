@@ -76,7 +76,8 @@ public class Contrato {
     /*O método calculaValorFinal() da classe Contrato calcula o valor final do contrato depende
 da categoria do jogo e da forma de pagamento:*/
 
-    public double calculaValorFinal(QuadroContrato quadroContrato){
+    public double calculaValorFinal(){
+        QuadroContrato quadroContrato = QuadroContrato.getInstance();
         double valorDiario = jogo.getValorDiario();
         Categoria categoriaCon = jogo.getCategoria();
 
@@ -104,7 +105,7 @@ da categoria do jogo e da forma de pagamento:*/
         if (quadroContrato.numDeContratorPorCliente(cliente) >= 3) {
             valorDiario -= valorDiario * 0.03;
         }
-        
+
         return periodo * valorDiario;
     }
 

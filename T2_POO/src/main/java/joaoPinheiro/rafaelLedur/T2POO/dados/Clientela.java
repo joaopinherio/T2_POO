@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
-
+import java.util.List;
 
 public class Clientela {
     private static Clientela instance;
@@ -149,6 +149,20 @@ public class Clientela {
 
     public boolean isEmpty(){
         return cadastro.isEmpty();
+    }
+
+    public Cliente getCLienteMaiorMontante(){
+        List<Cliente> auxClientes = cadastro
+        .stream()
+        .sorted(Comparator.comparingDouble(Cliente::getValorMontante))
+        .toList();
+
+        Cliente maioral = auxClientes.getLast();
+
+        if(auxClientes.get(auxClientes.size() -2) == maioral)
+            return null;
+
+        return maioral;
     }
 
 }

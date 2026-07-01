@@ -59,7 +59,7 @@ public class TelaRelatorioContratos extends VerticalLayout{
         gridContrato.addColumn(c -> c.getJogo().descrever()).setHeader("Jogo Contratado");
         gridContrato.addColumn(c -> c.getCliente().descrever()).setHeader("Cliente Contratante");
         gridContrato.addColumn(c -> c.getFormaPagamento().descrever()).setHeader("Forma de Pagamento");
-        gridContrato.addColumn(c -> c.calculaValorFinal(quadroContrato)).setHeader("Valor final");
+        gridContrato.addColumn(c -> c.calculaValorFinal()).setHeader("Valor final");
 
         add(new H2("Gerenciador de Contratos Cadastrados"));
 
@@ -99,6 +99,7 @@ public class TelaRelatorioContratos extends VerticalLayout{
         else {
             gridContrato.getDataProvider().refreshAll();
             gridContrato.setAriaLabel("Maior Valor Final (todos se houver empate)");
+            
             Contrato contratoSel = quadroContrato.getContratoMaiorValorFinal();
             if (contratoSel == null)
                 gridContrato.setItems(quadroContrato.getLista());

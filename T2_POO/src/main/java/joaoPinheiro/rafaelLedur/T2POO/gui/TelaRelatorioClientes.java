@@ -33,6 +33,7 @@ import joaoPinheiro.rafaelLedur.T2POO.dados.*;
 @Route("relatorioClientes")
 public class TelaRelatorioClientes extends VerticalLayout{
     private final Clientela clientela;
+    private final QuadroContrato quadroContrato;
     private final LogPagamentos logPagamentos;
 
     private final Button relatorioMode;
@@ -42,8 +43,9 @@ public class TelaRelatorioClientes extends VerticalLayout{
 
     public TelaRelatorioClientes(){
         clientela = Clientela.getInstance();
+        quadroContrato = QuadroContrato.getInstance();
         logPagamentos = LogPagamentos.getInstance();
-
+        
 
         gridCliente = new Grid<>();
 
@@ -62,13 +64,15 @@ public class TelaRelatorioClientes extends VerticalLayout{
         gridCliente.addColumn(c -> logPagamentos.getPagamentosByClienteToString(c))
         .setHeader("Pagamentos do Cliente");
 
-        add(new H2("Gerenciador de Contratos Cadastrados"));
+        gridCliente.addColumn(Cliente::getValorMontante).setHeader("Valor montante (Contratos)");
+
+        add(new H2("Gerenciador de Clientes Cadastrados"));
 
         relatorioMode = new Button("Modo relatorio (padrao)");
         relatorioMode.addClickListener(click -> this.relatorioClientes());
         
         consultaMode = new Button("Modo Consulta (Filtra Contrato com maior valor final)");
-        consultaMode.addClickListener(click -> this.mostraContratoMaiorValor());
+        consultaMode.addClickListener(click -> this.consultaCliente());
         
         add(relatorioMode, consultaMode);
         
@@ -85,6 +89,8 @@ public class TelaRelatorioClientes extends VerticalLayout{
         if(clientela.isEmpty())
             Notification.show("Erro! Nenhum cliente cadastrado.", 3000, Notification.Position.BOTTOM_STRETCH);
         else{
+            quadroContrato.calculaMontanteEachCliente();
+
             gridCliente.getDataProvider().refreshAll();
             add(gridCliente);
         }
@@ -97,7 +103,15 @@ public class TelaRelatorioClientes extends VerticalLayout{
         if(clientela.isEmpty())
             Notification.show("Erro! Nenhum cliente cadastrado.", 3000, Notification.Position.BOTTOM_STRETCH);
         else{
+            quadroContrato.calculaMontanteEachCliente();
+            Cliente clienteMaioral = clientela.getCLienteMaiorMontante();
             
+            if(clienteMaioral == null)
+                gridCliente.setItems(clientela.getLista());
+            else
+                gridCliente.setItems(clienteMaioral);
+        
+            add(gridCliente);
         }
     }
 
