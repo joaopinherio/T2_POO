@@ -34,7 +34,6 @@ public class Clientela {
     // CLIENTESINICIAL.CSV
     public void inicializaClientes(String pathS) {
         Path arq = Paths.get(pathS);
-        Corporativo corp1 = null;
         BufferedReader reader = null;
         String line = "";
         StringBuilder sb = new StringBuilder();

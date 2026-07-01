@@ -75,4 +75,8 @@ public class Jogo {
         this.contrato = null;
     }
 
+    public String getCsv(){
+        return codigo + ";" + nome + ";" + ano + ";" +  valorDiario + ";" + categoria;
+    }
+
 }
