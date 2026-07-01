@@ -7,6 +7,7 @@ public abstract class Cliente implements Serializable {
     private String nome;
     private String email;
     private FormaPagamento formaPagamento;
+    private double valorMontante;
 
     public Cliente(int numero, String nome, String email) {
         this.numero = numero;
@@ -58,5 +59,9 @@ public abstract class Cliente implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setValorMontante(double valorMontante){
+        this.valorMontante = valorMontante;
     }
 }

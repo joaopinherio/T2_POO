@@ -35,11 +35,15 @@ public class TelaRelatorioClientes extends VerticalLayout{
     private final Clientela clientela;
     private final LogPagamentos logPagamentos;
 
+    private final Button relatorioMode;
+    private final Button consultaMode;
+
     private final Grid<Cliente> gridCliente;
 
     public TelaRelatorioClientes(){
         clientela = Clientela.getInstance();
         logPagamentos = LogPagamentos.getInstance();
+
 
         gridCliente = new Grid<>();
 
@@ -58,19 +62,43 @@ public class TelaRelatorioClientes extends VerticalLayout{
         gridCliente.addColumn(c -> logPagamentos.getPagamentosByClienteToString(c))
         .setHeader("Pagamentos do Cliente");
 
+        add(new H2("Gerenciador de Contratos Cadastrados"));
+
+        relatorioMode = new Button("Modo relatorio (padrao)");
+        relatorioMode.addClickListener(click -> this.relatorioClientes());
+        
+        consultaMode = new Button("Modo Consulta (Filtra Contrato com maior valor final)");
+        consultaMode.addClickListener(click -> this.mostraContratoMaiorValor());
+        
+        add(relatorioMode, consultaMode);
+        
+        Button backButton = new Button("Voltar");
+        backButton.addClickListener(e -> UI.getCurrent().navigate("telaRelatorios"));
+        add(backButton);
+
+    }
+
+    private void relatorioClientes(){
+        Notification.show("Modo Relatorio (ativado)", 1000, Notification.Position.BOTTOM_CENTER);
         gridCliente.setItems(clientela.getLista());
         
         if(clientela.isEmpty())
             Notification.show("Erro! Nenhum cliente cadastrado.", 3000, Notification.Position.BOTTOM_STRETCH);
         else{
             gridCliente.getDataProvider().refreshAll();
-            add(new H2("Relatorio de Clientes Cadastrados"));
-
             add(gridCliente);
         }
-    
-        Button backButton = new Button("Voltar");
-        backButton.addClickListener(e -> UI.getCurrent().navigate("telaRelatorios"));
-        add(backButton);
     }
+
+    private void consultaCliente(){
+        Notification.show("Modo Consulta (ativado)", 1000, Notification.Position.BOTTOM_CENTER);
+        gridCliente.setItems(clientela.getLista());
+
+        if(clientela.isEmpty())
+            Notification.show("Erro! Nenhum cliente cadastrado.", 3000, Notification.Position.BOTTOM_STRETCH);
+        else{
+            
+        }
+    }
+
 }

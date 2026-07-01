@@ -8,9 +8,12 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.stream.Collectors;
+import java.util.Map;
 
 public class QuadroContrato {
     private static QuadroContrato instance;
@@ -222,5 +225,11 @@ public class QuadroContrato {
         }
         
         return conFinal;
+    }
+
+    public Cliente getClienteMaiorMontante(){
+        HashSet<Contrato> auxClientes = quadro.stream()
+        .collect(Collectors.groupingBy(Contrato::getCliente)
+        ,Collectors.summingDouble())
     }
 }
