@@ -79,9 +79,8 @@ public class TelaRelatorioContratos extends VerticalLayout {
          * });
          */
         GridContextMenu<Contrato> menuContexto = gridContrato.addContextMenu();
-
-        menuContexto.addItem("Remover contrato", event -> {
-            event.getItem().ifPresent(contrato -> {
+        menuContexto.addItem("Remover contrato", event ->{
+            event.getItem().ifPresent(contrato ->{
                 criaDialogoDeCancelamento(contrato).open();
             });
         });
@@ -101,10 +100,7 @@ public class TelaRelatorioContratos extends VerticalLayout {
         // sucesso.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
     }
 
-    private void limparFormulario() {
-        gridContrato.asSingleSelect().clear();
-
-    }
+    
 
     private Dialog criaDialogoDeCancelamento(Contrato contrato) {
         Dialog dialogo = new Dialog();
