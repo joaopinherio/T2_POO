@@ -203,8 +203,16 @@ public class QuadroContrato {
     public Contrato getContratoMaiorValorFinal(){
         List<Contrato> auxList = quadro
         .stream()
-        .sorted(Comparator.comparingDouble(con-> con.calculaValorFinal(quadro)))
+        .sorted(Comparator.comparingDouble(con-> con.calculaValorFinal(QuadroContrato.getInstance())))
         .toList();
 
+        Contrato conFinal = auxList.getLast();
+        auxList.remove(conFinal);
+
+        if(auxList.getLast() == conFinal){
+            return null;
+        }
+        
+        return conFinal;
     }
 }

@@ -41,6 +41,8 @@ public class TelaMenuConsultas extends VerticalLayout {
     private final Button consultaContrato;
     private final Button consultaCliente;
 
+    private final Dialog consultaJogDialog;
+    
     public TelaMenuConsultas() {
         clientela = Clientela.getInstance();
         catalogo = Catalogo.getInstance();
@@ -84,6 +86,9 @@ public class TelaMenuConsultas extends VerticalLayout {
         else {
             Contrato contratoSel = quadroContrato.getContratoMaiorValorFinal();
 
+            if(contratoSel == null){
+                
+            }
         }
     }
 }
