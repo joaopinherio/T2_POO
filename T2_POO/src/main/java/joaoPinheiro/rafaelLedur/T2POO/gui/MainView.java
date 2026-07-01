@@ -100,6 +100,7 @@ public class MainView extends VerticalLayout {
                 Notification.show("Dados salvos com sucesso!", 3000, Notification.Position.BOTTOM_STRETCH);
 
             salvarDialog.close();
+            remove(confirmarButton);
         });
     }
 
