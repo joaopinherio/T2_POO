@@ -6,12 +6,14 @@ import java.util.List;
 import com.vaadin.flow.component.AbstractField.ComponentValueChangeEvent;
 import com.vaadin.copilot.shaded.commons.configuration2.resolver.CatalogResolver.Catalog;
 import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.dialog.*;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H2;
@@ -41,16 +43,20 @@ public class TelaMenuConsultas extends VerticalLayout {
     private final Button consultaContrato;
     private final Button consultaCliente;
 
-    private final Dialog consultaJogDialog;
-    
+    private final Dialog jogoDialog;
+    private final Dialog contratoDialog;
+
     public TelaMenuConsultas() {
         clientela = Clientela.getInstance();
         catalogo = Catalogo.getInstance();
         logPagamentos = LogPagamentos.getInstance();
         quadroContrato = QuadroContrato.getInstance();
-        
+
         setSpacing(true);
         setSpacing(true);
+
+        jogoDialog = new Dialog();
+        contratoDialog = new Dialog();
 
         consultaJogo = new Button("Consulta: Jogo com maior valor diario");
         consultaJogo.addClickListener(click -> this.mostraJogoMaiorValor());
@@ -74,21 +80,24 @@ public class TelaMenuConsultas extends VerticalLayout {
         else {
             Jogo jogoSel = null;
             if ((jogoSel = catalogo.getJogoMaiorValor()) == null)
-                Notification.show("Empate entre valores: \n" + catalogo.toString(), 3000, Notification.Position.MIDDLE);
-            else
-                Notification.show("Jogo com maior valor diario: \n" + jogoSel.descrever(), 3000, Notification.Position.MIDDLE);
+                jogoDialog.add(catalogo.toString());
+                else
+                jogoDialog.add(jogoSel.toString());
         }
     }
 
-    private void mostraContratoMaiorValor(){
+    private void mostraContratoMaiorValor() {
         if (quadroContrato.isEmpty())
             Notification.show("Erro! Nenhum contrato cadastrado.", 3000, Notification.Position.BOTTOM_STRETCH);
         else {
             Contrato contratoSel = quadroContrato.getContratoMaiorValorFinal();
+            contratoDialog.add(quadroContrato.toString());
+            if (contratoSel == null)
+                contratoDialog.add(new TextField(quadroContrato.toString()));
+            else
+                contratoDialog.add(new TextField (contratoSel.descrever()));
 
-            if(contratoSel == null){
-                
-            }
+            contratoDialog.open();
         }
     }
 }

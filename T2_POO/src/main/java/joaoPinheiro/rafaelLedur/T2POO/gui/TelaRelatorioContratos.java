@@ -37,6 +37,9 @@ public class TelaRelatorioContratos extends VerticalLayout{
     private final LogPagamentos logPagamentos;
     private final QuadroContrato quadroContrato;
 
+    private final Button relatorioMode;
+    private final Button consultaMode;
+    
     private final Grid<Contrato> gridContrato;
 
     public TelaRelatorioContratos(){
@@ -56,23 +59,53 @@ public class TelaRelatorioContratos extends VerticalLayout{
         gridContrato.addColumn(c -> c.getJogo().descrever()).setHeader("Jogo Contratado");
         gridContrato.addColumn(c -> c.getCliente().descrever()).setHeader("Cliente Contratante");
         gridContrato.addColumn(c -> c.getFormaPagamento().descrever()).setHeader("Forma de Pagamento");
+        gridContrato.addColumn(c -> c.calculaValorFinal(quadroContrato)).setHeader("Valor final");
 
-//        gridContrato.addColumn(cliente -> cliente.getTipo() == "Corporativo" ?
-//        cliente.getNomeFantasia() : "---").setHeader("Nome Fantasia");
+        add(new H2("Gerenciador de Contratos Cadastrados"));
 
+        relatorioMode = new Button("Modo relatorio (padrao)");
+        relatorioMode.addClickListener(click -> this.relatorioContratos());
+        
+        consultaMode = new Button("Modo Consulta (Filtra Contrato com maior valor final)");
+        consultaMode.addClickListener(click -> this.mostraContratoMaiorValor());
+        
+        add(relatorioMode, consultaMode);
+        
+        Button backButton = new Button("Voltar");
+        backButton.addClickListener(e -> UI.getCurrent().navigate("telaRelatorios"));
+        add(backButton);
+
+        relatorioContratos();
+    }
+    
+    private void relatorioContratos(){
+        Notification.show("Modo Relatorio (ativado)", 1000, Notification.Position.BOTTOM_CENTER);
         gridContrato.setItems(quadroContrato.getLista());
         
         if(clientela.isEmpty())
             Notification.show("Erro! Nenhum contrato cadastrado.", 3000, Notification.Position.BOTTOM_STRETCH);
         else{
             gridContrato.getDataProvider().refreshAll();
-            add(new H2("Relatorio de Contratos Cadastrados"));
-
             add(gridContrato);
         }
+    }
     
-        Button backButton = new Button("Voltar");
-        backButton.addClickListener(e -> UI.getCurrent().navigate("telaRelatorios"));
-        add(backButton);
+    private void mostraContratoMaiorValor() {
+        Notification.show("Modo Consulta (ativado)", 1000, Notification.Position.BOTTOM_CENTER);
+        gridContrato.setItems(quadroContrato.getLista());
+        
+        if (quadroContrato.isEmpty())
+            Notification.show("Erro! Nenhum contrato cadastrado.", 3000, Notification.Position.BOTTOM_STRETCH);
+        else {
+            gridContrato.getDataProvider().refreshAll();
+            gridContrato.setAriaLabel("Maior Valor Final (todos se houver empate)");
+            Contrato contratoSel = quadroContrato.getContratoMaiorValorFinal();
+            if (contratoSel == null)
+                gridContrato.setItems(quadroContrato.getLista());
+            else
+                gridContrato.setItems(contratoSel);
+            
+            add(gridContrato);
+        }
     }
 }

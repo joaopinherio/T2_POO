@@ -192,6 +192,15 @@ public class QuadroContrato {
         return quadro.isEmpty();
     }
 
+    public String toString(){
+        String auxS = "";
+
+        for (Contrato con : quadro) {
+            auxS.concat(con.descrever() + "\n");
+        }
+        return auxS;
+    }
+
     public List<Contrato> getLista(){
         List<Contrato> auxList = quadro
         .stream()
@@ -203,13 +212,12 @@ public class QuadroContrato {
     public Contrato getContratoMaiorValorFinal(){
         List<Contrato> auxList = quadro
         .stream()
-        .sorted(Comparator.comparingDouble(con-> con.calculaValorFinal(QuadroContrato.getInstance())))
+        .sorted(Comparator.comparingDouble(con-> con.calculaValorFinal(instance)))
         .toList();
 
         Contrato conFinal = auxList.getLast();
-        auxList.remove(conFinal);
-
-        if(auxList.getLast() == conFinal){
+        
+        if(auxList.get(auxList.size() - 2) == conFinal){
             return null;
         }
         
