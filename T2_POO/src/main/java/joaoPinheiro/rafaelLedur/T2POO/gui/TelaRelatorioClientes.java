@@ -71,7 +71,7 @@ public class TelaRelatorioClientes extends VerticalLayout{
         relatorioMode = new Button("Modo relatorio (padrao)");
         relatorioMode.addClickListener(click -> this.relatorioClientes());
         
-        consultaMode = new Button("Modo Consulta (Filtra Contrato com maior valor final)");
+        consultaMode = new Button("Modo Consulta (Filtra Cliente com maior valor montante de contratos)");
         consultaMode.addClickListener(click -> this.consultaCliente());
         
         add(relatorioMode, consultaMode);
@@ -80,6 +80,7 @@ public class TelaRelatorioClientes extends VerticalLayout{
         backButton.addClickListener(e -> UI.getCurrent().navigate("telaRelatorios"));
         add(backButton);
 
+        relatorioClientes();
     }
 
     private void relatorioClientes(){

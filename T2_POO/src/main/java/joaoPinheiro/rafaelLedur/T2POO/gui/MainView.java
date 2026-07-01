@@ -45,4 +45,9 @@ public class MainView extends VerticalLayout {
 
     }
 
+
+    public void salvarDadosUser(){
+        
+    }
+
 }

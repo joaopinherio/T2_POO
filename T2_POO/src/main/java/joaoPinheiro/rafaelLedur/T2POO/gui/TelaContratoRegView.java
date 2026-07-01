@@ -118,7 +118,7 @@ public class TelaContratoRegView extends VerticalLayout{
             Contrato con = new Contrato(id.getValue(), periodo.getValue());
             con.setData(Date.valueOf(data.getValue()));
             con.setCliente(clienteSel);
-            con.setFormaPagamento(clienteSel.getFormaPagamento());
+            con.setFormaPagamento(formaPagamentoSel);
             con.setJogo(jogoSel);
 
             quadroContrato.addContrato(con);
