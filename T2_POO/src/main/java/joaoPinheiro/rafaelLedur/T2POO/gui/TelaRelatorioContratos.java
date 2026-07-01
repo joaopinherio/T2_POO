@@ -14,6 +14,7 @@ import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.contextmenu.GridContextMenu;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.html.Paragraph;
@@ -32,7 +33,7 @@ import joaoPinheiro.rafaelLedur.T2POO.dados.*;
 
 @PageTitle("Relatorio de Contratos")
 @Route("relatorioContratos")
-public class TelaRelatorioContratos extends VerticalLayout{
+public class TelaRelatorioContratos extends VerticalLayout {
     private final Clientela clientela;
     private final Catalogo catalogo;
     private final LogPagamentos logPagamentos;
@@ -40,7 +41,7 @@ public class TelaRelatorioContratos extends VerticalLayout{
 
     private final Grid<Contrato> gridContrato;
 
-    public TelaRelatorioContratos(){
+    public TelaRelatorioContratos() {
         clientela = Clientela.getInstance();
         catalogo = Catalogo.getInstance();
         logPagamentos = LogPagamentos.getInstance();
@@ -58,36 +59,46 @@ public class TelaRelatorioContratos extends VerticalLayout{
         gridContrato.addColumn(c -> c.getCliente().descrever()).setHeader("Cliente Contratante");
         gridContrato.addColumn(c -> c.getFormaPagamento().descrever()).setHeader("Forma de Pagamento");
 
-//        gridContrato.addColumn(cliente -> cliente.getTipo() == "Corporativo" ?
-//        cliente.getNomeFantasia() : "---").setHeader("Nome Fantasia");
+        // gridContrato.addColumn(cliente -> cliente.getTipo() == "Corporativo" ?
+        // cliente.getNomeFantasia() : "---").setHeader("Nome Fantasia");
 
         gridContrato.setItems(quadroContrato.getLista());
-        
-        if(clientela.isEmpty())
+
+        if (clientela.isEmpty())
             Notification.show("Erro! Nenhum contrato cadastrado.", 3000, Notification.Position.BOTTOM_STRETCH);
-        else{
+        else {
             gridContrato.getDataProvider().refreshAll();
             add(new H2("Relatorio de Contratos Cadastrados"));
 
             add(gridContrato);
         }
-        gridContrato.addItemClickListener(event -> {
-            Contrato contrato = event.getItem();
-            criaDialogoDeCancelamento(contrato).open();
+        /*
+         * gridContrato.addItemClickListener(event -> {
+         * Contrato contrato = event.getItem();
+         * criaDialogoDeCancelamento(contrato).open();
+         * });
+         */
+        GridContextMenu<Contrato> menuContexto = gridContrato.addContextMenu();
+
+        menuContexto.addItem("Remover contrato", event -> {
+            event.getItem().ifPresent(contrato -> {
+                criaDialogoDeCancelamento(contrato).open();
+            });
         });
-    
+
         Button backButton = new Button("Voltar");
         backButton.addClickListener(e -> UI.getCurrent().navigate("telaRelatorios"));
         add(backButton);
     }
 
     private void remover(Contrato contrato) {
-        quadroContrato.rmContrato(contrato); 
+        quadroContrato.rmContrato(contrato);
         gridContrato.setItems(quadroContrato.getLista());
         gridContrato.getDataProvider().refreshAll();
 
-        Notification.show("Contrato #" + contrato.getId() + " removido com sucesso.", 3000, Notification.Position.BOTTOM_STRETCH);
-       // sucesso.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+        Notification.show("Contrato #" + contrato.getId() + " removido com sucesso.", 3000,
+                Notification.Position.BOTTOM_STRETCH);
+        // sucesso.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
     }
 
     private void limparFormulario() {
@@ -108,5 +119,5 @@ public class TelaRelatorioContratos extends VerticalLayout{
         dialogo.getFooter().add(fecharDialogo, confirmarCancelamento);
         return dialogo;
     }
-    
+
 }
