@@ -51,7 +51,7 @@ Cada classe de coleção (`Catalogo`, `Clientela`, `LogPagamentos`, `QuadroContr
 
 ### Arquivos utilizados
 
-- `JOGOSINICIAL.CSV`, `CLIENTESINICIAL.CSV`, `FORMASPAGAMENTOINICIAL.CSV`, `CONTRATOSINICIAL.CSV` — carga inicial fixa, lida automaticamente pela `MainView` ao abrir o sistema, caso as coleções ainda estejam vazias.
-- **Salvar/Carregar dados do usuário** — na `MainView`, os botões "Salvar dados" e "Carregar dados" pedem um nome de arquivo (`fileNameField`/`fileNameLoad`) e usam esse nome como prefixo, concatenando os sufixos `CLIENTES`, `JOGOS`, `PAGAMENTOS` e `CONTRATOS` para gerar/ler os quatro arquivos correspondentes.
+- `JOGOSINICIAL.CSV`, `CLIENTESINICIAL.CSV`, `FORMASPAGAMENTOINICIAL.CSV`, `CONTRATOSINICIAL.CSV`, load inicial fixo, lida automaticamente pela `MainView` ao abrir o sistema, caso as coleções ainda estejam vazias.
+- **Salvar/Carregar dados do usuário**, na `MainView`, os botões "Salvar dados" e "Carregar dados" pedem um nome de arquivo (`fileNameField`/`fileNameLoad`) e usam esse nome como prefixo, concatenando os sufixos `CLIENTES`, `JOGOS`, `PAGAMENTOS` e `CONTRATOS` para gerar/ler os quatro arquivos correspondentes.
 
 Esse mecanismo garante a persistência exigida pelo trabalho: ao fechar o sistema (Finalizar Sistema) e abrir de novo, os dados salvos por esses arquivos continuam disponíveis, desde que o usuário use a opção de salvar antes de sair.
