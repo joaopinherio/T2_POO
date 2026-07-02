@@ -1,15 +1,21 @@
 package joaoPinheiro.rafaelLedur.T2POO.gui;
 
 import com.vaadin.flow.component.AbstractField.ComponentValueChangeEvent;
+import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
@@ -29,13 +35,31 @@ public class TelaRelatorioClientesView extends VerticalLayout{
     private final Button relatorioMode;
     private final Button consultaMode;
 
+    private final TextField campoNumero;
+    private final TextField campoTipo;
+    private final TextField campoNome;
+    private final TextField campoEmail;
+    private final TextField campoGovId;
+
+    private final Button salvarButton;
+    private final Button cancelarButton;
+    private Cliente clienteSelecionado;
+
     private final Grid<Cliente> gridCliente;
 
     public TelaRelatorioClientesView(){
         clientela = Clientela.getInstance();
         quadroContrato = QuadroContrato.getInstance();
         logPagamentos = LogPagamentos.getInstance();
-        
+
+        campoNumero = new TextField("Número");
+        campoNumero.setReadOnly(true);
+        campoTipo = new TextField("Tipo");
+        campoTipo.setReadOnly(true);
+        campoGovId = new TextField("CPF/CNPJ");
+        campoGovId.setReadOnly(true);
+        campoNome  = new TextField("Nome");
+        campoEmail = new TextField("Email");
 
         gridCliente = new Grid<>();
 
@@ -69,8 +93,32 @@ public class TelaRelatorioClientesView extends VerticalLayout{
         Button backButton = new Button("Voltar");
         backButton.addClickListener(e -> UI.getCurrent().navigate("telaRelatorios"));
         add(backButton);
+        gridCliente.asSingleSelect().addValueChangeListener(event -> preparaEdicaoCliente(event));
 
+        FormLayout formLayout = new FormLayout(campoNumero, campoTipo, campoNome, campoEmail, campoGovId);
+
+        salvarButton = new Button("Atualizar", VaadinIcon.CHECK.create());
+        salvarButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        salvarButton.addClickShortcut(Key.ENTER);
+        salvarButton.addClickListener(click -> atualizarFormulario());
+
+        cancelarButton = new Button("Cancelar");
+        Dialog dialogoCancelamento = criaDialogoDeCancelamento();
+        cancelarButton.addClickListener(click -> dialogoCancelamento.open());
+
+        HorizontalLayout botoesLayout = new HorizontalLayout(salvarButton, cancelarButton);
+
+        if (clientela.isEmpty()) {
+            Notification.show("Erro! Nenhum cliente cadastrado.", 3000, Notification.Position.BOTTOM_STRETCH);
+        } else {
+            add(gridCliente);
+            add(new Hr());
+            add(new H2("Alterar Cliente Selecionado"));
+            add(formLayout, botoesLayout);
+        }
+        
         relatorioClientes();
+        habilitarFormulario(false);
     }
 
     private void relatorioClientes(){
