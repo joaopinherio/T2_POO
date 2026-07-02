@@ -34,6 +34,4 @@ public class CartaoCredito extends FormaPagamento{
     public String getCsv(){
         return super.getCsv() + ";" + 1 + ";" + numero + ";" + validade;
     }
-
-
 }

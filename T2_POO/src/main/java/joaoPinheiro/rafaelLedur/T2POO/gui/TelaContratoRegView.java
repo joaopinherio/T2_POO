@@ -147,9 +147,6 @@ public class TelaContratoRegView extends VerticalLayout{
         id.focus();
     }
 
-    private void habilitarFormulario(boolean op) {
-    }
-
     private Dialog criaDialogoDeCancelamento() {
         Dialog dialogo = new Dialog();
         dialogo.setHeaderTitle("Confirmar cancelamento");
