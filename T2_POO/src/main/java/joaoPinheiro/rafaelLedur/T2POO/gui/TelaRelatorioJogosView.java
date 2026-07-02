@@ -16,7 +16,7 @@ import joaoPinheiro.rafaelLedur.T2POO.dados.*;
 
 @PageTitle("Relatório de Jogos")
 @Route("relatorioJogos")
-public class TelaRelatorioJogos extends VerticalLayout{
+public class TelaRelatorioJogosView extends VerticalLayout{
     private final Catalogo catalogo;
     
     private final Button relatorioMode;
@@ -24,7 +24,7 @@ public class TelaRelatorioJogos extends VerticalLayout{
     
     private final Grid <Jogo> gridCatalogo;
 
-    public TelaRelatorioJogos(){
+    public TelaRelatorioJogosView(){
 
         catalogo = Catalogo.getInstance();
         gridCatalogo = new Grid<>();

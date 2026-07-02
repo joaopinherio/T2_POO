@@ -13,7 +13,7 @@ import joaoPinheiro.rafaelLedur.T2POO.dados.*;
 
 @PageTitle("Relatorio de Clientes")
 @Route("relatorioClientes")
-public class TelaRelatorioClientes extends VerticalLayout{
+public class TelaRelatorioClientesView extends VerticalLayout{
     private final Clientela clientela;
     private final QuadroContrato quadroContrato;
     private final LogPagamentos logPagamentos;
@@ -23,7 +23,7 @@ public class TelaRelatorioClientes extends VerticalLayout{
 
     private final Grid<Cliente> gridCliente;
 
-    public TelaRelatorioClientes(){
+    public TelaRelatorioClientesView(){
         clientela = Clientela.getInstance();
         quadroContrato = QuadroContrato.getInstance();
         logPagamentos = LogPagamentos.getInstance();

@@ -33,7 +33,7 @@ import joaoPinheiro.rafaelLedur.T2POO.dados.PIX;
 
 @PageTitle("Cadastra Forma de Pagamento")
 @Route("cadastroPagamento")
-public class TelaPagamentoReg extends VerticalLayout {
+public class TelaPagamentoRegView extends VerticalLayout {
     private final LogPagamentos logPagamentos;
     private final Clientela clientela;
 
@@ -50,7 +50,7 @@ public class TelaPagamentoReg extends VerticalLayout {
 
     private final Grid<Cliente> grid;
 
-    public TelaPagamentoReg() {
+    public TelaPagamentoRegView() {
         clientela = Clientela.getInstance();
         logPagamentos = LogPagamentos.getInstance();
 
