@@ -50,6 +50,10 @@ public class Jogo {
         return this.categoria;
     }
 
+    public int getAno(){
+        return this.ano;
+    }
+
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
@@ -78,5 +82,4 @@ public class Jogo {
     public String getCsv(){
         return codigo + ";" + nome + ";" + ano + ";" +  valorDiario + ";" + categoria;
     }
-
 }

@@ -73,6 +73,10 @@ public class MainView extends VerticalLayout {
 
         add(telaCadastro);
         add(telaRelatorio);
+
+        Button finalizaButton = new Button ("Finalizar Sistema");
+        finalizaButton.addClickListener(click -> System.exit(0));
+        add(finalizaButton);
     }
 
     public void inicializaDados() {

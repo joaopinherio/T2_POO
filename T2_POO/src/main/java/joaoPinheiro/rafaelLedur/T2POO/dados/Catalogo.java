@@ -204,10 +204,7 @@ public class Catalogo {
         .sorted(Comparator.comparing(Jogo::getValorDiario))
         .toList();
 
-        Jogo retornoJ = auxList.getLast();
-        auxList.remove(retornoJ);
-
-        if (auxList.getLast().getValorDiario() != retornoJ.getValorDiario())
+        if (auxList.getLast() != auxList.get(auxList.size() - 2))
             return auxList.getLast();
 
         return null;

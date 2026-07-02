@@ -4,12 +4,10 @@ import java.sql.Date;
 import java.util.List;
 
 import com.vaadin.flow.component.AbstractField.ComponentValueChangeEvent;
-import com.vaadin.copilot.shaded.commons.configuration2.resolver.CatalogResolver.Catalog;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -25,9 +23,15 @@ import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import java.util.List;
 
-import joaoPinheiro.rafaelLedur.T2POO.dados.*;
+import joaoPinheiro.rafaelLedur.T2POO.dados.Catalogo;
+import joaoPinheiro.rafaelLedur.T2POO.dados.Cliente;
+import joaoPinheiro.rafaelLedur.T2POO.dados.Clientela;
+import joaoPinheiro.rafaelLedur.T2POO.dados.Contrato;
+import joaoPinheiro.rafaelLedur.T2POO.dados.FormaPagamento;
+import joaoPinheiro.rafaelLedur.T2POO.dados.Jogo;
+import joaoPinheiro.rafaelLedur.T2POO.dados.LogPagamentos;
+import joaoPinheiro.rafaelLedur.T2POO.dados.QuadroContrato;
 
 @PageTitle("Menu de Cadastro de Contratos")
 @Route("cadastroContrato")
@@ -61,10 +65,13 @@ public class TelaContratoRegView extends VerticalLayout{
         id = new IntegerField("ID de Contrato");
         periodo = new IntegerField("Periodo de contrato");
         data = new DatePicker("Data de Ass do Contrato");
-        clienteData = new TextField("Dados do Cliente");
-        jogoData = new TextField("Dados do Jogo");
-        formaPagamentoData = new TextField("Dados de Forma de Pagamento");
-        
+        clienteData = new TextField("Dados do Cliente (Selecione na tabela abaixo)");
+        clienteData.setReadOnly(true);
+        jogoData = new TextField("Dados do Jogo (Selecione na tabela abaixo)");
+        jogoData.setReadOnly(true);
+        formaPagamentoData = new TextField("Dados de Forma de Pagamento (Selecione na tabela abaixo)");
+        formaPagamentoData.setReadOnly(true);
+
         gridCliente = new Grid<>(Cliente.class);
         gridJogo = new Grid<>(Jogo.class);
         gridFormaPagamentos = new Grid<>(FormaPagamento.class);

@@ -1,33 +1,25 @@
 package joaoPinheiro.rafaelLedur.T2POO.gui;
 
-import java.sql.Date;
-import java.util.List;
-
-import com.vaadin.flow.component.AbstractField.ComponentValueChangeEvent;
-import com.vaadin.copilot.shaded.commons.configuration2.resolver.CatalogResolver.Catalog;
-import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.dialog.Dialog;
-import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.contextmenu.GridContextMenu;
 import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.Hr;
+import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Paragraph;
-import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import java.util.List;
 
-import joaoPinheiro.rafaelLedur.T2POO.dados.*;
+import joaoPinheiro.rafaelLedur.T2POO.dados.Catalogo;
+import joaoPinheiro.rafaelLedur.T2POO.dados.Clientela;
+import joaoPinheiro.rafaelLedur.T2POO.dados.Contrato;
+import joaoPinheiro.rafaelLedur.T2POO.dados.LogPagamentos;
+import joaoPinheiro.rafaelLedur.T2POO.dados.QuadroContrato;
 
 @PageTitle("Relatorio de Contratos")
 @Route("relatorioContratos")
@@ -68,8 +60,17 @@ public class TelaRelatorioContratos extends VerticalLayout{
         
         consultaMode = new Button("Modo Consulta (Filtra Contrato com maior valor final)");
         consultaMode.addClickListener(click -> this.mostraContratoMaiorValor());
-        
+
+        add(new H3("Para remover um contrato basta clicar com o botao direito no contrato escolhido"));
+
         add(relatorioMode, consultaMode);
+
+        GridContextMenu<Contrato> menuContexto = gridContrato.addContextMenu();
+        menuContexto.addItem("Remover contrato", event ->{
+            event.getItem().ifPresent(contrato ->{
+                criaDialogoDeCancelamento(contrato).open();
+            });
+        });
         
         Button backButton = new Button("Voltar");
         backButton.addClickListener(e -> UI.getCurrent().navigate("telaRelatorios"));
@@ -108,5 +109,29 @@ public class TelaRelatorioContratos extends VerticalLayout{
             
             add(gridContrato);
         }
+    }
+
+    private void remover(Contrato contrato) {
+        quadroContrato.rmContrato(contrato);
+        gridContrato.setItems(quadroContrato.getLista());
+        gridContrato.getDataProvider().refreshAll();
+
+        Notification.show("Contrato #" + contrato.getId() + " removido com sucesso.", 3000,
+                Notification.Position.BOTTOM_STRETCH);
+        // sucesso.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
+    }
+
+    private Dialog criaDialogoDeCancelamento(Contrato contrato) {
+        Dialog dialogo = new Dialog();
+        dialogo.setHeaderTitle("Confirmar remoção");
+        dialogo.add(new Paragraph("Você tem certeza que deseja remover o contrato?"));
+        Button confirmarCancelamento = new Button("Sim, remover", e -> {
+            remover(contrato);
+            dialogo.close();
+        });
+        confirmarCancelamento.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_ERROR);
+        Button fecharDialogo = new Button("Não", e -> dialogo.close());
+        dialogo.getFooter().add(fecharDialogo, confirmarCancelamento);
+        return dialogo;
     }
 }
