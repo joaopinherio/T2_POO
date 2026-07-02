@@ -190,7 +190,7 @@ public class Clientela {
 
         Cliente maioral = auxClientes.getLast();
 
-        if(auxClientes.get(auxClientes.size() -2) == maioral)
+        if(auxClientes.get(auxClientes.size() -2).getValorMontante() == maioral.getValorMontante())
             return null;
 
         return maioral;

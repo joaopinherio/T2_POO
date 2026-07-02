@@ -255,7 +255,7 @@ public class QuadroContrato {
 
         Contrato conFinal = auxList.getLast();
         
-        if(auxList.get(auxList.size() - 2) == conFinal){
+        if(auxList.get(auxList.size() - 2).calculaValorFinal() == conFinal.calculaValorFinal()){
             return null;
         }
         

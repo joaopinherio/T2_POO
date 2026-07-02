@@ -24,6 +24,10 @@ public class MainView extends VerticalLayout {
     private final TextField fileNameField;
     private final TextField fileNameLoad;
 
+    private final Button confirmarButton2;
+    private final Button confirmarButton1;
+
+
     public MainView() {
         clientela = Clientela.getInstance();
         catalogo = Catalogo.getInstance();
@@ -43,9 +47,17 @@ public class MainView extends VerticalLayout {
         Button telaRelatorio = new Button("Opcoes de Relatorio");
         telaRelatorio.addClickListener(e -> UI.getCurrent().navigate("telaRelatorios"));
 
+        fileNameField.setLabel("Digite o nome do arquivo em que os dados serao salvos");
+        confirmarButton1 = new Button("Confirmar");
+        salvarDialog.add(fileNameField, confirmarButton1);
+        
         Button salvarButton = new Button("Salvar dados");
         salvarButton.addClickListener(click -> this.salvarDadosUser());
-
+        
+        fileNameLoad.setLabel("Digite o nome do arquivo que deseja carregar");
+        confirmarButton2 = new Button("Confirmar");
+        loadDialog.add(fileNameLoad, confirmarButton2);
+        
         Button loadButton = new Button("Carregar dados");
         loadButton.addClickListener(click -> this.loadDados());
 
@@ -59,7 +71,7 @@ public class MainView extends VerticalLayout {
         add(finalizaButton);
     }
 
-    public void inicializaDados() {
+    private void inicializaDados() {
         if (clientela.isEmpty())
             clientela.inicializaClientes("CLIENTESINICIAL");
 
@@ -73,11 +85,7 @@ public class MainView extends VerticalLayout {
             quadroContrato.inicializaContratos("CONTRATOSINICIAL", clientela, catalogo, logPagamentos);
     }
 
-    public void salvarDadosUser() {
-        fileNameField.setLabel("Digite o nome do arquivo em que os dados serao salvos");
-        Button confirmarButton1 = new Button("Confirmar");
-        salvarDialog.add(fileNameField, confirmarButton1);
-
+    private void salvarDadosUser() {
         salvarDialog.open();
 
         confirmarButton1.addClickListener(click -> {
@@ -95,12 +103,7 @@ public class MainView extends VerticalLayout {
         });
     }
 
-    public void loadDados(){
-        fileNameLoad.setLabel("Digite o nome do arquivo que deseja carregar");
-        Button confirmarButton2 = new Button("Confirmar");
-    
-        loadDialog.add(fileNameLoad, confirmarButton2);
-
+    private void loadDados(){
         loadDialog.open();
 
         confirmarButton2.addClickListener(click -> {
