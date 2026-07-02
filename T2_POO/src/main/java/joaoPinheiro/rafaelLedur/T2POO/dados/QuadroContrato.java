@@ -18,6 +18,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.Map;
 import java.util.Set;
+import java.text.SimpleDateFormat;
 
 public class QuadroContrato {
     private static QuadroContrato instance;
@@ -36,7 +37,8 @@ public class QuadroContrato {
     }
 
     public void addContrato(Contrato c) {
-        if (quadro.offer(c) && !(isRepetido(c.getId())))
+        if (!(isRepetido(c.getId())))
+            quadro.offer(c);
             Collections.sort((List<Contrato>) quadro,
             Comparator.comparing(Contrato::getId));
     }
@@ -98,6 +100,7 @@ public class QuadroContrato {
             return false;
         } catch (Exception e) {
             System.out.println("Contratos: 2Problema na leitura do arquivo" + e.getMessage());
+            e.printStackTrace();
             return false;
         }
         return true;

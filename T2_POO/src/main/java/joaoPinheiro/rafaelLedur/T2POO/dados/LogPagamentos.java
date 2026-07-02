@@ -32,10 +32,10 @@ public class LogPagamentos {
     }
 
     public void addPagamento(FormaPagamento f) {
-        if(pagamentos.add(f) && !(isRepetido(f.getCod())));
+        if( !(isRepetido(f.getCod())));
+            pagamentos.add(f);
             pagamentos.sort(Comparator.comparing(FormaPagamento::getCod));
     }
-
     // CLIENTESINICIAL.CSV
     public boolean inicializaPagamentos(String pathS, Clientela clientela) {
         Path arq = Paths.get(pathS.concat(".CSV"));

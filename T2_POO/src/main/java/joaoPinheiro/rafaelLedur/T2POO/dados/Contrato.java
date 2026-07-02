@@ -1,5 +1,6 @@
 package joaoPinheiro.rafaelLedur.T2POO.dados;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Contrato {
@@ -110,7 +111,10 @@ da categoria do jogo e da forma de pagamento:*/
     }
 
     public String getCsv(){
-        return id + ";" + data + ";" + periodo + ";" + cliente.getNumero()
+        SimpleDateFormat sdf = new SimpleDateFormat("d/M/yyyy");
+        String dataFormatada = sdf.format(this.data);
+        
+        return id + ";" + dataFormatada + ";" + periodo + ";" + cliente.getNumero()
         + ";" + jogo.getCodigo() + ";" + formaPagamento.getCod();
     }
 

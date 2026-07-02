@@ -110,7 +110,8 @@ public class Catalogo {
     }
 
     public void addJogo(Jogo j) {
-        if (catalogo.add(j) && !(isRepetido(j.getCodigo())))
+        if (!(isRepetido(j.getCodigo())))
+            catalogo.add(j);
             catalogo.sort(Comparator.comparing(Jogo::getCodigo));
     }
 

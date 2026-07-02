@@ -1,4 +1,5 @@
 package joaoPinheiro.rafaelLedur.T2POO.dados;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class CartaoCredito extends FormaPagamento{
@@ -32,6 +33,8 @@ public class CartaoCredito extends FormaPagamento{
 
     @Override
     public String getCsv(){
-        return super.getCsv() + ";" + 1 + ";" + numero + ";" + validade;
+        SimpleDateFormat sdf = new SimpleDateFormat("d/M/yyyy");
+        String validadeFormatada = sdf.format(this.validade);
+        return super.getCsv() + ";" + 1 + ";" + numero + ";" + validadeFormatada;
     }
 }

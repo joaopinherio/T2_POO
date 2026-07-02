@@ -29,7 +29,8 @@ public class Clientela {
     }
 
     public void addCliente(Cliente c) {
-        if(cadastro.add(c) && !(isRepetido(c.getNumero())))
+        if(!(isRepetido(c.getNumero())))
+            cadastro.add(c);
             cadastro.sort(Comparator.comparing(Cliente::getNumero));
     }
 
