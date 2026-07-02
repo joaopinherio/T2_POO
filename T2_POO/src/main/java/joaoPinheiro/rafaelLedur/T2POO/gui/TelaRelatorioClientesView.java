@@ -1,15 +1,23 @@
 package joaoPinheiro.rafaelLedur.T2POO.gui;
 
+import com.vaadin.flow.component.AbstractField.ComponentValueChangeEvent;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-import joaoPinheiro.rafaelLedur.T2POO.dados.*;
+import joaoPinheiro.rafaelLedur.T2POO.dados.Cliente;
+import joaoPinheiro.rafaelLedur.T2POO.dados.Clientela;
+import joaoPinheiro.rafaelLedur.T2POO.dados.Corporativo;
+import joaoPinheiro.rafaelLedur.T2POO.dados.LogPagamentos;
+import joaoPinheiro.rafaelLedur.T2POO.dados.QuadroContrato;
 
 @PageTitle("Relatorio de Clientes")
 @Route("relatorioClientes")
@@ -96,6 +104,72 @@ public class TelaRelatorioClientesView extends VerticalLayout{
         
             add(gridCliente);
         }
+    }
+
+    private void atualizarFormulario() {
+        if (campoNome.getValue().isEmpty() || campoEmail.getValue().isEmpty()) {
+            Notification.show("Erro! Campo vazio.", 3000, Notification.Position.BOTTOM_STRETCH);
+        } else {
+            clienteSelecionado.setNome(campoNome.getValue());
+            clienteSelecionado.setEmail(campoEmail.getValue());
+
+            Notification.show("Cliente " + clienteSelecionado.getNome() + " atualizado com sucesso!",
+                    3000, Notification.Position.BOTTOM_STRETCH);
+        }
+        gridCliente.getDataProvider().refreshAll();
+        limparFormulario();
+        habilitarFormulario(false);
+    }
+
+    private void atualizarFormularioEdicao(Cliente cliente) {
+        campoNumero.setValue(String.valueOf(cliente.getNumero()));
+        campoTipo.setValue(cliente.getTipo());
+        campoNome.setValue(cliente.getNome());
+        campoEmail.setValue(cliente.getEmail());
+        campoGovId.setValue(cliente.getGovId());
+    }
+
+    private void habilitarFormulario(boolean opcao) {
+        campoNome.setEnabled(opcao);
+        campoEmail.setEnabled(opcao);
+        salvarButton.setEnabled(opcao);
+        cancelarButton.setEnabled(opcao);
+    }
+
+    private void preparaEdicaoCliente(ComponentValueChangeEvent<Grid<Cliente>, Cliente> event) {
+        clienteSelecionado = event.getValue();
+
+        if (clienteSelecionado != null) {
+            atualizarFormularioEdicao(clienteSelecionado);
+            habilitarFormulario(true);
+        } else {
+            limparFormulario();
+            habilitarFormulario(false);
+        }
+    }
+
+    private void limparFormulario() {
+        gridCliente.asSingleSelect().clear();
+        campoNumero.clear();
+        campoTipo.clear();
+        campoNome.clear();
+        campoEmail.clear();
+        campoGovId.clear();
+        campoNome.focus();
+    }
+
+    private Dialog criaDialogoDeCancelamento() {
+        Dialog dialogo = new Dialog();
+        dialogo.setHeaderTitle("Confirmar cancelamento");
+        dialogo.add(new Paragraph("Você tem certeza que deseja cancelar e limpar o formulário?"));
+        Button confirmarCancelamento = new Button("Sim, cancelar", e -> {
+            limparFormulario();
+            dialogo.close();
+        });
+        confirmarCancelamento.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_ERROR);
+        Button fecharDialogo = new Button("Não", e -> dialogo.close());
+        dialogo.getFooter().add(fecharDialogo, confirmarCancelamento);
+        return dialogo;
     }
 
 }
